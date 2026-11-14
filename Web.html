@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DISEÑO DE INTERFACES - Actividad 1: PomoFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-outer: #0f172a;
+      --bg-slide: #ffffff;
+      --bg-subtle: #f8fafc;
+      --primary: #1e3a8a;
+      --accent: #2563eb;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --slide-padding: clamp(1.5rem, 3.5vw, 3.2rem);
+      --transition-speed: 0.35s;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-outer);
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    #presentation-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    #deck {
+      position: relative;
+      width: min(100%, calc((100vh - 24px) * (16 / 9)));
+      aspect-ratio: 16 / 9;
+      background-color: var(--bg-slide);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: var(--slide-padding);
+      padding-bottom: calc(var(--slide-padding) + 32px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(24px);
+      transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
+      overflow-y: auto;
+    }
+
+    .slide.active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+    .slide.prev { transform: translateX(-24px); }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.65rem;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .slide-kicker { font-size: clamp(0.7rem, 1vw, 0.85rem); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .slide-page-badge { font-size: clamp(0.72rem, 0.95vw, 0.82rem); color: var(--text-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .slide-body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
+    .slide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; align-items: center; height: 100%; }
+    .slide-grid.equal { grid-template-columns: 1fr 1fr; }
+    
+    h1 { font-size: clamp(1.8rem, 3.4vw, 3rem); color: var(--primary); line-height: 1.15; font-weight: 700; }
+    h2 { font-size: clamp(1.2rem, 2.1vw, 1.7rem); color: var(--primary); line-height: 1.25; font-weight: 700; margin-bottom: 0.5rem; }
+    p, li { font-size: clamp(0.86rem, 1.25vw, 1.04rem); line-height: 1.55; color: var(--text-main); }
+    ul, ol { padding-left: 1.35rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    
+    .narrative-box {
+      background-color: var(--bg-subtle);
+      border-left: 4px solid var(--accent);
+      padding: 0.95rem 1.2rem;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .meta-block {
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 0.85rem 1.05rem;
+      border-radius: 8px;
+      font-size: clamp(0.8rem, 1.05vw, 0.92rem);
+      color: #1e40af;
+      margin-top: 0.85rem;
+    }
+
+    .cover-layout { justify-content: center; align-items: center; text-align: center; gap: 1.1rem; }
+    .cover-logo { width: 340px; height: 180px; }
+    .cover-subtitle { font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 600; color: var(--accent); }
+    .cover-author { font-size: clamp(0.95rem, 1.35vw, 1.15rem); font-weight: 500; color: var(--text-muted); margin-top: 0.4rem; }
+
+    .image-placeholder2, .image-placeholder {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-muted);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      background-color: var(--bg-subtle);
+    }
+    .image-placeholder2 { width: 50%; height: 50%; min-height: 200px; }
+
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .image-placeholder.gallery img:not(:first-of-type) { display: none; }
+    .image-placeholder.gallery.has-images { cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .image-placeholder.gallery.has-images:hover { transform: scale(1.015); box-shadow: 0 12px 26px -6px rgba(37, 99, 235, 0.25); }
+
+    .gallery-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 3;
+      background: rgba(15, 23, 42, 0.88);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+    .image-placeholder.gallery.has-multiple:hover .gallery-badge { opacity: 1; }
+
+    #gallery-lightbox {
+      position: absolute;
+      inset: 0;
+      z-index: 60;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px 18px;
+      color: #f8fafc;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    #gallery-lightbox.open { opacity: 1; visibility: visible; }
+    .lb-topbar { display: flex; justify-content: space-between; align-items: center; }
+    .lb-close { background: rgba(255, 255, 255, 0.12); border: none; color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; }
+    .lb-stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
+    .lb-stage img { max-width: 84%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+    .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.14); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+    .lb-nav.prev { left: 4px; } .lb-nav.next { right: 4px; }
+    .lb-footer { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .lb-thumbs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .lb-thumb-btn { width: 52px; height: 36px; border: 2px solid transparent; border-radius: 5px; background: rgba(255,255,255,0.08); cursor: pointer; overflow: hidden; }
+    .lb-thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
+
+    .controls-bar {
+      position: absolute; bottom: 12px; right: 16px; z-index: 20; display: flex; align-items: center; gap: 8px;
+      background: rgba(15, 23, 42, 0.88); padding: 5px 12px; border-radius: 999px; color: #fff; font-size: 0.8rem;
+    }
+    .controls-bar button { background: transparent; border: none; color: #fff; cursor: pointer; padding: 4px 8px; font-weight: 600; }
+    .progress-track { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: rgba(203, 213, 225, 0.4); z-index: 25; }
+    .progress-fill { height: 100%; width: 0%; background: var(--accent); transition: width var(--transition-speed) ease; }
+
+    #sidebar-index {
+      position: absolute; top: 0; left: 0; bottom: 0; width: min(330px, 80vw); background: #0f172a; color: #f8fafc;
+      z-index: 40; transform: translateX(-100%); transition: transform 0.3s ease; display: flex; flex-direction: column;
+    }
+    #sidebar-index.open { transform: translateX(0); }
+    .sidebar-header { padding: 1rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+    #index-list { list-style: none; padding: 0.6rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    #index-list li button { width: 100%; text-align: left; background: transparent; border: none; color: #cbd5e1; padding: 0.55rem 0.75rem; border-radius: 6px; cursor: pointer; }
+    #index-list li button:hover, #index-list li button.current { background: var(--accent); color: #fff; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div id="presentation-wrapper">
+    <main id="deck" aria-live="polite">
+
+      <!-- Slide 1 -->
+      <section class="slide active" data-title="Portada">
+        <div class="slide-header"><span class="slide-kicker">DISEÑO DE INTERFACES</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body cover-layout">
+          <div class="image-placeholder2 gallery cover-logo">
+            <img src="./imagenes/Gemini_Generated_Image_gydas7gydas7gyda.jpg" alt="Logotipo principal generativo para PomoFlow" style="width: 100%; height: 100%">
+          </div>
+          <h1>APP POMODORO</h1>
+          <p class="cover-subtitle">Desarrollo de Interfaces · Actividad 1</p>
+          <p class="cover-author">Aarón Estalayo Bermúdez</p>
+        </div>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="slide" data-title="Ideación y Prompt Inicial">
+        <div class="slide-header"><span class="slide-kicker">FASE DE IDEACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Prompt Inicial</h2>
+            <div class="narrative-box">
+              <p>Comencé utilizando <strong>Gemini</strong> para plantear las funcionalidades base de la herramienta Pomodoro.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG1.png" alt="Vista general del chat de ideación inicial">
+            <img src="./imagenes/IMG2.png" alt="Listado estructurado de funciones sugeridas por la IA">
+            <img src="./imagenes/IMG3.png" alt="Ajustes y refinamiento de requerimientos funcionales">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4 -->
+      <section class="slide" data-title="Prompt Base">
+        <div class="slide-header"><span class="slide-kicker">FASE DE IDEACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Estructuración del Prompt</h2>
+            <div class="narrative-box">
+              <p>Redacción del prompt maestro para fijar los cimientos del código web inicial.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG4.png" alt="Bloque de especificaciones del prompt maestro">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5 -->
+      <section class="slide" data-title="Interfaz y Prompt">
+        <div class="slide-header"><span class="slide-kicker">DISEÑO DE INTERFAZ</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Ajustes de Diseño</h2>
+            <div class="narrative-box">
+              <p>Modificaciones estéticas y de distribución solicitadas en el prompt.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG5.png" alt="Directrices de diseño visual añadidas en el chat">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6 -->
+      <section class="slide" data-title="Versión 1">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 1</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Primer Prototipo</h2>
+            <div class="narrative-box">
+              <p>Ejecución del prompt maestro para generar la estructura básica y visual.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG6.png" alt="Lanzamiento del código inicial en la interfaz">
+            <img src="./imagenes/VERS1_IMG7.png" alt="Vista del temporizador renderizado en pantalla">
+            <img src="./imagenes/VERS1_IMG8.png" alt="Despliegue del panel de opciones secundarias">
+            <img src="./imagenes/VERS1_IMG9.png" alt="Selectores de temas y sección de tareas básica">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8 -->
+      <section class="slide" data-title="Depuración Inicial">
+        <div class="slide-header"><span class="slide-kicker">DEPURACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Depuración Inicial</h2>
+            <div class="narrative-box">
+              <p>Corrección de pequeños errores de ejecución detectados durante las primeras pruebas.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG7.png" alt="Aviso de consola corregido de forma automática">
+            <img src="./imagenes/IMG8.png" alt="Fragmento de código reescrito para resolver fallos">
+            <img src="./imagenes/IMG9.png" alt="Validación de scripts tras la primera depuración">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9 -->
+      <section class="slide" data-title="Notificaciones">
+        <div class="slide-header"><span class="slide-kicker">DEPURACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Notificaciones de Escritorio</h2>
+            <div class="narrative-box">
+              <p>Revisión y ajuste de los permisos de la API de notificaciones del navegador.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG10.png" alt="Código de implementación de alertas nativas">
+            <img src="./imagenes/IMG11.png" alt="Explicación del asistente sobre los permisos web">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10 -->
+      <section class="slide" data-title="Versión 2">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 2</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Segundo Prototipo</h2>
+            <div class="narrative-box">
+              <p>Integración de correcciones y estabilización de la barra lateral.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/VER2_IMG1.png" alt="Menús laterales estables en la segunda versión">
+            <img src="./imagenes/VERS1_IMG8.png" alt="Comparativa con el panel del prototipo anterior">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11 -->
+      <section class="slide" data-title="Gestor de Tareas">
+        <div class="slide-header"><span class="slide-kicker">ITERACIÓN UX</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Gestión de Tareas y Metas</h2>
+            <div class="narrative-box">
+              <p>Corrección del almacenamiento local y reubicación ergonómica del panel de tareas.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG12.png" alt="Pruebas de guardado síncrono en localStorage">
+            <img src="./imagenes/IMG13.png" alt="Optimización de funciones de persistencia de datos">
+            <img src="./imagenes/IMG14.png" alt="Reposicionamiento del menú flotante inferior">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12 -->
+      <section class="slide" data-title="Versión 3">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 3</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Tercer Prototipo</h2>
+            <div class="narrative-box">
+              <p>Despliegue del nuevo acceso rápido al gestor de tareas y subtareas.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/VER3_IMG1.png" alt="Botón flotante de tareas en la esquina inferior">
+            <img src="./imagenes/VER3_IMG2.png" alt="Panel desplegado de creación de pendientes">
+            <img src="./imagenes/VER3_IMG3.png" alt="Subtareas con barras de progreso detalladas">
+            <img src="./imagenes/VER3_IMG4.png" alt="Sintonización visual entre reloj y tareas">
+            <img src="./imagenes/VER2_IMG3.png" alt="Estado anterior de la interfaz de control">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 13 -->
+      <section class="slide" data-title="Auditoría Claude">
+        <div class="slide-header"><span class="slide-kicker">AUDITORÍA</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Auditoría de Código en Claude</h2>
+            <div class="narrative-box">
+              <p>Revisión técnica para optimizar rendimiento, Modo Zen y estabilidad general.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/CLOUDE_IMG1.png" alt="Informe de recomendaciones técnicas emitido por Claude">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 14 -->
+      <section class="slide" data-title="Parches Gemini">
+        <div class="slide-header"><span class="slide-kicker">OPTIMIZACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Aplicación de Parches</h2>
+            <div class="narrative-box">
+              <p>Traslado de las mejoras de auditoría para su compilación y corrección de sintaxis.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG15.png" alt="Traspaso de directrices al entorno de desarrollo">
+            <img src="./imagenes/CLOUDE_IMG2.png" alt="Resultado de la compilación de parches en el código">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 15 -->
+      <section class="slide" data-title="Modo Zen">
+        <div class="slide-header"><span class="slide-kicker">MICRO-INTERACCIONES</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Auto-ocultación en Modo Zen</h2>
+            <div class="narrative-box">
+              <p>Desvanecimiento inteligente de controles tras periodos de inactividad.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG16.png" alt="Controles activos antes de la inactividad">
+            <img src="./imagenes/IMG17.png" alt="Pantalla limpia sin elementos flotantes molestos">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 16 -->
+      <section class="slide" data-title="Iteración DeepSeek">
+        <div class="slide-header"><span class="slide-kicker">REFINAMIENTO</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Iteración en DeepSeek (v3.0)</h2>
+            <div class="narrative-box">
+              <p>Tercera perspectiva enfocada en pulido visual y detección de bugs residuales.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_1.png" alt="Propuestas de mejora visual evaluadas en DeepSeek">
+            <img src="./imagenes/DEPP_2.png" alt="Generación de código actualizado tras la revisión">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 17 -->
+      <section class="slide" data-title="Versión 4">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 4</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Cuarto Prototipo</h2>
+            <div class="narrative-box">
+              <p>Estilo e interactividad mejorados según las propuestas de DeepSeek.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/PRO5_1.png" alt="Pantalla principal rediseñada en la versión 4">
+            <img src="./imagenes/PRO5_2.png" alt="Panel analítico de estadísticas renovado">
+            <img src="./imagenes/PRO5_3.png" alt="Mapa de calor de actividad acumulada">
+            <img src="./imagenes/PRO5_4.png" alt="Selector de temas visuales personalizados">
+            <img src="./imagenes/PRO5_5.png" alt="Guía flotante de atajos de teclado">
+            <img src="./imagenes/PRO5_6.png" alt="Gestor de tareas optimizado">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 18 -->
+      <section class="slide" data-title="Resumen Técnico">
+        <div class="slide-header"><span class="slide-kicker">SALTO CUALITATIVO</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body">
+          <h2>Evolución de PomoFlow: De MVP a Aplicación Pro</h2>
+          <p>Consolidación técnica tras las auditorías multi-IA para garantizar estabilidad y accesibilidad:</p>
+          <ol>
+            <li><strong>Reloj preciso:</strong> Marcas de tiempo reales con <code>Date.now()</code>.</li>
+            <li><strong>Analíticas avanzadas:</strong> Mapa de calor de 90 días y notificaciones Toast.</li>
+            <li><strong>Sincronización:</strong> Persistencia local robusta y soporte para PWA.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Slide 19 -->
+      <section class="slide" data-title="Atajos y Relojes">
+        <div class="slide-header"><span class="slide-kicker">PERSONALIZACIÓN</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Atajos y Diseño de Relojes</h2>
+            <div class="narrative-box">
+              <p>Asignación de bindings de teclado y solicitud de relojes diferenciados por tema.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_4.png" alt="Panel de control de atajos y esferas horarias">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 20 -->
+      <section class="slide" data-title="Referencias Visuales">
+        <div class="slide-header"><span class="slide-kicker">DIRECCIÓN DE ARTE</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Relojes Personalizados por Tema</h2>
+            <div class="narrative-box">
+              <p>Aporte de imágenes de referencia para guiar el diseño de los relojes:</p>
+            </div>
+            <ul class="mt-sm">
+              <li><strong>Lo-Fi:</strong> despertador analógico retro de los 90.</li>
+              <li><strong>Cyberpunk:</strong> circuito electrónico expuesto.</li>
+              <li><strong>Vintage:</strong> reloj de madera oscura con números romanos.</li>
+              <li><strong>Light:</strong> diseño minimalista de oficina.</li>
+            </ul>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_5.png" alt="Esquema conceptual y directrices artísticas de esferas">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 21 -->
+      <section class="slide" data-title="Ajuste de Esferas">
+        <div class="slide-header"><span class="slide-kicker">AJUSTE VISUAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Ajuste de Esferas</h2>
+            <div class="narrative-box">
+              <p>Corrección de coordenadas SVG y aislamiento de clases para evitar solapamientos.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_6.png" alt="Corrección de coordenadas en números romanos">
+            <img src="./imagenes/DEPP_7.png" alt="Reporte de superposición de elementos gráficos">
+            <img src="./imagenes/DEPP_9.png" alt="Aislamiento correcto de clases CSS por tema">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 22 -->
+      <section class="slide" data-title="Porcentaje de Tareas">
+        <div class="slide-header"><span class="slide-kicker">FEEDBACK VISUAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Porcentaje de Progreso</h2>
+            <div class="narrative-box">
+              <p>Implementación del widget circular con el porcentaje de tareas cumplidas.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_8.png" alt="Widget numérico de porcentaje de tareas completadas">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 23 -->
+      <section class="slide" data-title="Música y Datos">
+        <div class="slide-header"><span class="slide-kicker">FUNCIONALIDADES AVANZADAS</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Música Local y Gestión de Datos</h2>
+            <div class="narrative-box">
+              <p>Reproductor MP3 mediante IndexedDB, copias de seguridad JSON e internacionalización.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/IMG18.png" alt="Estructura IndexedDB para ficheros de audio locales">
+            <img src="./imagenes/IMG19.png" alt="Panel de gestión de copias de seguridad de datos">
+            <img src="./imagenes/IMG20.png" alt="Rediseño del botón identificativo del reproductor">
+            <img src="./imagenes/IMG21.png" alt="Corrección de pausa y reproducción continua en audio">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 24 -->
+      <section class="slide" data-title="Versión 5">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 5</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Versión 5 · Prototipo Avanzado</h2>
+            <div class="narrative-box">
+              <p>Entorno consolidado con reproductor multimedia y copias de seguridad operativas.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/PRO_GEM_1.png" alt="Interfaz con el módulo de música multimedia operativo">
+            <img src="./imagenes/PRO_GEM_2.png" alt="Opciones de exportación de estadísticas y ayuda">
+            <img src="./imagenes/PRO_GEM_3.png" alt="Menú de selección de idioma integrado">
+            <img src="./imagenes/PRO_GEM_4.png" alt="Estado general previo al modo flotante">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 25 -->
+      <section class="slide" data-title="Temporizador Flotante">
+        <div class="slide-header"><span class="slide-kicker">ACABADO FINAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Acabado Final: Reloj Flotante</h2>
+            <div class="narrative-box">
+              <p>Diseño en Claude y desarrollo en Gemini del modo <em>Picture-in-Picture</em>.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/CLOUD_1.png" alt="Prompt redactado en Claude para la API de ventana flotante">
+            <img src="./imagenes/GEM_1.png" alt="Integración del script de reloj flotante en Gemini">
+            <img src="./imagenes/GEM2.png" alt="Ventana independiente flotando sobre el sistema operativo">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 26 -->
+      <section class="slide" data-title="Versión 6">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 6</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid equal">
+          <div>
+            <h2>Versión 6 · Prototipo Definitivo</h2>
+            <div class="narrative-box">
+              <p>Consolidación de PomoFlow Pro con 5 temas visuales, reproductor local, gestor avanzado de tareas y modo flotante universal.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/GEM2.png" alt="Vista principal con temporizador flotante activo">
+            <img src="./imagenes/Final_1.png" alt="Tema Vintage con esfera de madera y números romanos">
+            <img src="./imagenes/Final_2.png" alt="Tema Lo-Fi Retro con diseño de despertador analógico">
+            <img src="./imagenes/Final_3.png" alt="Tema Cyberpunk con estilo de circuito electrónico">
+            <img src="./imagenes/Final_4.png" alt="Tema Botanic y panel general de configuración">
+            <img src="./imagenes/Final_5.png" alt="Tema Light minimalista de oficina despejada">
+            <img src="./imagenes/Final_6.png" alt="Panel analítico completo con mapa de calor">
+            <img src="./imagenes/Final_7.png" alt="Gestor avanzado de tareas y reproductor de audio">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 27 -->
+      <section class="slide" data-title="Funcionalidades Prototipo 6">
+        <div class="slide-header"><span class="slide-kicker">EVOLUCIÓN PROTOTIPO 6</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body">
+          <h2>Consolidación de Funcionalidades</h2>
+          <p>Hitos alcanzados en esta última iteración:</p>
+          <ol>
+            <li><strong>Universos Visuales:</strong> 5 estilos con esferas SVG independientes.</li>
+            <li><strong>PiP Universal:</strong> Reloj flotante compatible con múltiples navegadores.</li>
+            <li><strong>Sincronización:</strong> Persistencia local y exportación de analíticas.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Slide 28 -->
+      <section class="slide" data-title="Auditoría Claude Global">
+        <div class="slide-header"><span class="slide-kicker">AUDITORÍA GLOBAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Auditoría y Peticiones a Claude</h2>
+            <div class="narrative-box">
+              <p>Revisión integral desglosada por funciones y adaptación móvil avanzada.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/Cloude_1_1.png" alt="Documento de análisis técnico detallado de Claude">
+            <img src="./imagenes/Cloude_1_2.png" alt="Propuestas de optimización estructural en la interfaz">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 29 -->
+      <section class="slide" data-title="Depuración DeepSeek">
+        <div class="slide-header"><span class="slide-kicker">REFINAMIENTO TÉCNICO</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Refinamiento y Depuración en DeepSeek</h2>
+            <div class="narrative-box">
+              <p>Plan por fases: marcas de tiempo, Service Workers y PiP universal.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/DEPP_1_1.png" alt="Panel de control aplicando parches multiplataforma">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 30 -->
+      <section class="slide" data-title="Prototipo Final Definitivo">
+        <div class="slide-header"><span class="slide-kicker">PROTOTIPO FINAL (v6)</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Versión Final Definitiva</h2>
+            <div class="narrative-box">
+              <p>Entorno de productividad robusto, impecable y plenamente accesible.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./imagenes/Prototipo_Final.png" alt="Temporizador en marcha con anillo de progreso y tareas completadas">
+            <img src="./imagenes/Prototipo_Final_2.png" alt="Panel desplegable de tareas y notificación Toast inferior">
+            <img src="./imagenes/Prototipo_Final_3.png" alt="Modal central de atajos de teclado rápidos">
+            <img src="./imagenes/Prototipo_Final_4.png" alt="Ventana modal Acerca de PomoFlow">
+            <img src="./imagenes/Prototipo_Final_5.png" alt="Tema Vintage activo con librería clásica">
+            <img src="./imagenes/Prototipo_Final_6.png" alt="Tema Lo-Fi Retro activo con tonos cálidos">
+            <img src="./imagenes/Prototipo_Final_7.png" alt="Panel lateral de configuración de ajustes">
+            <img src="./imagenes/Prototipo_Final_8.png" alt="Ajustes de audio, volumen y selector de música">
+            <img src="./imagenes/Prototipo_Final_9.png" alt="Estadísticas completas con mapa de calor">
+            <img src="./imagenes/Prototipo_Final_10.png" alt="Modo Zen inmersivo con controles ocultos">
+            <img src="./imagenes/Prototipo_Final_11.png" alt="Tema Cyberpunk activo con neón y celda de energía">
+            <img src="./imagenes/Prototipo_Final_12.png" alt="Tema Botanic activo con vegetación inmersiva">
+            <img src="./imagenes/Prototipo_Final_13.png" alt="Vista adaptada de la aplicación a pantalla completa">
+          </div>
+        </div>
+      </section>
+
+      <!-- Lightbox -->
+      <div id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Galería de imágenes" hidden>
+        <div class="lb-topbar">
+          <span class="lb-counter" id="lb-counter">1 / 1</span>
+          <button type="button" class="lb-close" id="lb-close" title="Cerrar (Esc)">✕</button>
+        </div>
+        <div class="lb-stage" id="lb-stage">
+          <button type="button" class="lb-nav prev" id="lb-prev" title="Anterior">←</button>
+          <img id="lb-img" src="" alt="" />
+          <button type="button" class="lb-nav next" id="lb-next" title="Siguiente">→</button>
+        </div>
+        <div class="lb-footer">
+          <div class="lb-thumbs" id="lb-thumbs"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <nav class="controls-bar" aria-label="Controles">
+      <button id="btn-index" title="Índice (M)">☰ Índice</button>
+      <button id="btn-prev" title="Anterior">←</button>
+      <span id="slide-counter">1 / 30</span>
+      <button id="btn-next" title="Siguiente">→</button>
+      <button id="btn-fullscreen" title="Pantalla completa (F)">⛶</button>
+    </nav>
+    <aside id="sidebar-index" aria-label="Índice">
+      <div class="sidebar-header"><span>Índice</span><button id="btn-close-index">✕</button></div>
+      <ul id="index-list"></ul>
+    </aside>
+  </div>
+
+  <script>
+    (() => {
+      const deck = document.getElementById('deck');
+      const slides = Array.from(deck.querySelectorAll('.slide'));
+      const counterEl = document.getElementById('slide-counter');
+      const progressEl = document.getElementById('progress-fill');
+      const indexListEl = document.getElementById('index-list');
+      const sidebarEl = document.getElementById('sidebar-index');
+
+      const lbEl = document.getElementById('gallery-lightbox');
+      const lbImg = document.getElementById('lb-img');
+      const lbCounter = document.getElementById('lb-counter');
+      const lbThumbs = document.getElementById('lb-thumbs');
+      const lbPrev = document.getElementById('lb-prev');
+      const lbNext = document.getElementById('lb-next');
+      const lbClose = document.getElementById('lb-close');
+      const lbStage = document.getElementById('lb-stage');
+
+      let current = 0;
+      const total = slides.length;
+      let lbImages = [];
+      let lbIndex = 0;
+      let lbTriggerEl = null;
+
+      function isLightboxOpen() { return lbEl.classList.contains('open'); }
+
+      function renderLightbox() {
+        const item = lbImages[lbIndex];
+        if (!item) return;
+        lbImg.src = item.src;
+        lbImg.alt = item.alt;
+        lbCounter.textContent = `${lbIndex + 1} / ${lbImages.length}`;
+        const multiple = lbImages.length > 1;
+        lbPrev.classList.toggle('hidden', !multiple);
+        lbNext.classList.toggle('hidden', !multiple);
+        Array.from(lbThumbs.children).forEach((btn, i) => { btn.classList.toggle('active', i === lbIndex); });
+      }
+
+      function openLightbox(images, startIndex, triggerEl) {
+        if (!images.length) return;
+        lbImages = images;
+        lbIndex = startIndex;
+        lbTriggerEl = triggerEl || document.activeElement;
+        lbThumbs.innerHTML = '';
+        if (images.length > 1) {
+          images.forEach((imgObj, i) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'lb-thumb-btn';
+            const thumb = document.createElement('img');
+            thumb.src = imgObj.src;
+            btn.appendChild(thumb);
+            btn.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = i; renderLightbox(); });
+            lbThumbs.appendChild(btn);
+          });
+        }
+        renderLightbox();
+        lbEl.hidden = false;
+        requestAnimationFrame(() => { lbEl.classList.add('open'); lbClose.focus(); });
+      }
+
+      function closeLightbox() {
+        if (!isLightboxOpen()) return;
+        lbEl.classList.remove('open');
+        lbEl.hidden = true;
+        if (lbTriggerEl && typeof lbTriggerEl.focus === 'function') lbTriggerEl.focus();
+      }
+
+      lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+      lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; renderLightbox(); });
+      lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbImages.length; renderLightbox(); });
+      lbEl.addEventListener('click', (e) => { if (e.target === lbEl || e.target === lbStage) closeLightbox(); });
+
+      deck.querySelectorAll('.image-placeholder.gallery').forEach((container) => {
+        const imgs = Array.from(container.querySelectorAll('img'));
+        if (imgs.length === 0) return;
+        const items = imgs.map((img) => ({ src: img.getAttribute('src'), alt: (img.getAttribute('alt') || '').trim() }));
+        container.classList.add('has-images');
+        container.setAttribute('role', 'button');
+        container.setAttribute('tabindex', '0');
+        if (items.length > 1) {
+          container.classList.add('has-multiple');
+          const badge = document.createElement('span');
+          badge.className = 'gallery-badge';
+          badge.textContent = `Ver ${items.length} imágenes`;
+          container.appendChild(badge);
+        }
+        const triggerOpen = () => openLightbox(items, 0, container);
+        container.addEventListener('click', triggerOpen);
+        container.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerOpen(); } });
+      });
+
+      slides.forEach((slide, idx) => {
+        const pageBadge = slide.querySelector('.slide-page-badge');
+        if (pageBadge) pageBadge.textContent = `${idx + 1} / ${total}`;
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.textContent = `${idx + 1}. ${slide.dataset.title || 'Diapositiva'}`;
+        btn.addEventListener('click', () => { current = idx; updateUI(); sidebarEl.classList.remove('open'); });
+        li.appendChild(btn);
+        indexListEl.appendChild(li);
+      });
+
+      const indexButtons = Array.from(indexListEl.querySelectorAll('button'));
+
+      function updateUI() {
+        slides.forEach((slide, idx) => {
+          slide.classList.remove('active', 'prev');
+          if (idx === current) { slide.classList.add('active'); slide.scrollTop = 0; }
+          else if (idx < current) slide.classList.add('prev');
+        });
+        indexButtons.forEach((btn, idx) => { btn.classList.toggle('current', idx === current); });
+        counterEl.textContent = `${current + 1} / ${total}`;
+        progressEl.style.width = `${total > 1 ? ((current + 1) / total) * 100 : 100}%`;
+      }
+
+      document.getElementById('btn-next').addEventListener('click', () => { if (current < total - 1) { current++; updateUI(); } });
+      document.getElementById('btn-prev').addEventListener('click', () => { if (current > 0) { current--; updateUI(); } });
+      document.getElementById('btn-fullscreen').addEventListener('click', () => {
+        if (!document.documentElement.contains(document.fullscreenElement)) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+      });
+      document.getElementById('btn-index').addEventListener('click', () => sidebarEl.classList.toggle('open'));
+      document.getElementById('btn-close-index').addEventListener('click', () => sidebarEl.classList.remove('open'));
+
+      document.addEventListener('keydown', (e) => {
+        if (isLightboxOpen()) {
+          if (e.key === 'ArrowRight') { e.preventDefault(); lbIndex = (lbIndex + 1) % lbImages.length; renderLightbox(); }
+          else if (e.key === 'ArrowLeft') { e.preventDefault(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; renderLightbox(); }
+          else if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
+          return;
+        }
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); if (current < total - 1) { current++; updateUI(); } }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); if (current > 0) { current--; updateUI(); } }
+        else if (e.key.toLowerCase() === 'f') {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+          else document.exitFullscreen().catch(() => {});
+        }
+        else if (e.key.toLowerCase() === 'm') sidebarEl.classList.toggle('open');
+        else if (e.key === 'Escape') sidebarEl.classList.remove('open');
+      });
+
+      updateUI();
+    })();
+  </script>
+</body>
+</html>
