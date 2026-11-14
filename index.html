@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BleizZzo — Hub de Proyectos</title>
+  <meta name="description" content="Índice personal de páginas web y proyectos interactivos de BleizZzo.">
+  
+  <!-- Favicon SVG en blanco y negro -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
+  <!-- Tipografía Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+        Variables y Sistema de Color (Modo Claro / Oscuro)
+        ========================================================================== */
+    :root {
+      --bg-color: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --text-main: #09090b;
+      --text-muted: #71717a;
+      --border-color: #e4e4e7;
+      --border-hover: #09090b;
+
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --transition-speed: 200ms;
+      --transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #09090b;
+        --bg-secondary: #18181b;
+        --text-main: #fafafa;
+        --text-muted: #a1a1aa;
+        --border-color: #27272a;
+        --border-hover: #fafafa;
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #09090b;
+      --bg-secondary: #18181b;
+      --text-main: #fafafa;
+      --text-muted: #a1a1aa;
+      --border-color: #27272a;
+      --border-hover: #fafafa;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #ffffff;
+      --bg-secondary: #f4f4f5;
+      --text-main: #09090b;
+      --text-muted: #71717a;
+      --border-color: #e4e4e7;
+      --border-hover: #09090b;
+    }
+
+    /* ==========================================================================
+        Estilos Base y Resets
+        ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+
+    .site-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+        Cabecera y Filtros
+        ========================================================================== */
+    .site-header {
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 2rem;
+    }
+
+    .header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .site-title {
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .site-subtitle {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      font-weight: 400;
+      max-width: 600px;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--border-hover);
+      background-color: var(--bg-secondary);
+    }
+
+    .theme-icon::before {
+      content: "☀️";
+      font-size: 1.1rem;
+    }
+    [data-theme="dark"] .theme-icon::before {
+      content: "🌙";
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .theme-icon::before {
+        content: "🌙";
+      }
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .controls-bar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .search-wrapper input {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 100%;
+      max-width: 280px;
+      transition: border-color var(--transition-speed) ease;
+    }
+
+    .search-wrapper input:focus {
+      border-color: var(--border-hover);
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .tag-btn:hover, .tag-btn.active {
+      color: var(--text-main);
+      border-color: var(--border-hover);
+      background-color: var(--bg-secondary);
+    }
+
+    .tag-btn.active {
+      font-weight: 500;
+      border-color: var(--text-main);
+    }
+
+    /* ==========================================================================
+        Rejilla de Proyectos y Tarjetas
+        ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (min-width: 640px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: 
+        transform var(--transition-speed) var(--transition-timing),
+        background-color var(--transition-speed) ease,
+        color var(--transition-speed) ease,
+        border-color var(--transition-speed) ease;
+    }
+
+    .project-card.fade-in {
+      animation: fadeInSlide 400ms var(--transition-timing) forwards;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card:hover {
+      background-color: var(--text-main);
+      color: var(--bg-color);
+      border-color: var(--text-main);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .card-arrow {
+      font-size: 1.2rem;
+      line-height: 1;
+      transition: transform var(--transition-speed) var(--transition-timing);
+    }
+
+    .project-card:hover .card-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    .card-description {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .project-card:hover .card-description {
+      color: var(--bg-color);
+      opacity: 0.85;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      margin-top: auto;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .card-tag {
+      text-transform: lowercase;
+      opacity: 0.75;
+    }
+
+    .card-year {
+      font-variant-numeric: tabular-nums;
+      opacity: 0.6;
+    }
+
+    .status-message {
+      font-size: 1rem;
+      color: var(--text-muted);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .site-footer {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== Fondo animado + modo admin ===== */
+    [hidden] { display: none !important; }
+    #bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    body::after { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 0%, transparent 0%, var(--bg-color) 90%); opacity: .75; }
+    .site-container { position: relative; z-index: 1; }
+    .project-card { background-color: color-mix(in srgb, var(--bg-color) 72%, transparent); backdrop-filter: blur(6px); }
+    .header-actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .btn-tool { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 100px;
+      padding: .5rem 1rem; font: inherit; font-size: .85rem; cursor: pointer; transition: all var(--transition-speed) ease; }
+    .btn-tool:hover, .btn-tool.on { background: var(--text-main); color: var(--bg-color); border-color: var(--text-main); }
+    .project-card.editing { border-style: dashed; cursor: default; }
+    .card-del { align-self: flex-start; margin-top: 1rem; background: transparent; color: inherit; font: inherit; font-size: .8rem;
+      border: 1px solid currentColor; border-radius: 100px; padding: .35rem .9rem; cursor: pointer; }
+    .card-del:hover { background: var(--text-main); color: var(--bg-color); }
+    .project-card.editing:hover .card-del:hover { background: var(--bg-color); color: var(--text-main); }
+    dialog { background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-hover);
+      border-radius: 10px; padding: 1.5rem; width: min(480px, 92vw); font-family: var(--font-sans); }
+    dialog::backdrop { background: rgba(0,0,0,.7); }
+    dialog h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+    dialog label { display: block; font-size: .8rem; color: var(--text-muted); margin: .7rem 0 .25rem; }
+    dialog input { width: 100%; background: transparent; color: inherit; border: 1px solid var(--border-color);
+      border-radius: 6px; padding: .55rem .7rem; font: inherit; font-size: .9rem; }
+    dialog input:focus { border-color: var(--border-hover); outline: none; }
+    dialog details { margin-top: 1.2rem; border-top: 1px solid var(--border-color); padding-top: .8rem; }
+    dialog summary { cursor: pointer; font-size: .9rem; }
+    .btn { background: var(--text-main); color: var(--bg-color); border: 1px solid var(--text-main); border-radius: 6px;
+      padding: .55rem 1rem; font: inherit; font-size: .85rem; cursor: pointer; margin-top: 1rem; margin-right: .4rem; }
+    .btn.ghost { background: transparent; color: var(--text-main); border-color: var(--border-color); }
+    #admin-msg { font-size: .8rem; color: var(--text-muted); margin-top: 1rem; min-height: 1.2em; }
+  </style>
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <dialog id="admin-dialog">
+    <h3>Añadir proyecto</h3>
+    <form id="project-form">
+      <label for="f-url">Enlace *</label>
+      <input id="f-url" type="text" required placeholder="https://tuusuario.github.io/mi-proyecto/">
+      <label for="f-title">Título (se rellena solo)</label>
+      <input id="f-title" type="text">
+      <label for="f-desc">Descripción</label>
+      <input id="f-desc" type="text">
+      <label for="f-tags">Etiquetas (separadas por comas)</label>
+      <input id="f-tags" type="text" placeholder="herramienta, web">
+      <button class="btn" type="submit">Añadir</button>
+      <button class="btn ghost" type="button" id="admin-close">Cerrar</button>
+    </form>
+    <details>
+      <summary>Publicar en GitHub (para que se guarde en el repo)</summary>
+      <label for="g-owner">Usuario</label><input id="g-owner" type="text">
+      <label for="g-repo">Repositorio</label><input id="g-repo" type="text">
+      <label for="g-branch">Rama</label><input id="g-branch" type="text" value="main">
+      <label for="g-path">Archivo de datos</label><input id="g-path" type="text" value="projects.json">
+      <label for="g-token">Token (fine-grained, solo este repo, permiso Contents: Read and write)</label>
+      <input id="g-token" type="password" autocomplete="off">
+      <button class="btn" type="button" id="g-save">Guardar ajustes</button>
+      <button class="btn ghost" type="button" id="g-export">Descargar projects.json</button>
+    </details>
+    <p id="admin-msg" aria-live="polite"></p>
+  </dialog>
+
+  <div class="site-container">
+    <!-- Cabecera -->
+    <header class="site-header">
+      <div class="header-main">
+        <div>
+          <h1 id="site-title" class="site-title">—</h1>
+          <p id="site-subtitle" class="site-subtitle">—</p>
+        </div>
+        <div class="header-actions">
+          <button id="admin-btn" class="btn-tool" type="button">＋ Añadir proyecto</button>
+          <button id="edit-btn" class="btn-tool" type="button">Quitar</button>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema de color" type="button">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros y Búsqueda -->
+      <div class="controls-bar">
+        <div class="search-wrapper">
+          <input 
+            type="search" 
+            id="search-input" 
+            placeholder="Buscar proyectos..." 
+            aria-label="Buscar proyectos por título o descripción"
+            autocomplete="off"
+          >
+        </div>
+        <div id="tags-container" class="tags-container" role="group" aria-label="Filtrar por etiquetas">
+          <!-- Las etiquetas se generan dinámicamente -->
+        </div>
+      </div>
+    </header>
+
+    <!-- Estado de Carga -->
+    <div id="status-message" class="status-message" aria-live="polite"></div>
+
+    <!-- Rejilla Principal de Proyectos -->
+    <main>
+      <section id="projects-grid" class="projects-grid" aria-label="Lista de proyectos">
+        <!-- Las tarjetas se generan dinámicamente -->
+      </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+      <p>&copy; <span id="current-year"></span> — Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <script>
+    // ==========================================================================
+    // CONFIGURACIÓN DE DATOS (Aquí puedes añadir o modificar tus proyectos)
+    // ==========================================================================
+const PORTFOLIO_DATA = {
+  "site": {
+    "title": "BleizZzo",
+    "subtitle": "Colección personal de herramientas web..."
+  },
+  "projects": [
+    {
+      "title": "Pomodoro",
+      "description": "Tarea  3",
+      "url": "https://zorualch.github.io/2DAM2627ASI_2.0/Pomodoro_FINAL.html",
+      "tags": ["herramienta", "web"],
+      "year": 2026
+    },
+    // Añade o quita proyectos aquí
+  ]
+};
+
+    // ==========================================================================
+    // LÓGICA DE LA APLICACIÓN
+    // ==========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      let allProjects = [];
+      let siteData = PORTFOLIO_DATA;
+      let editMode = false;
+      let activeTag = 'all';
+      let searchQuery = '';
+
+      const grid = document.getElementById('projects-grid');
+      const statusMsg = document.getElementById('status-message');
+      const siteTitle = document.getElementById('site-title');
+      const siteSubtitle = document.getElementById('site-subtitle');
+      const tagsContainer = document.getElementById('tags-container');
+      const searchInput = document.getElementById('search-input');
+      const themeToggle = document.getElementById('theme-toggle');
+      const currentYearSpan = document.getElementById('current-year');
+
+      currentYearSpan.textContent = new Date().getFullYear();
+
+      // 1. Manejo del Tema Claro / Oscuro
+      initTheme();
+
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          let newTheme = 'dark';
+
+          if (currentTheme === 'dark') {
+            newTheme = 'light';
+          } else if (currentTheme === 'light') {
+            newTheme = 'dark';
+          } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            newTheme = prefersDark ? 'light' : 'dark';
+          }
+
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+        });
+      }
+
+      // 2. Inicializar Datos
+      loadData();
+
+      async function loadData() {
+        try {
+          let DATA = PORTFOLIO_DATA;
+          try { const d = JSON.parse(localStorage.getItem('hub_draft')); if (d && d.projects) DATA = d; } catch (e) {}
+          siteData = DATA;
+          if (DATA.site) {
+            siteTitle.textContent = DATA.site.title || 'Mis Proyectos';
+            siteSubtitle.textContent = DATA.site.subtitle || '';
+            document.title = `${DATA.site.title || 'Hub'} — Proyectos`;
+          }
+
+          allProjects = DATA.projects || [];
+
+          if (allProjects.length === 0) {
+            statusMsg.style.display = 'block';
+            statusMsg.textContent = 'No hay proyectos disponibles en este momento.';
+            return;
+          }
+
+          statusMsg.style.display = 'none';
+          buildTagFilters(allProjects);
+          renderProjects();
+
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+          statusMsg.style.display = 'block';
+          statusMsg.textContent = '⚠️ Hubo un error al cargar los datos del portfolio.';
+        }
+      }
+
+      // 3. Renderizado de Proyectos con Filtros
+      function renderProjects() {
+        grid.innerHTML = '';
+
+        const filtered = allProjects.filter(project => {
+          const matchesTag = activeTag === 'all' || (project.tags && project.tags.includes(activeTag));
+          const matchesSearch = project.title.toLowerCase().includes(searchQuery) ||
+                                project.description.toLowerCase().includes(searchQuery);
+          return matchesTag && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<p class="status-message">No se encontraron proyectos que coincidan con la búsqueda.</p>`;
+          return;
+        }
+
+        filtered.forEach((project, index) => {
+          const card = createProjectCard(project, index);
+          grid.appendChild(card);
+        });
+      }
+
+      function createProjectCard(project, index) {
+        const card = document.createElement(editMode ? 'div' : 'a');
+        card.className = 'project-card fade-in';
+        card.style.animationDelay = `${index * 50}ms`;
+        if (!editMode) {
+          card.href = project.url;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+        }
+
+        const tagsHTML = project.tags && project.tags.length > 0
+          ? project.tags.map(tag => `<span class="card-tag">#${escapeHTML(tag)}</span>`).join(' ')
+          : '';
+
+        const yearHTML = project.year ? `<span class="card-year">${escapeHTML(String(project.year))}</span>` : '';
+
+        card.innerHTML = `
+          <div>
+            <div class="card-header">
+              <h2 class="card-title">${escapeHTML(project.title)}</h2>
+              <span class="card-arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="card-description">${escapeHTML(project.description)}</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-tags">${tagsHTML}</div>
+            ${yearHTML}
+          </div>
+        `;
+
+        if (editMode) {
+          card.classList.add('editing');
+          const del = document.createElement('button');
+          del.type = 'button'; del.className = 'card-del'; del.textContent = 'Quitar ✕';
+          let armed = false;
+          del.addEventListener('click', () => {
+            if (!armed) {
+              armed = true; del.textContent = '¿Seguro? Pulsa otra vez';
+              setTimeout(() => { armed = false; del.textContent = 'Quitar ✕'; }, 3000);
+              return;
+            }
+            removeProject(project);
+          });
+          card.appendChild(del);
+        }
+        return card;
+      }
+
+      // 4. Generación Dinámica de Etiquetas de Filtro
+      function buildTagFilters(projects) {
+        const tagsSet = new Set();
+        projects.forEach(p => {
+          if (Array.isArray(p.tags)) {
+            p.tags.forEach(tag => tagsSet.add(tag));
+          }
+        });
+
+        if (tagsSet.size === 0) return;
+
+        tagsContainer.innerHTML = '';
+
+        const allBtn = document.createElement('button');
+        allBtn.className = 'tag-btn active';
+        allBtn.textContent = 'todos';
+        allBtn.addEventListener('click', () => setTagFilter('all', allBtn));
+        tagsContainer.appendChild(allBtn);
+
+        tagsSet.forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'tag-btn';
+          btn.textContent = tag;
+          btn.addEventListener('click', () => setTagFilter(tag, btn));
+          tagsContainer.appendChild(btn);
+        });
+      }
+
+      function setTagFilter(tag, buttonEl) {
+        activeTag = tag;
+        document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
+        buttonEl.classList.add('active');
+        renderProjects();
+      }
+
+      // 5. Evento de Búsqueda
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderProjects();
+      });
+
+      // 6. Herramientas para añadir y quitar proyectos desde la propia web
+      const $ = id => document.getElementById(id);
+      const dlg = $('admin-dialog'), msg = $('admin-msg');
+      $('edit-btn').addEventListener('click', e => {
+        editMode = !editMode;
+        e.currentTarget.classList.toggle('on', editMode);
+        e.currentTarget.textContent = editMode ? 'Listo' : 'Quitar';
+        renderProjects();
+      });
+
+      const ghCfg = () => { try { return JSON.parse(localStorage.getItem('hub_gh')); } catch (e) { return null; } };
+      const say = t => { msg.textContent = t; };
+
+      function guessTitle(u) {
+        try {
+          const x = new URL(u), p = x.pathname.split('/').filter(Boolean);
+          const raw = x.hostname.endsWith('github.io') ? (p[0] || x.hostname.split('.')[0]) : x.hostname.replace(/^www\./, '').split('.')[0];
+          return raw.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        } catch (e) { return ''; }
+      }
+      const fixUrl = u => /^https?:\/\//i.test(u) ? u : 'https://' + u;
+
+      $('f-url').addEventListener('blur', () => {
+        const u = $('f-url').value.trim();
+        if (u && !$('f-title').value) $('f-title').value = guessTitle(fixUrl(u));
+      });
+
+      $('admin-btn').addEventListener('click', () => {
+        const c = ghCfg() || {};
+        const host = location.hostname, repoGuess = location.pathname.split('/')[1] || '';
+        $('g-owner').value = c.owner || (host.endsWith('github.io') ? host.split('.')[0] : '');
+        $('g-repo').value = c.repo || repoGuess;
+        $('g-branch').value = c.branch || 'main';
+        $('g-path').value = c.path || 'projects.json';
+        $('g-token').value = c.token || '';
+        say(''); dlg.showModal();
+      });
+      $('admin-close').addEventListener('click', () => dlg.close());
+
+      $('g-save').addEventListener('click', () => {
+        localStorage.setItem('hub_gh', JSON.stringify({
+          owner: $('g-owner').value.trim(), repo: $('g-repo').value.trim(), branch: $('g-branch').value.trim() || 'main',
+          path: $('g-path').value.trim() || 'projects.json', token: $('g-token').value.trim()
+        }));
+        say('Ajustes guardados en este navegador.');
+      });
+
+      $('g-export').addEventListener('click', () => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([JSON.stringify(siteData, null, 2)], { type: 'application/json' }));
+        a.download = 'projects.json'; a.click();
+      });
+
+      $('project-form').addEventListener('submit', async e => {
+        e.preventDefault();
+        const url = fixUrl($('f-url').value.trim());
+        allProjects.unshift({
+          title: $('f-title').value.trim() || guessTitle(url) || url,
+          description: $('f-desc').value.trim(),
+          url,
+          tags: $('f-tags').value.split(',').map(t => t.trim().toLowerCase()).filter(Boolean),
+          year: new Date().getFullYear()
+        });
+        e.target.reset();
+        await persist('Proyecto añadido');
+      });
+
+      function removeProject(p) {
+        allProjects = allProjects.filter(x => x !== p);
+        persist('Proyecto eliminado');
+      }
+
+      function refresh() {
+        activeTag = 'all';
+        tagsContainer.innerHTML = '';
+        statusMsg.style.display = allProjects.length ? 'none' : 'block';
+        if (!allProjects.length) statusMsg.textContent = 'No hay proyectos todavía.';
+        buildTagFilters(allProjects);
+        renderProjects();
+      }
+
+      async function persist(okText) {
+        siteData = { ...siteData, projects: allProjects };
+        refresh();
+        const c = ghCfg();
+        if (!c || !c.token) {
+          localStorage.setItem('hub_draft', JSON.stringify(siteData));
+          return say(okText + '. Guardado solo en este navegador; configura GitHub para publicarlo.');
+        }
+        try {
+          await pushToGitHub(c);
+          localStorage.removeItem('hub_draft');
+          say(okText + ' y publicado en GitHub ✓ (Pages puede tardar ~1 min en reflejarlo).');
+        } catch (err) {
+          localStorage.setItem('hub_draft', JSON.stringify(siteData));
+          say('No se pudo publicar (' + err.message + '). Guardado en este navegador.');
+        }
+      }
+
+      async function pushToGitHub(c) {
+        const api = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path}`;
+        const h = { Authorization: 'Bearer ' + c.token, Accept: 'application/vnd.github+json' };
+        let sha;
+        const g = await fetch(`${api}?ref=${encodeURIComponent(c.branch)}`, { headers: h });
+        if (g.ok) sha = (await g.json()).sha; else if (g.status !== 404) throw new Error('lectura ' + g.status);
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(siteData, null, 2))));
+        const r = await fetch(api, { method: 'PUT', headers: h,
+          body: JSON.stringify({ message: 'Actualizar proyectos desde el índice', branch: c.branch, content, sha }) });
+        if (!r.ok) throw new Error('escritura ' + r.status);
+      }
+
+      function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+          tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+      }
+    });
+  </script>
+  <script>
+    // Fondo: red de puntos blanca/negra que reacciona al ratón
+    (function () {
+      const c = document.getElementById('bg'), x = c.getContext('2d');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w, h, pts = [], m = { x: -999, y: -999 };
+      function size() {
+        w = c.width = innerWidth; h = c.height = innerHeight;
+        const n = Math.min(110, Math.floor(w * h / 14000));
+        pts = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3 }));
+      }
+      function frame() {
+        const col = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim() || '#fff';
+        x.clearRect(0, 0, w, h); x.fillStyle = x.strokeStyle = col;
+        pts.forEach((p, i) => {
+          if (!reduce) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1; }
+          x.globalAlpha = .5; x.beginPath(); x.arc(p.x, p.y, 1.2, 0, 6.283); x.fill();
+          for (let j = i + 1; j < pts.length; j++) {
+            const q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+            if (d < 120) { x.globalAlpha = .12 * (1 - d / 120); x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(q.x, q.y); x.stroke(); }
+          }
+          const dm = Math.hypot(p.x - m.x, p.y - m.y);
+          if (dm < 160) { x.globalAlpha = .35 * (1 - dm / 160); x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(m.x, m.y); x.stroke(); }
+        });
+        if (!reduce) requestAnimationFrame(frame);
+      }
+      addEventListener('resize', () => { size(); if (reduce) frame(); });
+      addEventListener('pointermove', e => { m.x = e.clientX; m.y = e.clientY; });
+      size(); frame();
+    })();
+  </script>
+</body>
+</html>
