@@ -96,6 +96,15 @@
     h2 { font-size: clamp(1.2rem, 2.1vw, 1.7rem); color: var(--primary); line-height: 1.25; font-weight: 700; margin-bottom: 0.5rem; }
     p, li { font-size: clamp(0.86rem, 1.25vw, 1.04rem); line-height: 1.55; color: var(--text-main); }
     ul, ol { padding-left: 1.35rem; display: flex; flex-direction: column; gap: 0.45rem; }
+
+    code {
+      background-color: #e2e8f0;
+      color: var(--primary);
+      padding: 0.12rem 0.38rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
     
     .narrative-box {
       background-color: var(--bg-subtle);
@@ -104,6 +113,11 @@
       border-radius: 0 8px 8px 0;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
+
+    .narrative-box p + p {
+      margin-top: 0.65rem;
+    }
+
     .meta-block {
       background-color: #eff6ff;
       border: 1px solid #bfdbfe;
@@ -112,6 +126,10 @@
       font-size: clamp(0.8rem, 1.05vw, 0.92rem);
       color: #1e40af;
       margin-top: 0.85rem;
+    }
+
+    .mt-sm {
+      margin-top: 0.75rem;
     }
 
     .cover-layout { justify-content: center; align-items: center; text-align: center; gap: 1.1rem; }
@@ -230,14 +248,31 @@
         </div>
       </section>
 
+      <!-- Slide 2 (Añadida desde web2.html) -->
+      <section class="slide" data-title="Requisitos de la Actividad 1 (CFGS DAM)">
+        <div class="slide-header"><span class="slide-kicker">DISEÑO DE INTERFACES</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body">
+          <h2>CFGS · Desarrollo de Aplicaciones Multiplataforma</h2>
+          <div class="narrative-box">
+            <p><strong>Objetivos de la Actividad 1:</strong></p>
+            <ol class="mt-sm">
+              <li>Desarrollar una aplicación web funcional basada en la técnica Pomodoro.</li>
+              <li>Entregar un documento PDF con los enlaces a la aplicación desplegada, al repositorio de GitHub de la tarea y a la web con la memoria del proceso.</li>
+              <li>Documentar el proceso de resolución: prompts utilizados e inteligencias artificiales empleadas en orden cronológico, acompañados de capturas de pantalla de cada versión.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
       <!-- Slide 3 -->
       <section class="slide" data-title="Ideación y Prompt Inicial">
         <div class="slide-header"><span class="slide-kicker">FASE DE IDEACIÓN</span><span class="slide-page-badge"></span></div>
         <div class="slide-body slide-grid">
           <div>
-            <h2>Prompt Inicial</h2>
+            <h2>Lluvia de ideas de Gemini</h2>
             <div class="narrative-box">
-              <p>Comencé utilizando <strong>Gemini</strong> para plantear las funcionalidades base de la herramienta Pomodoro.</p>
+              <p>Comencé utilizando <strong>Gemini</strong> para hacer una lluvia de ideas sobre las funcionalidades clave que debía incluir una aplicación web Pomodoro moderna.</p>
+              <p>Posteriormente, le solicité un listado estructurado para separar las características de la explicación general, aunque en un primer intento la IA generó código web completo sin haberlo pedido todavía.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -248,18 +283,55 @@
         </div>
       </section>
 
-      <!-- Slide 4 -->
-      <section class="slide" data-title="Prompt Base">
-        <div class="slide-header"><span class="slide-kicker">FASE DE IDEACIÓN</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body slide-grid">
+<!-- Diapositiva: Prompt Proporcionado por la IA -->
+      <section class="slide" data-title="Prompt Proporcionado por la IA">
+        <div class="slide-header">
+          <span class="slide-kicker">FASE DE IDEACIÓN Y PROMPTING</span>
+          <span class="slide-page-badge"></span>
+        </div>
+        <div class="slide-body slide-grid single">
           <div>
-            <h2>Estructuración del Prompt</h2>
+            <h2>Prompt Generado por la IA (GEMINI)</h2>
             <div class="narrative-box">
-              <p>Redacción del prompt maestro para fijar los cimientos del código web inicial.</p>
+              <p>Especificaciones técnicas y estructura detallada facilitadas por la inteligencia artificial para guiar el desarrollo de la aplicación:</p>
             </div>
-          </div>
-          <div class="image-placeholder gallery">
-            <img src="./IMG4.png" alt="Bloque de especificaciones del prompt maestro">
+            <div class="meta-block" style="max-height: 48vh; overflow-y: auto; text-align: left;">
+              <p><code>
+                Actúa como un desarrollador Frontend experto y diseñador UI/UX. Tu objetivo es crear una aplicación web moderna, interactiva y totalmente funcional basada en el Método Pomodoro.<br><br>
+                La aplicación debe estar construida utilizando HTML5, CSS3 y JavaScript nativo (puede ser en un solo archivo o dividido lógicamente), con un diseño limpio, responsivo y una arquitectura modular.<br><br>
+                ---<br><br>
+                <strong>### 1. Sistema de Estilos Dinámicos y Temáticos (Theming)</strong><br>
+                La web debe incluir un selector con <strong>4 estilos visuales principales</strong> (Vintage, Lo-Fi, Botanic, Cyberpunk). Al cambiar de estilo, <strong>toda la interfaz debe transformarse por completo</strong>: no solo los colores, sino los fondos de pantalla, los iconos, el diseño tipográfico, la forma del reloj y el estilo de las tarjetas de tareas y botones.<br><br>
+                - <strong>Vintage:</strong> Estética clásica de despacho antiguo, tonos tierra, beige, verde oscuro, tipografía con serifa o estilo máquina de escribir, temporizador de estilo mecánico/analógico.<br>
+                - <strong>Lo-Fi:</strong> Estética acogedora tipo anime/cafetería, colores pasteles cálidos, ilustraciones suaves de fondo, iconos minimalistas de descanso y concentración.<br>
+                - <strong>Botanic:</strong> Estética natural, tonos verdes hoja y terracota, elementos orgánicos, iconos de plantas y elementos de la naturaleza.<br>
+                - <strong>Cyberpunk:</strong> Estética oscura, neones vibrantes (magenta, cian, verde fósforo), efectos de terminal o futuristas, fuentes sans-serif agresivas o de estilo código.<br><br>
+                Además, dentro de cada estilo, el usuario debe poder <strong>cambiar el fondo de pantalla o sub-estilo</strong> (por ejemplo, alternar entre diferentes texturas o imágenes dentro de la misma temática).<br><br>
+                ---<br><br>
+                <strong>### 2. Funcionalidades Esenciales (Core)</strong><br>
+                - <strong>Temporizador Configurable:</strong><br>
+                &nbsp;&nbsp;&bull; Tiempos ajustables para Pomodoro (trabajo), Descanso Corto y Descanso Largo.<br>
+                &nbsp;&nbsp;&bull; Opción de alternar entre <strong>ciclos automáticos</strong> (el descanso empieza solo al terminar el trabajo) o <strong>manuales</strong>.<br>
+                - <strong>Gestor de Tareas (To-Do List):</strong><br>
+                &nbsp;&nbsp;&bull; Crear, editar, eliminar y marcar tareas como completadas.<br>
+                &nbsp;&nbsp;&bull; Poder asignar un número estimado de "Pomodoros" a cada tarea.<br>
+                - <strong>Sonidos y Notificaciones:</strong><br>
+                &nbsp;&nbsp;&bull; Efectos de audio sutiles y agradables al finalizar cada ciclo (con opción de silenciar o cambiar volumen).<br>
+                &nbsp;&nbsp;&bull; Notificaciones de escritorio del navegador si el usuario cambia de pestaña.<br><br>
+                ---<br><br>
+                <strong>### 3. Funcionalidades Secundarias</strong><br>
+                - <strong>Pantalla Completa / Modo Zen:</strong> Un botón que hace desaparecer todos los menús, tareas y paneles laterales, dejando únicamente el fondo de pantalla y el reloj en grande para lograr un enfoque visual del 100%.<br>
+                - <strong>Gamificación (Rachas):</strong><br>
+                &nbsp;&nbsp;&bull; Sistema de conteo de días consecutivos (Streaks/Rachas) completando al menos un pomodoro diario, guardado en el almacenamiento local (localStorage).<br>
+                - <strong>Estadísticas y Analíticas:</strong><br>
+                &nbsp;&nbsp;&bull; Un apartado o modal dedicado a mostrar gráficos (semanales y mensuales) del tiempo total estudiado y pomodoros completados.<br><br>
+                ---<br><br>
+                <strong>Requisitos Técnicos:</strong><br>
+                - El código debe ser limpio, comentado y estar listo para ejecutarse directamente en el navegador.<br>
+                - Utiliza <code>localStorage</code> para guardar las tareas, las rachas y las estadísticas del usuario para que no se pierdan al recargar la página.<br>
+                - Asegúrate de que las transiciones entre estilos sean suaves y fluidas.
+              </code></p>
+            </div>
           </div>
         </div>
       </section>
@@ -271,11 +343,72 @@
           <div>
             <h2>Ajustes de Diseño</h2>
             <div class="narrative-box">
-              <p>Modificaciones estéticas y de distribución solicitadas en el prompt.</p>
+              <p>Tras revisar el prompt generado, introduje modificaciones específicas para adaptar la experiencia de usuario y la distribución visual a mis preferencias.</p>
             </div>
+            <p class="meta-block"><strong>Cambios solicitados:</strong> soporte para iconos y vídeos de fondo personalizados mediante enlaces, menú desplegable en la esquina superior izquierda, temporizador centrado y ampliación del gestor de tareas.</p>
           </div>
           <div class="image-placeholder gallery">
             <img src="./IMG5.png" alt="Directrices de diseño visual añadidas en el chat">
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Diapositiva: Prompt Proporcionado por la IA -->
+      <section class="slide" data-title="Prompt Proporcionado por la IA">
+        <div class="slide-header">
+          <span class="slide-kicker">FASE DE IDEACIÓN Y PROMPTING</span>
+          <span class="slide-page-badge"></span>
+        </div>
+        <div class="slide-body slide-grid single">
+          <div>
+            <h2>Prompt Generado por la IA (CLOUDE)</h2>
+            <div class="narrative-box">
+              <p>Especificaciones técnicas y estructura detallada facilitadas por la inteligencia artificial para guiar el desarrollo de la aplicación:</p>
+            </div>
+<div class="meta-block" style="max-height: 48vh; overflow-y: auto; text-align: left;">
+              <p><code>
+                Actúa como un desarrollador Frontend experto y diseñador UI/UX. Tu objetivo es crear una aplicación web moderna, interactiva y totalmente funcional basada en el Método Pomodoro.<br><br>
+                La aplicación debe estar construida utilizando HTML5, CSS3 y JavaScript nativo, con un diseño modular, limpio y responsivo.<br><br>
+                ---<br><br>
+                <strong>### 1. Sistema de Multimedia Editable mediante Variables (Fondos e Íconos)</strong><br>
+                Crea una estructura limpia donde <strong>todos los activos visuales (íconos y fondos de pantalla/vídeo)</strong> estén centralizados en un objeto o archivo de configuración al inicio del código JavaScript (o variables CSS/HTML fácilmente editables).<br><br>
+                * <strong>Vinculación por enlace:</strong> El usuario solo debe reemplazar las URLs (enlaces de imagen, SVG o vídeo) en ese objeto de configuración para que se cambien automáticamente en toda la interfaz sin necesidad de modificar el código estructural.<br>
+                * <strong>Vídeos e Imágenes de fondo:</strong> Permite la opción de usar URLs de vídeo (HTML5 <code>&lt;video&gt;</code>) o imágenes de alta calidad como fondos de pantalla dinámicos para cada tema.<br><br>
+                ---<br><br>
+                <strong>### 2. Estructura de la Interfaz (Layout)</strong><br>
+                * <strong>Esquina superior izquierda (Menú Hamburguesa / Lateral):</strong> Un ícono en la esquina superior izquierda que al hacer clic despliega una barra lateral deslizante (Sidebar).<br>
+                &nbsp;&nbsp;* <strong>Contenido del Menú Lateral:</strong> Todas las opciones y configuraciones se deben gestionar desde aquí (Selector de estilos y sub-fondos, ajustes del temporizador, selector manual/automático, panel de estadísticas, volumen de sonido y botón de Modo Zen / Pantalla Completa).<br>
+                * <strong>Centro de la Pantalla:</strong> El área central estará dedicada exclusivamente al <strong>Temporizador/Reloj</strong>, el selector de estados (Pomodoro, Descanso Corto, Descanso Largo) y el control principal de Inicio/Pauta.<br>
+                * <strong>Zona Inferior o Panel Flotante:</strong> Gestor de tareas accesible y limpio, sincronizado visualmente con el tema activo.<br><br>
+                ---<br><br>
+                <strong>### 3. Temas Visuales Dinámicos (4 Estilos con Variaciones de Fondo)</strong><br>
+                Incluye 4 configuraciones de tema predefinidas: <strong>Vintage, Lo-Fi, Botanic y Cyberpunk</strong>. Al alternar de estilo desde el menú lateral:<br>
+                * Se cambiarán automáticamente las tipografías, la estética del reloj, los colores de la interfaz, el grupo de íconos vinculados por URL y el fondo (imagen o vídeo).<br>
+                * El menú lateral debe incluir una opción para <strong>cambiar de fondo de pantalla/vídeo dentro del mismo estilo</strong>.<br><br>
+                ---<br><br>
+                <strong>### 4. Gestor de Tareas Avanzado (To-Do List Potenciado)</strong><br>
+                El gestor de tareas no debe ser básico. Debe incluir las siguientes funciones:<br>
+                * <strong>Crear, editar, priorizar y eliminar tareas.</strong><br>
+                * <strong>Estimación vs. Realidad:</strong> Asignar Pomodoros estimados a cada tarea y contar automáticamente cuántos Pomodoros tomó realmente completarla.<br>
+                * <strong>Categorías / Etiquetas:</strong> Clasificar tareas mediante etiquetas de colores o proyectos (ej. <em>Estudio, Trabajo, Personal</em>).<br>
+                * <strong>Subtareas / Checklists:</strong> Poder añadir pequeñas subtareas dentro de una tarea principal.<br>
+                * <strong>Vincular Tarea al Temporizador:</strong> Botón "Iniciar esta tarea" que selecciona la tarea y muestra cuál está activa en la pantalla principal debajo del reloj.<br>
+                * <strong>Filtros:</strong> Filtrar tareas por <em>Todas, Pendientes, Completadas</em> y por <em>Categoría</em>.<br><br>
+                ---<br><br>
+                <strong>### 5. Funcionalidades Esenciales y Secundarias</strong><br>
+                * <strong>Temporizador Configurable:</strong> Tiempos personalizables para Pomodoro y descansos. Opción de ciclo automático o manual.<br>
+                * <strong>Sonidos y Notificaciones:</strong> Sonidos personalizables al finalizar bloques (vía enlace de audio) y notificaciones de escritorio si el navegador no está visible.<br>
+                * <strong>Pantalla Completa / Modo Zen:</strong> Opción en la barra lateral que oculta toda la interfaz para dejar únicamente el fondo animado/imagen y el reloj central.<br>
+                * <strong>Gamificación (Rachas / Streaks):</strong> Sistema que contabilice días consecutivos completando al menos 1 Pomodoro, guardando el progreso en <code>localStorage</code>.<br>
+                * <strong>Estadísticas e Historial:</strong> Modal con gráficos o métricas visuales que muestren el tiempo invertido por día/semana y tareas completadas.<br><br>
+                ---<br><br>
+                <strong>Requisitos Técnicos:</strong><br>
+                - Código en HTML, CSS y JS totalmente funcional y listo para ejecutarse en el navegador.<br>
+                - Uso de <code>localStorage</code> para persistir tareas, rachas, estadísticas y configuraciones del usuario.<br>
+                - Transiciones fluidas al abrir la barra lateral y al alternar entre temas visuales.
+              </code></p>
+            </div>
           </div>
         </div>
       </section>
@@ -287,7 +420,8 @@
           <div>
             <h2>Primer Prototipo</h2>
             <div class="narrative-box">
-              <p>Ejecución del prompt maestro para generar la estructura básica y visual.</p>
+              <p>En una conversación limpia, ejecuté el prompt maestro definitivo para evaluar el primer prototipo funcional generado por la IA.</p>
+              <p>Este primer resultado sentó las bases visuales y estructurales de <strong>PomoFlow</strong>.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -299,6 +433,22 @@
         </div>
       </section>
 
+      <!-- Slide 7 (Añadida desde web2.html) -->
+      <section class="slide" data-title="Funcionalidades de la Versión 1">
+        <div class="slide-header"><span class="slide-kicker">ARQUITECTURA INICIAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body">
+          <h2>Funcionalidades de la Versión 1</h2>
+          <p>Arquitectura autónoma en un único archivo HTML con las siguientes características base:</p>
+          <ol>
+            <li><strong>Configuración centralizada (<code>MEDIA_CONFIG</code>):</strong> Gestión unificada para intercambiar imágenes, vídeos de fondo e iconos <em>(los vídeos presentaron fallos de carga iniciales)</em>.</li>
+            <li><strong>Temas dinámicos:</strong> 4 estilos visuales (Vintage, Lo-Fi, Botanic y Cyberpunk) con tipografías adaptadas, efectos <em>glassmorphism</em> y neón.</li>
+            <li><strong>Gestor de tareas avanzado:</strong> Categorías, etiquetas de prioridad, estimación de Pomodoros, subtareas con barra de progreso y vinculación rápida al reloj.</li>
+            <li><strong>Gamificación y analíticas:</strong> Registro de racha diaria, horas totales de enfoque, tasa de finalización e historial persistente con <code>localStorage</code>.</li>
+            <li><strong>Modo Zen y accesibilidad:</strong> Interfaz minimalista sin distracciones, atajos de teclado (Espacio y Esc), alarmas con Web Audio API y notificaciones.</li>
+          </ol>
+        </div>
+      </section>
+
       <!-- Slide 8 -->
       <section class="slide" data-title="Depuración Inicial">
         <div class="slide-header"><span class="slide-kicker">DEPURACIÓN</span><span class="slide-page-badge"></span></div>
@@ -306,7 +456,8 @@
           <div>
             <h2>Depuración Inicial</h2>
             <div class="narrative-box">
-              <p>Corrección de pequeños errores de ejecución detectados durante las primeras pruebas.</p>
+              <p>Al probar el primer prototipo desde la perspectiva de usuario, solicité pequeños ajustes que desencadenaron varias iteraciones internas de código.</p>
+              <p>Las capturas muestran cómo Gemini regeneró el archivo automáticamente tras detectar errores de ejecución en el navegador.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -324,7 +475,8 @@
           <div>
             <h2>Notificaciones de Escritorio</h2>
             <div class="narrative-box">
-              <p>Revisión y ajuste de los permisos de la API de notificaciones del navegador.</p>
+              <p>Tras estabilizar los cambios anteriores, detecté que el botón para activar las notificaciones del navegador no respondía correctamente.</p>
+              <p>Solicité a Gemini la revisión de los permisos de la API de notificaciones hasta lograr su correcto funcionamiento.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -341,7 +493,8 @@
           <div>
             <h2>Segundo Prototipo</h2>
             <div class="narrative-box">
-              <p>Integración de correcciones y estabilización de la barra lateral.</p>
+              <p>Con el sistema de notificaciones operativo y los ajustes de la barra lateral aplicados, obtuve el segundo prototipo funcional.</p>
+              <p>En la galería se aprecia la comparativa visual entre la primera y la segunda versión.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -358,8 +511,10 @@
           <div>
             <h2>Gestión de Tareas y Metas</h2>
             <div class="narrative-box">
-              <p>Corrección del almacenamiento local y reubicación ergonómica del panel de tareas.</p>
+              <p>Al corregir las notificaciones surgieron errores al crear y guardar nuevas tareas. Una vez solucionado el problema, experimenté con la ubicación del panel de tareas.</p>
+              <p>Tras probar una posición que no resultaba cómoda, pedí reubicarlo de nuevo hasta dar con la distribución más ergonómica.</p>
             </div>
+            <p class="meta-block"><strong>Solución final de UX:</strong> botón desplegable interactivo situado en la esquina inferior izquierda para acceder rápidamente a tareas y metas.</p>
           </div>
           <div class="image-placeholder gallery">
             <img src="./IMG12.png" alt="Pruebas de guardado síncrono en localStorage">
@@ -376,7 +531,8 @@
           <div>
             <h2>Tercer Prototipo</h2>
             <div class="narrative-box">
-              <p>Despliegue del nuevo acceso rápido al gestor de tareas y subtareas.</p>
+              <p>La integración del nuevo acceso rápido al gestor de tareas dio lugar al tercer prototipo.</p>
+              <p>Las capturas muestran el despliegue del menú de tareas y su evolución respecto a la versión anterior.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -396,11 +552,77 @@
           <div>
             <h2>Auditoría de Código en Claude</h2>
             <div class="narrative-box">
-              <p>Revisión técnica para optimizar rendimiento, Modo Zen y estabilidad general.</p>
+              <p>Para elevar la calidad del código, sometí el proyecto a una revisión técnica en <strong>Claude</strong> con el objetivo de detectar fallos ocultos y oportunidades de mejora.</p>
+              <p><strong>Diagnóstico principal:</strong> optimización del Modo Zen en móviles y Safari, precisión del temporizador en segundo plano, unificación del sistema de audio, corrección de rachas horarias y creación de un sistema de respaldo (<em>fallback</em>) para fondos multimedia.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
             <img src="./CLOUDE_IMG1.png" alt="Informe de recomendaciones técnicas emitido por Claude">
+          </div>
+        </div>
+      </section>
+
+      
+      <!-- Diapositiva: Prompt Proporcionado por la IA -->
+      <section class="slide" data-title="Prompt Proporcionado por la IA">
+        <div class="slide-header">
+          <span class="slide-kicker">FASE DE IDEACIÓN Y PROMPTING</span>
+          <span class="slide-page-badge"></span>
+        </div>
+        <div class="slide-body slide-grid single">
+          <div>
+            <h2>Prompt Generado por la IA (CLOUDE)</h2>
+            <div class="narrative-box">
+              <p>Especificaciones técnicas y estructura detallada facilitadas por la inteligencia artificial para guiar el desarrollo de la aplicación:</p>
+            </div>
+<div class="meta-block" style="max-height: 48vh; overflow-y: auto; text-align: left;">
+              <p><code>
+                <strong>Fallos importantes</strong><br><br>
+                1. El temporizador se desincroniza. Resta 1 por cada tick de setInterval. Si la pestaña queda en segundo plano, el navegador la ralentiza y el pomodoro puede atrasarse mucho. Lo correcto es guardar la hora de fin con Date.now() y calcular el tiempo restante a partir de ella.<br><br>
+                2. El Modo Zen no tiene salida en móvil. Solo se sale con Escape, y en Zen se ocultan tanto el botón de Zen como los controles de iniciar y pausar.<br><br>
+                3. La alarma suena con 1 segundo de retraso. El reloj llega a 00:00 y la finalización se procesa en el tick siguiente.<br><br>
+                4. Las notificaciones pueden romper el ciclo. new Notification() no está dentro de un try/catch. En Chrome para Android suele lanzar error, y entonces no se cambia de modo ni se guardan las estadísticas.<br><br>
+                5. Las fechas usan UTC (toISOString). En España, lo que trabajas entre las 00:00 y la 01:00 (hasta las 02:00 en verano) cuenta para el día anterior. Eso afecta a la racha y a la gráfica.<br>
+                &nbsp;&nbsp;&bull; Se pierde progreso sin avisar: Cambiar de pestaña de modo con el reloj en marcha lo reinicia.<br>
+                &nbsp;&nbsp;&bull; Cambiar la duración en ajustes también lo reinicia.<br>
+                &nbsp;&nbsp;&bull; Al recargar se pierden la sesión y la tarea activa.<br><br>
+                6. Un localStorage corrupto o bloqueado rompe toda la app. Los JSON.parse iniciales no tienen try/catch.<br><br>
+                ---<br><br>
+                <strong>Fallos menores</strong><br><br>
+                - Contador de tareas: el texto “0/0 Completadas” pierde la palabra “Completadas” en cuanto se renderiza.<br>
+                - Gráfica: los días sin actividad muestran igualmente una barra del 8% y no hay valores ni tooltips.<br>
+                - Ciclo de descansos: el descanso largo se calcula con completedPomos % 4 sobre el total histórico. El botón Saltar nunca lleva al descanso largo.<br>
+                - Ajustes de tiempo: el max de los inputs no se aplica y el valor mostrado no se corrige.<br>
+                - Tarea activa: si renombras la tarea enfocada, el banner no se actualiza.<br>
+                - Borrar tareas: no pide confirmación ni se puede deshacer.<br>
+                - Guardado: se escribe en localStorage cada segundo.<br>
+                - Sonido: se crea un AudioContext nuevo en cada alarma sin cerrarlo ni llamar a resume(). Además, “Tono de Alarma” solo tiene el botón “Probar”, sin tonos para elegir.<br>
+                - Accesibilidad: Los paneles ocultos siguen recibiendo foco con Tab.<br>
+                &nbsp;&nbsp;&bull; Los modales no se cierran con Escape ni tienen role="dialog".<br>
+                &nbsp;&nbsp;&bull; Varios botones de icono no tienen etiqueta.<br>
+                - Safari/iOS: select-none en el body puede impedir escribir en los inputs. Conviene probarlo.<br>
+                - Fondos y dependencias: Los vídeos de Mixkit y las fotos de Unsplash no tienen onerror ni imagen de respaldo.<br>
+                &nbsp;&nbsp;&bull; Tailwind por CDN no es para producción y Phosphor en unpkg no está fijado a una versión.<br>
+                &nbsp;&nbsp;&bull; Sin internet la página se ve sin estilos.<br>
+                - Detalles de código: window.onload espera a recursos externos y podría ser DOMContentLoaded.<br>
+                &nbsp;&nbsp;&bull; Los pesos de fuente 800 y 900 no están cargados.<br>
+                &nbsp;&nbsp;&bull; Hay configuración de Tailwind sin usar.<br><br>
+                ---<br><br>
+                <strong>Qué le podrías agregar</strong><br><br>
+                - Pantalla activa y Zen real: la Wake Lock API para que la pantalla no se apague, y la Fullscreen API en Zen.<br>
+                - PWA: instalable, offline y con notificaciones desde un service worker, que además arregla las de móvil.<br>
+                - Sonidos ambientales: lluvia, ruido marrón o lo-fi según el tema, y varios tonos de alarma.<br>
+                - Más ajustes: descanso largo cada N pomodoros, meta diaria con anillo de progreso y categorías personalizadas.<br>
+                - Tareas: ordenar por prioridad, arrastrar y soltar, fechas límite, búsqueda y aviso al llegar a los pomodoros estimados.<br>
+                - Estadísticas: desglose por categoría, vista mensual, mapa de calor, mejor día y exportar o importar copia de seguridad.<br>
+                - Atajos de teclado: S, R, 1/2/3, N y Z, con una ayuda visible.<br>
+                - Concentración: una lista para anotar distracciones durante la sesión y una nota breve al terminar cada una.<br>
+                - Gamificación: logros, niveles o XP.<br>
+                - Pulido: tema claro y prefers-reduced-motion.<br>
+                - Fondo propio: subir un fondo propio.<br>
+                - Idioma: textos en varios idiomas.
+              </code></p>
+            </div>
           </div>
         </div>
       </section>
@@ -412,7 +634,8 @@
           <div>
             <h2>Aplicación de Parches</h2>
             <div class="narrative-box">
-              <p>Traslado de las mejoras de auditoría para su compilación y corrección de sintaxis.</p>
+              <p>Trasladé el listado de mejoras propuesto por Claude de vuelta a Gemini para integrarlas en el código fuente.</p>
+              <p>Durante el proceso surgieron errores de sintaxis que la propia IA detectó y corrigió de manera autónoma antes de entregar el resultado.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -429,8 +652,9 @@
           <div>
             <h2>Auto-ocultación en Modo Zen</h2>
             <div class="narrative-box">
-              <p>Desvanecimiento inteligente de controles tras periodos de inactividad.</p>
+              <p>Para lograr una experiencia inmersiva real durante las sesiones de estudio o trabajo, solicité que los controles desaparecieran automáticamente tras un breve periodo de inactividad.</p>
             </div>
+            <p class="meta-block"><strong>Comportamiento implementado:</strong> desvanecimiento suave de los botones tras 2,5 segundos sin mover el ratón y reaparición instantánea al detectar movimiento o toque.</p>
           </div>
           <div class="image-placeholder gallery">
             <img src="./IMG16.png" alt="Controles activos antes de la inactividad">
@@ -446,7 +670,8 @@
           <div>
             <h2>Iteración en DeepSeek (v3.0)</h2>
             <div class="narrative-box">
-              <p>Tercera perspectiva enfocada en pulido visual y detección de bugs residuales.</p>
+              <p>Con una versión sólida y funcional, recurrí a <strong>DeepSeek</strong> para obtener una tercera perspectiva enfocada en el pulido visual, la interactividad y la detección de posibles <em>bugs</em> residuales.</p>
+              <p>Posteriormente, le indiqué que implementara directamente todas sus propuestas sobre la aplicación.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -463,7 +688,8 @@
           <div>
             <h2>Cuarto Prototipo</h2>
             <div class="narrative-box">
-              <p>Estilo e interactividad mejorados según las propuestas de DeepSeek.</p>
+              <p>Tras incorporar las correcciones de errores y las mejoras de estilo e interactividad propuestas por DeepSeek, obtuve el cuarto prototipo.</p>
+              <p>En la galería se muestran las distintas vistas y mejoras visuales alcanzadas en esta etapa.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -482,11 +708,30 @@
         <div class="slide-header"><span class="slide-kicker">SALTO CUALITATIVO</span><span class="slide-page-badge"></span></div>
         <div class="slide-body">
           <h2>Evolución de PomoFlow: De MVP a Aplicación Pro</h2>
-          <p>Consolidación técnica tras las auditorías multi-IA para garantizar estabilidad y accesibilidad:</p>
+          <p>Consolidación técnica tras las auditorías multi-IA para garantizar estabilidad, accesibilidad y una experiencia de usuario profesional:</p>
           <ol>
-            <li><strong>Reloj preciso:</strong> Marcas de tiempo reales con <code>Date.now()</code>.</li>
-            <li><strong>Analíticas avanzadas:</strong> Mapa de calor de 90 días y notificaciones Toast.</li>
-            <li><strong>Sincronización:</strong> Persistencia local robusta y soporte para PWA.</li>
+            <li>
+              <strong>Corrección de errores críticos (Bugs):</strong>
+              <ul>
+                <li><strong>Precisión del reloj:</strong> Uso de marcas de tiempo reales (<code>Date.now()</code>) para evitar desfases cuando la pestaña queda en segundo plano.</li>
+                <li><strong>Audio y zona horaria:</strong> Desbloqueo forzado del contexto de audio y cálculo de rachas con fecha local en lugar de UTC.</li>
+                <li><strong>Código robusto y accesible:</strong> Delegación de eventos en lugar de atributos <code>onclick</code> y uso correcto de <code>aria-hidden</code> e <code>inert</code>.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Mejoras de interfaz y experiencia (UI/UX):</strong>
+              <ul>
+                <li><strong>Relojes temáticos y diseño vivo:</strong> Esferas únicas por tema, efecto de respiración en el anillo activo y transiciones suaves.</li>
+                <li><strong>Analíticas avanzadas y feedback:</strong> Mapa de calor (<em>Heatmap</em>) de 90 días, anillo de progreso, notificaciones <em>Toast</em> y confeti al completar tareas.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Nuevas funcionalidades:</strong>
+              <ul>
+                <li><strong>Sincronización y PWA:</strong> Persistencia multipestaña y manifiesto dinámico para instalar la web como aplicación nativa.</li>
+                <li><strong>Productividad fluida:</strong> Arrastrar y soltar (<em>Drag &amp; Drop</em>) tareas al temporizador, modo Ciclo Infinito y modal de atajos (<code>Shift + ?</code>).</li>
+              </ul>
+            </li>
           </ol>
         </div>
       </section>
@@ -498,7 +743,8 @@
           <div>
             <h2>Atajos y Diseño de Relojes</h2>
             <div class="narrative-box">
-              <p>Asignación de bindings de teclado y solicitud de relojes diferenciados por tema.</p>
+              <p>Al probar las novedades detecté que algunos atajos de teclado no respondían y faltaba información en la guía de ayuda.</p>
+              <p>Aproveché esa corrección para solicitar que cada tema visual contara con un diseño de reloj completamente diferenciado.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -514,13 +760,13 @@
           <div>
             <h2>Relojes Personalizados por Tema</h2>
             <div class="narrative-box">
-              <p>Aporte de imágenes de referencia para guiar el diseño de los relojes:</p>
+              <p>Como los primeros diseños generados resultaban demasiado simples, aporté imágenes de referencia para guiar a la IA en cada estilo:</p>
             </div>
             <ul class="mt-sm">
-              <li><strong>Lo-Fi:</strong> despertador analógico retro de los 90.</li>
-              <li><strong>Cyberpunk:</strong> circuito electrónico expuesto.</li>
-              <li><strong>Vintage:</strong> reloj de madera oscura con números romanos.</li>
-              <li><strong>Light:</strong> diseño minimalista de oficina.</li>
+              <li><strong>Lo-Fi:</strong> despertador analógico retro de los años 90.</li>
+              <li><strong>Cyberpunk:</strong> placa base expuesta con circuito y batería visible.</li>
+              <li><strong>Vintage:</strong> reloj clásico de madera oscura con números romanos.</li>
+              <li><strong>Light:</strong> diseño limpio y minimalista estilo reloj de oficina.</li>
             </ul>
           </div>
           <div class="image-placeholder gallery">
@@ -536,8 +782,9 @@
           <div>
             <h2>Ajuste de Esferas</h2>
             <div class="narrative-box">
-              <p>Corrección de coordenadas SVG y aislamiento de clases para evitar solapamientos.</p>
+              <p>La implementación inicial de los relojes presentó solapamientos visuales entre temas, por lo que detallé exactamente cada fallo gráfico para su corrección.</p>
             </div>
+            <p class="meta-block"><strong>Correcciones aplicadas:</strong> alineación SVG de los números romanos, creación de la esfera minimalista para el tema Light y ocultación de <code>.vintage-numerals</code> en el resto de temas.</p>
           </div>
           <div class="image-placeholder gallery">
             <img src="./DEPP_6.png" alt="Corrección de coordenadas en números romanos">
@@ -554,11 +801,101 @@
           <div>
             <h2>Porcentaje de Progreso</h2>
             <div class="narrative-box">
-              <p>Implementación del widget circular con el porcentaje de tareas cumplidas.</p>
+              <p>Para ofrecer una lectura inmediata del avance diario sin necesidad de abrir el panel completo, solicité añadir un indicador visual de porcentaje sobre las tareas completadas.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
             <img src="./DEPP_8.png" alt="Widget numérico de porcentaje de tareas completadas">
+          </div>
+        </div>
+      </section>
+
+            <section class="slide" data-title="Solicitud de Prompt">
+        <div class="slide-header"><span class="slide-kicker">FEEDBACK VISUAL</span><span class="slide-page-badge"></span></div>
+        <div class="slide-body slide-grid">
+          <div>
+            <h2>Prompt de Cloude</h2>
+            <div class="narrative-box">
+              <p>Solicite a cloude que me desarrollara un promp para la app.</p>
+            </div>
+          </div>
+          <div class="image-placeholder gallery">
+            <img src="./CLOUDE_IMG3.png" alt="Widget numérico de porcentaje de tareas completadas">
+          </div>
+        </div>
+      </section>
+
+            <!-- Diapositiva: Prompt Proporcionado por la IA -->
+      <section class="slide" data-title="Prompt Proporcionado por la IA">
+        <div class="slide-header">
+          <span class="slide-kicker">FASE DE IDEACIÓN Y PROMPTING</span>
+          <span class="slide-page-badge"></span>
+        </div>
+        <div class="slide-body slide-grid single">
+          <div>
+            <h2>Prompt Generado por la IA (CLOUDE)</h2>
+            <div class="narrative-box">
+              <p>Especificaciones técnicas y estructura detallada facilitadas por la inteligencia artificial para guiar el desarrollo de la aplicación:</p>
+            </div>
+<div class="meta-block" style="max-height: 48vh; overflow-y: auto; text-align: left;">
+  
+              <p><code>
+                Te adjunto el HTML completo de mi app "PomoFlow" (un solo archivo con Tailwind CDN, Phosphor Icons y JavaScript vanilla). Quiero que añadas las 4 funcionalidades siguientes SIN romper nada de lo existente y me devuelvas el archivo HTML COMPLETO (no fragmentos), listo para copiar y pegar.<br><br>
+                <strong>REGLAS GENERALES</strong><br>
+                - Mantén un único archivo HTML, sin librerías nuevas ni frameworks.<br>
+                - Interfaz en español. Respeta el estilo actual: clases glass-panel / glass-btn, variables CSS (--accent-color, etc.) y que todo se vea bien en los 5 temas (Vintage, Lo-Fi, Botanic, Cyberpunk, Light), también en móvil.<br>
+                - Respeta el patrón de accesibilidad existente: aria-label en botones, aria-hidden + inert en paneles y modales, cierre con Esc y clic fuera.<br>
+                - Registra los nuevos elementos en el objeto "elements", y los nuevos modales en isAnyModalOrDrawerOpen(), en el manejador de Escape (handleGlobalKeydown) y en el array de cierre por clic exterior.<br>
+                - Los nuevos ajustes se añaden a DEFAULT_SETTINGS y se guardan con safeStorageGet/safeStorageSet y saveSettings(), para no romper a quien ya tenga datos guardados.<br>
+                - Escapa con escapeHtml() cualquier texto de usuario que se pinte con innerHTML.<br><br>
+                ---<br><br>
+                <strong>1) MÚSICA RELAJANTE DE FONDO CON VARIOS ESTILOS + MP3 PROPIO</strong><br>
+                <strong>Ubicación:</strong> nueva sección "Música de fondo" en la barra lateral de Configuración, justo después de "Audio y Notificaciones". Añade también un botón con icono de nota musical (ph-music-notes) en la cabecera, al lado del de atajos, para reproducir/pausar rápido, y el atajo de teclado M (añádelo a la lista del modal de atajos).<br><br>
+                <strong>Estilos integrados:</strong><br>
+                - Genéralos con Web Audio API (sin URLs externas, para que funcionen sin conexión y no se rompan enlaces). Reutiliza el audioCtx y initAudioContext() existentes.<br>
+                - Incluye al menos: Lo-Fi suave (acordes con osciladores desafinados + filtro paso bajo + crujido de vinilo), Ambiente/Pad, Lluvia, Bosque (viento + trinos de pájaros ocasionales), Olas del mar, Piano relajante (notas pentatónicas espaciadas con reverb generada) y Ruido marrón para concentración.<br>
+                - Deja una constante MUSIC_LIBRARY fácil de ampliar donde también pueda añadir pistas por URL de audio.<br>
+                - Cada generador debe poder detenerse limpiamente (desconectar nodos, limpiar timeouts/intervalos) sus fugas de memoria ni sonidos residuales.<br><br>
+                <strong>MP3 propio:</strong><br>
+                - Botón "Subir mi música" con input type="file" oculto (accept="audio/*,.mp3"), múltiples archivos permitidos, límite razonable por archivo (ej. 25 MB) con toast de error si se supera o el formato no es válido.<br>
+                - Guarda los archivos en IndexedDB (localStorage no tiene espacio suficiente) para que sigan ahí al recargar. En localStorage solo guarda metadatos (id, nombre) y los ajustes. Si IndexedDB no está disponible, permite usarlos solo en la sesión y avisa con un toast.<br>
+                - Muestra una lista "Mis canciones" con nombre, botón reproducir y botón eliminar. Reproduce con HTMLAudioElement + URL.createObjectURL (y haz URL.revokeObjectURL al terminar). Al acabar una canción, pasa a la siguiente en bucle.<br><br>
+                <strong>Controles y comportamiento:</strong><br>
+                - Selector de estilo, botón reproducir/pausar y slider de volumen propio de la música (independiente del volumen de la alarma), con fundido de entrada y salida de ~1 s.<br>
+                - Interruptor "Sincronizar con el temporizador": si está activo, la música suena solo mientras el temporizador está en marcha y se pausa al pausar. Otro interruptor: "Solo durante el enfoque (pausar en descansos)".<br>
+                - Cuando suene la alarma (playAlarmSound), baja temporalmente el volumen de la música unos 3 segundos y vuelve a subirlo.<br>
+                - Los navegadores bloquean el autoplay: la música solo arranca tras un clic del usuario. Al recargar, recuerda estilo, volumen y ajustes, pero no intentes reproducir automáticamente.<br>
+                - Maneja errores (archivo corrupto, audio bloqueado) con toasts claros.<br><br>
+                ---<br><br>
+                <strong>2) EL ICONO DEL BOTÓN DE TAREAS MUESTRA EL PORCENTAJE</strong><br>
+                - En el botón flotante "Tareas y Metas" (id btn-toggle-tasks-panel), sustituye el cuadradito con el icono ph-check-square-offset por un pequeño círculo de progreso SVG (aprox. 40x40 px) con el porcentaje de tareas completadas dentro (por ejemplo "60%").<br>
+                - Reutiliza la lógica de updateTasksProgress() para que se actualice a la vez que el círculo del panel (al renderizar tareas, completar, eliminar, editar o cambiar de tema), con transición suave.<br>
+                - Usa var(--accent-color) para el trazo y que el texto sea legible en todos los temas, incluido Light. Con 0 tareas muestra "0%".<br>
+                - Al llegar al 100%, un pequeño detalle visual (por ejemplo el trazo en verde esmeralda o un check pequeño). Añade un aria-label dinámico del tipo "Tareas: 60% completado".<br>
+                - Mantén el círculo que ya existe dentro del panel de tareas.<br><br>
+                ---<br><br>
+                <strong>3) APARTADO DE INFORMACIÓN AL LADO DE LOS ATAJOS</strong><br>
+                - Añade en la cabecera, justo al lado del botón de atajos de teclado (btn-show-shortcuts), un botón con icono ph-info que abra un nuevo modal "Acerca de PomoFlow", con el mismo estilo que el modal de atajos (puede tener scroll si es largo).<br>
+                - Contenido en español, breve y claro: qué es la app y la técnica Pomodoro (25 min de enfoque + descansos, descanso largo cada 4 pomodoros); resumen de funciones (temporizador con modos, temas y fondos, tareas con subtareas y prioridades, modo Zen, estadísticas y racha, música de fondo, notificaciones); cómo usarla en 3-4 pasos; nota de que todos los datos se guardan solo en el navegador del usuario (localStorage/IndexedDB) y no se envían a ningún servidor; versión de la app.<br>
+                - Ciérralo con Esc, con la X y con clic fuera, e intégralo con isAnyModalOrDrawerOpen().<br><br>
+                ---<br><br>
+                <strong>4) ESTADÍSTICAS: DESCARGAR, IMPORTAR Y GUARDAR</strong><br>
+                <strong>Ubicación:</strong> pie del modal de estadísticas, junto al botón "Reiniciar Datos", con dos botones: "Descargar" (ph-download-simple) e "Importar" (ph-upload-simple) y un input type="file" oculto (accept=".json,application/json").<br><br>
+                <strong>Descargar:</strong><br>
+                - Genera un JSON con { app: "PomoFlow", version: 1, exportedAt: ISO, stats, tasks, settings } y lo descarga con Blob + enlace temporal. Nombre: pomoflow-estadisticas-AAAA-MM-DD.json (usa getLocalDateString()). Toast de confirmación.<br>
+                - Opcional: segundo botón o menú para exportar también un CSV del historial diario (fecha, minutos) y del registro de sesiones.<br><br>
+                <strong>Importar:</strong><br>
+                - Lee el archivo con FileReader/JSON.parse dentro de try/catch y valida estructura: debe ser de PomoFlow; totalSeconds, completedPomos y streakDays son números &gt;= 0; history es un objeto con claves AAAA-MM-DD y valores numéricos; sessionLog es array (máx. 100). Si algo no es válido, descarta ese campo o rechaza el archivo con un toast claro. Nunca ejecutes ni insertes HTML del archivo sin escapar.<br>
+                - Antes de aplicar, muestra un pequeño modal de confirmación con resumen (pomodoros, horas, nº de días) y dos opciones: "Reemplazar mis datos" o "Combinar". Combinar debe ser idempotente (importar el mismo archivo dos veces no duplica datos): por día se toma el mayor valor de history, el sessionLog se une sin duplicados (clave = fecha ISO) y se ordena por fecha, y para los totales se toma el mayor valor.<br>
+                - Tras aplicar: saveStats(), renderStats(), checkStreakOnLoad(), y toast "Estadísticas importadas". Si el archivo incluye tareas, pregunta si también quiere importarlas.<br>
+                - Para que lo guardado no se pierda, llama a navigator.storage.persist() (si existe) cuando el usuario descargue o importe por primera vez.<br><br>
+                ---<br><br>
+                <strong>ENTREGA</strong><br>
+                - Devuélveme el HTML completo y funcional.<br>
+                - Al final, lista en pocas líneas qué cambiaste y dónde, y avísame de cualquier decisión que hayas tenido que tomar.
+              </code></p>
+            </div>
+                      
           </div>
         </div>
       </section>
@@ -570,14 +907,15 @@
           <div>
             <h2>Música Local y Gestión de Datos</h2>
             <div class="narrative-box">
-              <p>Reproductor MP3 mediante IndexedDB, copias de seguridad JSON e internacionalización.</p>
+              <p>De vuelta en Gemini, amplié la aplicación con un reproductor de música local (archivos MP3 almacenados con IndexedDB), exportación e importación de estadísticas, guía de información y soporte multi-idioma.</p>
+              <p>Además, rediseñé el icono de música para hacerlo más intuitivo y corregí un fallo por el cual las canciones reiniciaban desde el principio al pausarlas.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
             <img src="./IMG18.png" alt="Estructura IndexedDB para ficheros de audio locales">
             <img src="./IMG19.png" alt="Panel de gestión de copias de seguridad de datos">
             <img src="./IMG20.png" alt="Rediseño del botón identificativo del reproductor">
-            <img src="./IMG21.png" alt="Corrección de pausa y reproducción continua en audio">
+            <img src="./IMG21.png" alt="Corrección de pausa y reanudación en la pista de audio">
           </div>
         </div>
       </section>
@@ -589,7 +927,7 @@
           <div>
             <h2>Versión 5 · Prototipo Avanzado</h2>
             <div class="narrative-box">
-              <p>Entorno consolidado con reproductor multimedia y copias de seguridad operativas.</p>
+              <p>Tras consolidar en Gemini el reproductor MP3, la gestión de copias de seguridad y los ajustes visuales, obtuve este quinto prototipo previo al acabado final.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -608,7 +946,8 @@
           <div>
             <h2>Acabado Final: Reloj Flotante</h2>
             <div class="narrative-box">
-              <p>Diseño en Claude y desarrollo en Gemini del modo <em>Picture-in-Picture</em>.</p>
+              <p>Para el toque final, utilicé <strong>Claude</strong> para diseñar el prompt de una última funcionalidad clave: un <strong>temporizador flotante</strong> (<em>Picture-in-Picture</em>) visible mientras se navega por otras pestañas o programas.</p>
+              <p>Implementé este prompt en Gemini para obtener la versión definitiva de la aplicación.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
@@ -626,7 +965,7 @@
           <div>
             <h2>Versión 6 · Prototipo Definitivo</h2>
             <div class="narrative-box">
-              <p>Consolidación de PomoFlow Pro con 5 temas visuales, reproductor local, gestor avanzado de tareas y modo flotante universal.</p>
+              <p>Consolidación de PomoFlow Pro con <strong>5 temas visuales</strong> (Vintage, Lo-Fi Retro, Botanic, Cyberpunk y Light), relojes personalizados por estilo, reproductor de música local, gestor avanzado de tareas con indicador de porcentaje, soporte multi-idioma, Modo Zen inmersivo y modo flotante universal.</p>
             </div>
           </div>
           <div class="image-placeholder gallery">
