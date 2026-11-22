@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal turístico no oficial (proyecto educativo) sobre Pinto (Madrid). Descubre su patrimonio, naturaleza, gastronomía, fiestas y barrios.">
+  <title>Descubre Pinto | Turismo, Historia y Naturaleza en Madrid</title>
+  <meta name="theme-color" content="#C8102E">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Descubre Pinto | Turismo, Historia y Naturaleza en Madrid">
+  <meta property="og:description" content="Patrimonio, naturaleza, gastronomía, fiestas y barrios de Pinto (Madrid).">
+  <link rel="icon" href="../IMAGENES/bandera.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a href="#app-main" class="skip-link">Saltar al contenido</a>
+
+  <!-- ================= HEADER FIJO ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo" data-route="inicio" aria-label="Inicio Descubre Pinto">
+        <img src="../IMAGENES/bandera.png" alt="Descubre Pinto" class="logo-img">
+        <span class="logo-text">Descubre <strong>Pinto</strong></span>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <button type="button" class="close-nav-btn" id="close-nav-btn" aria-label="Cerrar menú">&times;</button>
+        <ul class="nav-list">
+          <li><a href="#inicio" class="nav-link active" data-route="inicio">Inicio</a></li>
+          <li><a href="#que-ver" class="nav-link" data-route="que-ver">Qué ver</a></li>
+          <li><a href="#que-hacer" class="nav-link" data-route="que-hacer">Qué hacer</a></li>
+          <li><a href="#comer-comprar" class="nav-link" data-route="comer-comprar">Comer y comprar</a></li>
+          <li><a href="#fiestas" class="nav-link" data-route="fiestas">Fiestas y agenda</a></li>
+          <li><a href="#barrios" class="nav-link" data-route="barrios">Mis barrios</a></li>
+          <li><a href="#info-practica" class="nav-link" data-route="info-practica">Cómo llegar</a></li>
+          <li><a href="#favoritos" class="nav-link" data-route="favoritos">Favoritos <span class="badge-fav" id="fav-count">0</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button type="button" class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+<!-- Capa oscura para el menú móvil -->
+<div class="nav-overlay" id="nav-overlay"></div>
+  <!-- ================= MAIN ================= -->
+  <main id="app-main">
+    <!-- SECCIÓN 1: INICIO -->
+    <section id="view-inicio" class="spa-view active">
+      <div class="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <span class="hero-kicker">Comunidad de Madrid · Centro geográfico peninsular</span>
+          <h1 class="hero-title">Descubre Pinto</h1>
+          <p class="hero-subtitle">Historia medieval, grandes pulmones verdes, arqueología y tradición gastronómica a solo 20 km al sur de Madrid.</p>
+          <div class="hero-search-wrapper">
+            <form class="hero-search" id="global-search-form" role="search">
+              <label for="global-search-input" class="visually-hidden">Buscar lugares</label>
+              <input type="search" id="global-search-input" placeholder="Busca Torre de Éboli, Parque Juan Carlos I..." autocomplete="off">
+              <button type="submit" class="btn btn-primary">Explorar</button>
+            </form>
+            <div class="search-results-dropdown" id="search-results-dropdown" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section container reveal">
+        <div class="section-header">
+          <h2>Inspírate por temática</h2>
+          <p>Elige cómo quieres vivir tu próxima escapada a nuestra villa.</p>
+        </div>
+        <div class="theme-pills-grid">
+          <button class="theme-card t-patrimonio" data-nav-filter="que-ver:Patrimonio">
+            <h3>Historia y Patrimonio</h3>
+            <p>De la Torre de Éboli a las casas señoriales</p>
+          </button>
+          <button class="theme-card t-naturaleza" data-nav-filter="que-ver:Naturaleza">
+            <h3>Naturaleza y Parques</h3>
+            <p>55 hectáreas de ocio y humedales con 130 aves</p>
+          </button>
+          <button class="theme-card t-deporte" data-nav-filter="que-hacer:Deporte">
+            <h3>Deporte y Rutas</h3>
+            <p>Cuna de campeones y senderos cicloturistas</p>
+          </button>
+          <button class="theme-card t-gastro" data-nav-filter="comer-comprar:all">
+            <h3>Gastronomía</h3>
+            <p>Cocido madrileño, chocolate y Ombligos de Pinto</p>
+          </button>
+          <button class="theme-card t-fiestas" data-nav-filter="fiestas:all">
+            <h3>Fiestas y Cultura</h3>
+            <p>Tradiciones vivas durante todo el año</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="section bg-alt reveal">
+        <div class="container">
+          <div class="section-header-flex">
+            <div>
+              <h2>Imprescindibles de Pinto</h2>
+              <p>Los lugares que no pueden faltar en tu primera visita.</p>
+            </div>
+          </div>
+          
+          <!-- CARRUSEL PROFESIONAL -->
+          <div class="carousel-wrapper">
+            <button type="button" class="circle-btn prev" id="carousel-prev" aria-label="Anterior">&#8592;</button>
+            <div class="horizontal-carousel" id="imprescindibles-carousel"></div>
+            <button type="button" class="circle-btn next" id="carousel-next" aria-label="Siguiente">&#8594;</button>
+          </div>
+          
+        </div>
+      </div>
+      <!-- ESTADÍSTICAS -->
+      <div class="section container reveal">
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number" data-target="56651">0</span>
+            <span class="stat-label">Habitantes (Padrón 2025)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="1359">0</span>
+            <span class="stat-label">Año del título de Villa</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="55" data-suffix=" ha">0</span>
+            <span class="stat-label">Parque Juan Carlos I</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="130" data-suffix="+">0</span>
+            <span class="stat-label">Aves en Los Estragales</span>
+          </div>
+        </div>
+      </div>
+      <div class="section bg-alt reveal">
+        <div class="container">
+          <div class="section-header">
+            <h2>Curiosidades de <em>Punctum</em></h2>
+            <p>Toca o pasa el ratón sobre las tarjetas para descubrir los secretos de Pinto.</p>
+          </div>
+          <div class="flip-grid" id="curiosidades-grid"></div>
+          <div class="quiz-box" id="quiz-box">
+            <span class="badge-gold">Reto local</span>
+            <h3>¿Cuánto sabes de Pinto?</h3>
+            <div id="quiz-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section container reveal">
+        <div class="split-home-grid">
+          <div>
+            <div class="section-header">
+              <h2>Próximas citas</h2>
+              <p>Agenda cultural y festiva.</p>
+            </div>
+            <div class="events-compact-list" id="home-events-list"></div>
+            <a href="#fiestas" class="btn btn-outline mt-1" data-route="fiestas">Ver calendario completo</a>
+          </div>
+          <div>
+            <div class="section-header">
+              <h2>Mapa interactivo</h2>
+              <p>Explora patrimonio, parques y servicios.</p>
+            </div>
+            <div id="home-map" class="map-container map-mini"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: QUÉ VER -->
+    <section id="view-que-ver" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Qué ver en Pinto</h1>
+          <p>Monumentos medievales, arquitectura industrial chocolatera, parques históricos y espacios naturales.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="filter-bar" role="group">
+          <button class="chip active" data-filter="all">Todos</button>
+          <button class="chip" data-filter="Patrimonio">Patrimonio</button>
+          <button class="chip" data-filter="Parques">Parques</button>
+          <button class="chip" data-filter="Naturaleza">Naturaleza</button>
+          <button class="chip" data-filter="Museos y cultura">Museos y cultura</button>
+        </div>
+        <p class="grid-counter" id="que-ver-grid-count"></p>
+        <div class="places-grid" id="que-ver-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: QUÉ HACER -->
+    <section id="view-que-hacer" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Qué hacer en Pinto</h1>
+          <p>Rutas cicloturistas, arqueología experimental en familia e instalaciones deportivas de primer nivel.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="filter-bar" role="group">
+          <button class="chip active" data-filter="all">Todas las actividades</button>
+          <button class="chip" data-filter="Rutas">Rutas a pie y bici</button>
+          <button class="chip" data-filter="Familia">Ocio en familia</button>
+          <button class="chip" data-filter="Deporte">Deporte y clubes</button>
+        </div>
+        <p class="grid-counter" id="que-hacer-grid-count"></p>
+        <div class="places-grid" id="que-hacer-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: COMER Y COMPRAR -->
+    <section id="view-comer-comprar" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Comer y comprar</h1>
+          <p>Del tradicional cocido madrileño a la herencia chocolatera y los dulces Ombligos de Pinto.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <h2 class="mt-3">Dónde comer y zonas comerciales</h2>
+        <div class="horizontal-cards-list" id="comer-list"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: FIESTAS -->
+    <section id="view-fiestas" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Fiestas y agenda</h1>
+          <p>Tradiciones patronales, encuentros vecinales y programación cultural a lo largo del año.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="countdown-banner">
+          <div>
+            <span class="badge-gold">Próxima gran cita</span>
+            <h2 id="countdown-event-name">Próximas Fiestas de Pinto</h2>
+            <p id="countdown-event-desc">Consulta la agenda actualizada para 2026/2027.</p>
+          </div>
+          <div class="countdown-timer">
+            <div class="time-box"><span id="cd-days">--</span><small>Días</small></div>
+            <div class="time-box"><span id="cd-hours">--</span><small>Horas</small></div>
+            <div class="time-box"><span id="cd-mins">--</span><small>Min</small></div>
+            <div class="time-box"><span id="cd-secs">--</span><small>Seg</small></div>
+          </div>
+        </div>
+        <div class="events-grid" id="fiestas-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: MIS BARRIOS -->
+    <section id="view-barrios" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Mis barrios</h1>
+          <p>Un recorrido por la identidad y evolución urbana de los barrios que dan vida a Pinto.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="places-grid" id="barrios-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: CÓMO LLEGAR -->
+    <section id="view-info-practica" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Cómo llegar y dónde dormir</h1>
+          <p>Conexiones rápidas con Madrid, mapa de recursos, alojamientos y teléfonos de utilidad.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div id="full-map" class="map-container map-large" style="margin-bottom: 2rem;"></div>
+        <h2>Alojamientos</h2>
+        <div class="horizontal-cards-list" id="alojamientos-list"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: FAVORITOS -->
+    <section id="view-favoritos" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Tus Favoritos</h1>
+          <p>Los lugares que has guardado para tu próxima visita.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="places-grid" id="favoritos-grid"></div>
+        <div class="empty-state" id="favoritos-empty" hidden>
+          <p>Aún no tienes favoritos. ¡Explora la web y pulsa el corazón!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Descubre Pinto</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: #9A968D;">Portal turístico no oficial creado como proyecto educativo. Descubre la historia, naturaleza y gastronomía de esta villa madrileña.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/AyuntamientodePinto" target="_blank" rel="noopener noreferrer" aria-label="Facebook del Ayuntamiento de Pinto">FB</a>
+          <a href="https://x.com/AytoPinto" target="_blank" rel="noopener noreferrer" aria-label="Twitter del Ayuntamiento de Pinto">X</a>
+          <a href="https://www.instagram.com/ayuntamientopinto" target="_blank" rel="noopener noreferrer" aria-label="Instagram del Ayuntamiento de Pinto">IG</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explora la web</h4>
+        <ul class="footer-links">
+          <li><a href="#que-ver" data-route="que-ver">Qué ver</a></li>
+          <li><a href="#que-hacer" data-route="que-hacer">Qué hacer</a></li>
+          <li><a href="#comer-comprar" data-route="comer-comprar">Comer y comprar</a></li>
+          <li><a href="#fiestas" data-route="fiestas">Fiestas y agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Información útil</h4>
+        <ul class="footer-links">
+          <li><a href="#info-practica" data-route="info-practica">Cómo llegar</a></li>
+          <li><a href="#barrios" data-route="barrios">Mis barrios</a></li>
+          <li><a href="#favoritos" data-route="favoritos">Tus favoritos</a></li>
+          <li><a href="https://www.ayto-pinto.es/" target="_blank" rel="noopener">Ayuntamiento</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul class="footer-links">
+          <li>📍 Plaza de la Constitución, 1</li>
+          <li>📞 +34 91 248 80 00</li>
+          <li>✉️ turismo@ayto-pinto.es</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Descubre Pinto. Proyecto educativo sin ánimo de lucro.</p>
+        <p style="font-size:.8rem;opacity:.7;margin-top:.4rem">Información revisada en noviembre de 2026. Horarios, tarifas y aperturas pueden cambiar: confirma siempre en las fuentes oficiales.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen">&times;</button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada">
+  </div>
+    <!-- ================= MODAL DE DETALLE (FALTABA ESTO) ================= -->
+  <div class="modal-backdrop" id="detail-modal" hidden role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar ficha">&times;</button>
+      
+      <div class="modal-gallery" id="modal-gallery"></div>
+      
+      <div class="modal-body">
+        <div class="modal-top-meta">
+          <span class="card-tag" id="modal-category">Categoría</span>
+          <div class="modal-actions-inline">
+            <button type="button" class="btn-icon-text" id="modal-fav-btn">♡ Guardar</button>
+            <button type="button" class="btn-icon-text" id="modal-share-btn">Compartir</button>
+          </div>
+        </div>
+        
+        <h2 id="modal-title">Título del lugar</h2>
+        <p class="text-muted" id="modal-desc" style="margin-top: 1rem;">Descripción completa...</p>
+        
+        <div class="modal-practical-box">
+          <h4>Información práctica</h4>
+          <ul id="modal-practical-list"></ul>
+        </div>
+        
+        <div id="modal-map" class="map-container" style="height: 250px; margin-top: 1.5rem;"></div>
+        
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <a href="#" id="modal-directions-btn" class="btn btn-primary" target="_blank" rel="noopener">📍 Cómo llegar (OpenStreetMap)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./app.js"></script>
+</body>
+</html>

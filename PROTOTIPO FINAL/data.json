@@ -1,0 +1,983 @@
+{
+  "places": [
+    {
+      "id": "torre-de-eboli",
+      "title": "Torre de Éboli",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/Torre_Eboli.webp",
+      "gallery": [
+        "../IMAGENES/Torre_Eboli.webp",
+        "../IMAGENES/Torre_Eboli2.jpeg",
+        "../IMAGENES/Torre_Eboli3.jpeg"
+      ],
+      "coords": [
+        40.2427,
+        -3.7024
+      ],
+      "shortDesc": "Fortaleza medieval del siglo XIV y Bien de Interés Cultural, célebre por ser prisión de la princesa de Éboli.",
+      "fullDesc": "La Torre de Pinto, conocida popularmente como Torre de Éboli, es el icono arquitectónico más reconocible de la villa. Levantada en el siglo XIV en piedra blanca de Colmenar, alcanzó fama histórica tras servir de prisión para Ana de Mendoza de la Cerda, princesa de Éboli, desde 1579 hasta su fallecimiento en 1592 por orden de Felipe II. Protegida desde 1949 y declarada Bien de Interés Cultural en 2019, conserva todo su porte defensivo en pleno corazón urbano.",
+      "practicalInfo": [
+        "Ubicación: Plaza Jaime Méric, casco antiguo de Pinto.",
+        "Visitas guiadas: lunes, miércoles, viernes y domingos (los horarios varían según el mes).",
+        "Reserva previa en reservas.ayto-pinto.es.",
+        "Entrada general 4 €; reducida 2 € (jubilados y niños de 7 a 12 años); gratis para menores de 7. Confirma las tarifas vigentes."
+      ],
+      "lastChecked": "noviembre 2026"
+    },
+    {
+      "id": "fabrica-chocolates-compania-colonial",
+      "title": "Antigua fábrica de chocolates Compañía Colonial",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/Fabrica_Chocolate.jpg",
+      "gallery": [
+        "../IMAGENES/Fabrica_Chocolate.jpg",
+        "../IMAGENES/Fabrica_Chocolate2.jpg",
+        "../IMAGENES/Fabrica_Chocolate3.jpg"
+      ],
+      "coords": [
+        40.2414,
+        -3.7024
+      ],
+      "shortDesc": "Conjunto industrial de 1866 que conserva su chimenea, un almacén y la emblemática Casita de Chocolate.",
+      "fullDesc": "En 1866 la Compañía Colonial inauguró en Pinto una moderna fábrica de chocolates aprovechando el impulso del ferrocarril Madrid-Aranjuez. Este complejo transformó la economía y la fisonomía de la localidad durante décadas. En la actualidad se conservan tres testigos singulares de aquel pasado industrial: la esbelta chimenea de ladrillo, un antiguo almacén reconvertido en centro de educación de personas adultas y la pintoresca Casita de Chocolate, hoy sede de dependencias municipales.",
+      "practicalInfo": [
+        "Ubicación: Entorno de la calle Pablo Picasso y Paseo Dolores Soria.",
+        "Exterior visitable libremente durante todo el año.",
+        "Horario de dependencias municipales: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "iglesia-santo-domingo-de-silos",
+      "title": "Iglesia parroquial de Santo Domingo de Silos",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/Santo_Domingo.jpg",
+      "gallery": [
+        "../IMAGENES/Santo_Domingo.jpg",
+        "../IMAGENES/Santo_Domingo2.jpg",
+        "../IMAGENES/Santo_Domingo3.png"
+      ],
+      "coords": [
+        40.2431,
+        -3.6981
+      ],
+      "shortDesc": "Principal templo parroquial del casco histórico, testigo de siglos de devoción y arte sacro en la villa.",
+      "fullDesc": "Situada en el núcleo fundacional de Pinto, la iglesia parroquial de Santo Domingo de Silos constituye el referente religioso más antiguo de la localidad. Su arquitectura refleja distintas etapas constructivas vinculadas al crecimiento de la villa desde la Edad Media. Un paseo por sus alrededores permite enlazar fácilmente con otros templos históricos del municipio, como las iglesias de San José y San Francisco Javier.",
+      "practicalInfo": [
+        "Ubicación: Plaza de Santo Domingo, casco antiguo.",
+        "Acceso sujeto a horarios de culto parroquial.",
+        "Horarios detallados: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "convento-iglesia-capuchinas",
+      "title": "Convento e iglesia de las Capuchinas",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/convento-capuchinas.jpg",
+      "gallery": [
+        "../IMAGENES/convento-capuchinas.jpg",
+        "../IMAGENES/convento-capuchinas2.jpeg",
+        "../IMAGENES/convento-capuchinas3.jpg"
+      ],
+      "coords": [
+        40.2441,
+        -3.7023
+      ],
+      "shortDesc": "Conjunto conventual inventariado como Bien Cultural por la Comunidad de Madrid en el centro histórico.",
+      "fullDesc": "El convento e iglesia de las Madres Capuchinas forma parte destacada del patrimonio arquitectónico religioso de Pinto, contando con reconocimiento oficial como Bien Cultural inventariado por la Comunidad de Madrid. Su sobria fachada y el recogimiento de su iglesia aportan un remanso de tranquilidad en las calles tradicionales del casco antiguo pinteño.",
+      "practicalInfo": [
+        "Ubicación: Casco antiguo de Pinto.",
+        "Visita interior vinculada a celebraciones litúrgicas.",
+        "Horarios: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "ermitas-historicas-pinto",
+      "title": "Ruta de las Ermitas: Cristo, San Antón y Jesús Nazareno",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/ermitas-pinto1.JPG",
+      "gallery": [
+        "../IMAGENES/ermitas-pinto1.JPG",
+        "../IMAGENES/ermitas-pinto2.jpg",
+        "../IMAGENES/ermitas-pinto3.jpg"
+      ],
+      "coords": [
+        40.2422,
+        -3.7046
+      ],
+      "shortDesc": "Recorrido por las ermitas del Santísimo Cristo del Calvario, San Antón y Jesús Nazareno y San José Obrero.",
+      "fullDesc": "La tradición popular de Pinto se articula en buena medida alrededor de sus ermitas, puntos de encuentro esenciales durante las fiestas patronales y celebraciones vecinales. Destacan especialmente la ermita del Santísimo Cristo del Calvario, ligada a las Fiestas del Cristo (finales de mayo o junio, según el año), la ermita de San Antón en el barrio homónimo y la ermita de Jesús Nazareno y San José Obrero.",
+      "practicalInfo": [
+        "Recorrido urbano a pie por distintos barrios históricos.",
+        "Apertura especial en festividades locales y Semana Santa.",
+        "Horarios de visita: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "casas-senoriales-yacimiento-yesares",
+      "title": "Casas señoriales y Yacimiento de Los Yesares",
+      "category": "Patrimonio",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/casa-cadena2.jpeg",
+      "gallery": [
+        "../IMAGENES/CasaDeLaCadena.jpeg",
+        "../IMAGENES/casa-cadena2.jpeg",
+        "../IMAGENES/Torre_Eboli.webp"
+      ],
+      "coords": [
+        40.2428,
+        -3.7009
+      ],
+      "shortDesc": "Casonas blasonadas del casco urbano y vestigios arqueológicos que narran la historia milenaria de Pinto.",
+      "fullDesc": "El casco histórico de Pinto conserva diversas casas señoriales que testimonian la presencia de familias hidalgas y acomodadas tras la concesión del título de villa en 1359 por Pedro I. A este legado arquitectónico se suma el yacimiento arqueológico de Los Yesares, que confirma el poblamiento antiguo del territorio pinteño mucho antes de la Edad Media.",
+      "practicalInfo": [
+        "Fachadas de casas señoriales visibles en el paseo por el centro.",
+        "Visitas culturales guiadas: consultar reservas.ayto-pinto.es.",
+        "Acceso a zonas arqueológicas: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "parque-municipal-juan-carlos-i",
+      "title": "Parque Municipal Juan Carlos I",
+      "category": "Parques",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/parque-juan-carlos.jpg",
+      "gallery": [
+        "../IMAGENES/parque-juan-carlos.jpg",
+        "../IMAGENES/parque-juan-carlos1.jpeg",
+        "../IMAGENES/parque-juan-carlos.jpeg"
+      ],
+      "coords": [
+        40.2485,
+        -3.689
+      ],
+      "shortDesc": "Gran pulmón verde de unas 55 hectáreas con lago de wakeboard, auditorio, pajarera, carril bici y recinto ferial.",
+      "fullDesc": "Abierto en 1997 e inaugurado oficialmente en 1998 por los reyes Juan Carlos I y Sofía, este parque de aproximadamente 55 hectáreas es el mayor espacio de ocio al aire libre de Pinto. Entre sus numerosos atractivos figuran un lago con actividad de wakeboard, auditorio, recinto ferial, circuito de educación vial, centro hípico, pajarera con pavos reales, zona canina, restaurante, juegos infantiles y extensos paseos ciclables.",
+      "practicalInfo": [
+        "Acceso libre y gratuito durante todo el año.",
+        "Dispone de aparcamiento y área de autocaravanas en las inmediaciones.",
+        "Horario de cierre nocturno según estación: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "parque-egido-de-la-fuente",
+      "title": "Parque Egido de la Fuente y Monolito",
+      "category": "Parques",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/egido-fuente.jpeg",
+      "gallery": [
+        "../IMAGENES/egido-fuente.jpeg",
+        "../IMAGENES/egido-fuente1.jpg",
+        "../IMAGENES/egido.jpeg"
+      ],
+      "coords": [
+        40.241,
+        -3.702
+      ],
+      "shortDesc": "Paseo arbolado céntrico donde se alza el monolito del centro geográfico peninsular y la leyenda del Arca.",
+      "fullDesc": "El Parque del Egido de la Fuente es el punto de encuentro más querido por los vecinos en el centro de Pinto. En sus jardines se levanta el monolito que conmemora la histórica creencia de que Pinto —del latín punctum, punto— marcaba el centro geográfico de la península ibérica, acompañando el relato tradicional de la leyenda del Arca.",
+      "practicalInfo": [
+        "Ubicación: Paseo Dolores Soria, centro urbano.",
+        "Espacio abierto las 24 horas con zonas de descanso y terrazas próximas.",
+        "Ideal como punto de partida para recorrer el casco antiguo."
+      ]
+    },
+    {
+      "id": "parques-urbanos-buenos-aires-guardia-civil",
+      "title": "Parques de Pinto Buenos Aires y de la Guardia Civil",
+      "category": "Parques",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/parque-buenos-aires.jpeg",
+      "gallery": [
+        "../IMAGENES/parque-buenos-aires.jpeg",
+        "../IMAGENES/parque-buenos-aires1.jpeg",
+        "../IMAGENES/parque-buenos-aires2.jpeg"
+      ],
+      "coords": [
+        40.2448,
+        -3.7052
+      ],
+      "shortDesc": "Zonas ajardinadas de barrio perfectas para el paseo tranquilo, el descanso y el juego infantil.",
+      "fullDesc": "Además de sus grandes parques emblemáticos, Pinto cuenta con una cuidada red de parques urbanos integrados en sus distintos barrios. Entre ellos destacan el parque de Pinto Buenos Aires y el parque de la Guardia Civil, espacios arbolados que ofrecen áreas estanciales, paseos peatonales y zonas de recreo para disfrutar del aire libre a pocos pasos del centro.",
+      "practicalInfo": [
+        "Acceso libre durante todo el día.",
+        "Equipados con bancos, arbolado de sombra y áreas infantiles.",
+        "Ubicación en barrios Buenos Aires y zona centro-oeste."
+      ]
+    },
+    {
+      "id": "humedal-los-estragales",
+      "title": "Humedal de Los Estragales",
+      "category": "Naturaleza",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/estragales.webp",
+      "gallery": [
+        "../IMAGENES/estragales.webp",
+        "../IMAGENES/estragales.jpg",
+        "../IMAGENES/estragales2.webp"
+      ],
+      "coords": [
+        40.235,
+        -3.715
+      ],
+      "shortDesc": "El único humedal conservado en Pinto, un enclave natural de gran valor donde se han censado hasta 130 especies de aves.",
+      "fullDesc": "Ubicado al suroeste del término municipal, Los Estragales es el último humedal natural que perdura en Pinto y un auténtico oasis para la fauna silvestre. Su lámina de agua y vegetación palustre atraen a multitud de aves acuáticas y migratorias, habiéndose llegado a censar hasta 130 especies distintas, lo que lo convierte en un lugar imprescindible para los amantes de la ornitología.",
+      "practicalInfo": [
+        "Recomendación: Llevar prismáticos y cámara con teleobjetivo.",
+        "Respetar los caminos señalizados y mantener silencio para no perturbar a las aves.",
+        "Mejor época de observación: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "parque-regional-sureste-pinto",
+      "title": "Entorno del Parque Regional del Sureste",
+      "category": "Naturaleza",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/parque-regional-sureste.jpeg",
+      "gallery": [
+        "../IMAGENES/parque-regional-sureste.jpeg",
+        "../IMAGENES/parque-regional-sureste1.jpeg",
+        "../IMAGENES/parque-regional-sureste2.jpeg"
+      ],
+      "coords": [
+        40.232,
+        -3.674
+      ],
+      "shortDesc": "Paisajes esteparios, cortados yesíferos y llanuras agrarias en el sector oriental del término municipal.",
+      "fullDesc": "Por el sector oriental de Pinto se extiende parte del Parque Regional del Sureste, un espacio natural protegido de la Comunidad de Madrid caracterizado por sus llanuras cerealistas, cerros testigo y ecosistemas de gran interés botánico y faunístico. Es un entorno ideal para comprender el paisaje tradicional de la comarca de La Sagra madrileña.",
+      "practicalInfo": [
+        "Acceso mediante caminos rurales habilitados desde el municipio.",
+        "Se aconseja llevar agua y protección solar en meses estivales.",
+        "Normativa ambiental disponible en la web de la Comunidad de Madrid."
+      ]
+    },
+    {
+      "id": "casa-de-la-cadena-museo",
+      "title": "Casa de la Cadena y Museo",
+      "category": "Museos y cultura",
+      "section": "que-ver",
+      "featured": true,
+      "image": "../IMAGENES/CasaDeLaCadena.jpeg",
+      "gallery": [
+        "../IMAGENES/CasaDeLaCadena.jpeg",
+        "../IMAGENES/casa-cadena2.jpeg",
+        "../IMAGENES/casa-cadena3.jpg"
+      ],
+      "coords": [
+        40.242,
+        -3.699
+      ],
+      "shortDesc": "Edificio histórico reconvertido en centro cultural con biblioteca, salas de exposiciones y el Museo Casa de la Cadena.",
+      "fullDesc": "La Casa de la Cadena es uno de los espacios culturales más dinámicos de Pinto. Aunque la tradición popular asoció durante décadas este inmueble con una supuesta estancia de los Reyes Católicos —extremo descartado por investigaciones históricas posteriores—, el edificio conserva su encanto tradicional y alberga hoy una biblioteca, salas de muestras temporales y el Museo Casa de la Cadena.",
+      "practicalInfo": [
+        "Ubicación: Calle de la Cadena, casco histórico.",
+        "Entrada libre a exposiciones y salas de lectura.",
+        "Horarios de apertura del museo: consultar en turismopinto.es."
+      ]
+    },
+    {
+      "id": "teatro-municipal-francisco-rabal",
+      "title": "Teatro Municipal Francisco Rabal",
+      "category": "Museos y cultura",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/teatro-rabal.jpg",
+      "gallery": [
+        "../IMAGENES/teatro-rabal.jpg",
+        "../IMAGENES/teatro-rabal1.jpg",
+        "../IMAGENES/teatro-rabal2.jpeg"
+      ],
+      "coords": [
+        40.2475,
+        -3.6942
+      ],
+      "shortDesc": "Principal escenario de las artes escénicas en Pinto, con programación estable de teatro, danza y conciertos.",
+      "fullDesc": "Bautizado en honor al célebre actor español, el Teatro Municipal Francisco Rabal es el epicentro de la vida escénica pinteña. Acoge espectáculos teatrales de ámbito nacional, conciertos sinfónicos, muestras de las escuelas municipales de música y danza y festivales culturales durante toda la temporada.",
+      "practicalInfo": [
+        "Ubicación: Calle Alpujarras, s/n.",
+        "Venta de entradas y programación en ayto-pinto.es.",
+        "Horarios de taquilla: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "biblioteca-javier-lapena-monumentos",
+      "title": "Biblioteca Javier Lapeña y Monumentos Conmemorativos",
+      "category": "Museos y cultura",
+      "section": "que-ver",
+      "featured": false,
+      "image": "../IMAGENES/biblioteca-lapena.jpeg",
+      "gallery": [
+        "../IMAGENES/biblioteca-lapena.jpeg",
+        "../IMAGENES/biblioteca-lapena2.jpeg",
+        "../IMAGENES/biblioteca-lapena3.jpeg"
+      ],
+      "coords": [
+        40.2515,
+        -3.6975
+      ],
+      "shortDesc": "Moderno equipamiento cultural con aula de la UNED y recorrido por los monumentos de memoria cívica de la ciudad.",
+      "fullDesc": "Situada en el barrio de La Tenería, la Biblioteca Javier Lapeña destaca por su arquitectura luminosa y por acoger también un aula de la UNED. En el ámbito de la memoria cívica y cultural del municipio sobresalen asimismo los monumentos dedicados a las víctimas del 11-M, a los Abogados de Atocha y al centro geográfico de la península ibérica.",
+      "practicalInfo": [
+        "Ubicación biblioteca: Calle Juana Francés, barrio de La Tenería.",
+        "Acceso libre a salas de consulta y actividades culturales.",
+        "Horarios de biblioteca: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "ruta-cicloturista-de-los-prados",
+      "title": "Ruta cicloturista de los Prados",
+      "category": "Rutas",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/ruta-prados.jpg",
+      "gallery": [
+        "../IMAGENES/ruta-prados.jpg",
+        "../IMAGENES/ruta-prados2.jpg",
+        "../IMAGENES/ruta-prados3.jpeg"
+      ],
+      "coords": [
+        40.2385,
+        -3.684
+      ],
+      "shortDesc": "Itinerario rural señalizado ideal para pedalear o caminar entre campos abiertos y paisajes tradicionales.",
+      "fullDesc": "La Ruta de los Prados forma parte de la red municipal de rutas de interés cicloturista de Pinto. Discurre por pistas agrícolas llanas y accesibles que permiten desconectar del entorno urbano y disfrutar del paisaje abierto de la campiña madrileña, siendo una opción excelente tanto para ciclistas aficionados como para senderistas.",
+      "practicalInfo": [
+        "Modalidad: Bicicleta de montaña o senderismo.",
+        "Fichas y mapas descargables en ayto-pinto.es/rutas-de-interes.",
+        "Distancia exacta y desnivel: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "rutas-pilillas-y-higueral",
+      "title": "Rutas de las Pilillas y del Higueral",
+      "category": "Rutas",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/rutas-ciclo.jpg",
+      "gallery": [
+        "../IMAGENES/rutas-ciclo.jpg",
+        "../IMAGENES/rutas-ciclo2.jpeg",
+        "../IMAGENES/rutas-ciclo3.jpg"
+      ],
+      "coords": [
+        40.2315,
+        -3.708
+      ],
+      "shortDesc": "Dos recorridos periurbanos por vaguadas y cerros suaves para explorar el entorno natural del sur de Pinto.",
+      "fullDesc": "Junto a la ruta de los Prados, los itinerarios de las Pilillas y del Higueral completan la trilogía de rutas cicloturistas diseñadas por el Ayuntamiento de Pinto. A lo largo de sus caminos rurales es posible contemplar vistas panorámicas del municipio, antiguas zonas de cultivo y fauna esteparia característica del sur de Madrid.",
+      "practicalInfo": [
+        "Recomendado para bicicleta BTT y marcha nórdica.",
+        "Información oficial en ayto-pinto.es/rutas-de-interes.",
+        "Duración estimada: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "canada-real-galiana-rutas-guiadas",
+      "title": "Cañada Real Galiana y Rutas Guiadas Municipales",
+      "category": "Rutas",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/canada-galiana.webp",
+      "gallery": [
+        "../IMAGENES/canada-galiana.webp",
+        "../IMAGENES/canada-galiana2.webp",
+        "../IMAGENES/canada-galiana3.webp"
+      ],
+      "coords": [
+        40.233,
+        -3.69
+      ],
+      "shortDesc": "Histórica vía pecuaria trashumante donde el Ayuntamiento organiza recorridos interpretativos y patrimoniales.",
+      "fullDesc": "La Cañada Real Galiana atraviesa el término municipal de Pinto conservando su valor como corredor ecológico e histórico ligado a la trashumancia. A lo largo del año, especialmente en fechas señaladas como el Día Internacional de los Monumentos y Sitios, el Ayuntamiento programa rutas guiadas a pie tanto por este entorno natural como por el patrimonio monumental del centro.",
+      "practicalInfo": [
+        "Inscripciones para visitas guiadas en reservas.ayto-pinto.es.",
+        "Actividad gratuita en convocatorias municipales consultar en ayto-pinto.es.",
+        "Se recomienda calzado cómodo para caminar por tierra."
+      ]
+    },
+    {
+      "id": "arqueopinto-parque-gonzalo-arteaga",
+      "title": "ArqueoPinto (Parque Arqueológico Gonzalo Arteaga)",
+      "category": "Familia",
+      "section": "que-hacer",
+      "featured": true,
+      "image": "../IMAGENES/arqueopinto.jpeg",
+      "gallery": [
+        "../IMAGENES/arqueopinto.jpeg",
+        "../IMAGENES/arqueopinto2.jpeg",
+        "../IMAGENES/arqueopinto3.jpeg"
+      ],
+      "coords": [
+        40.249,
+        -3.69
+      ],
+      "shortDesc": "El parque temático de la Prehistoria en Pinto, con talleres participativos de fuego, caza y arqueología para toda la familia.",
+      "fullDesc": "Situado dentro del Parque Municipal Juan Carlos I, ArqueoPinto (parque arqueológico Gonzalo Arteaga) es el recurso turístico más consolidado de la localidad tras más de dos décadas de trayectoria. A través de reconstrucciones de cabañas prehistóricas y talleres prácticos de talla lítica, pintura rupestre o encendido de fuego, niños y adultos experimentan cómo vivían nuestros antepasados.",
+      "practicalInfo": [
+        "Ubicación: Interior del Parque Juan Carlos I.",
+        "Imprescindible reserva previa en turismopinto.es o reservas.ayto-pinto.es.",
+        "Tarifas y pases de fin de semana: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "ocio-infantil-ludoteca-educacion-vial",
+      "title": "Circuito de Educación Vial, Pajarera y Ludoteca Manolito Gafotas",
+      "category": "Familia",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/ocio-familia-pinto.jpeg",
+      "gallery": [
+        "../IMAGENES/ocio-familia-pinto.jpeg",
+        "../IMAGENES/ocio-familia-pinto2.jpeg",
+        "../IMAGENES/ocio-familia-pinto3.jpeg"
+      ],
+      "coords": [
+        40.2472,
+        -3.6912
+      ],
+      "shortDesc": "Planes pensados para los más pequeños: bicicletas en el circuito vial, pavos reales y animación infantil.",
+      "fullDesc": "Pinto destaca por su amplia oferta de ocio familiar. En el Parque Juan Carlos I los niños pueden disfrutar de extensas áreas de juegos infantiles, observar los pavos reales de la pajarera o practicar normas de circulación en el circuito de educación vial. La oferta se completa con propuestas culturales como la ludoteca municipal Manolito Gafotas.",
+      "practicalInfo": [
+        "Parques y pajarera de acceso libre.",
+        "Actividades de ludoteca sujetas a programación municipal.",
+        "Horarios y edades recomendadas: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "centro-comercial-ocio-plaza-eboli",
+      "title": "Ocio y compras en Plaza Éboli",
+      "category": "Familia",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/plaza-eboli.jpg",
+      "gallery": [
+        "../IMAGENES/plaza-eboli.jpg",
+        "../IMAGENES/plaza-eboli2.jpg",
+        "../IMAGENES/plaza-eboli3.jpg"
+      ],
+      "coords": [
+        40.2512,
+        -3.6968
+      ],
+      "shortDesc": "Gran espacio comercial y de entretenimiento con salas de cine, bolera, tiendas y restauración junto a La Tenería.",
+      "fullDesc": "Ubicado junto al Parque Juan Carlos I y el barrio de La Tenería, el centro comercial Plaza Éboli es un punto de referencia para el ocio cubierto y las compras en el sur de Madrid. Cuenta con salas de cine, bolera, gimnasio, hipermercado, numerosas tiendas de moda y servicios, así como una variada zona de restauración.",
+      "practicalInfo": [
+        "Ubicación: Calle Pablo Picasso, s/n.",
+        "Dispone de aparcamiento propio y área de autocaravanas cercana.",
+        "Horarios comerciales y de ocio: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "estadio-rafael-mendoza-principes-asturias",
+      "title": "Estadio Rafael Mendoza y Pabellón Príncipes de Asturias",
+      "category": "Deporte",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/zona-deportiva.jpeg",
+      "gallery": [
+        "../IMAGENES/zona-deportiva.jpeg",
+        "../IMAGENES/zona-deportiva2.jpeg",
+        "../IMAGENES/zona-deportiva3.jpeg"
+      ],
+      "coords": [
+        40.248,
+        -3.687
+      ],
+      "shortDesc": "Complejo deportivo con pista de atletismo, campos de fútbol, pistas de tenis y pádel, skatepark y rocódromo.",
+      "fullDesc": "La gran ciudad deportiva integrada en el entorno del Parque Juan Carlos I agrupa el Estadio Rafael Mendoza —con pista de atletismo y campo de fútbol—, el pabellón Príncipes de Asturias, campos anexos de fútbol 7 y 11, pistas de tenis y pádel, un moderno skatepark y el rocódromo Gabriel Martínez «Grali». Es sede habitual de clubes como el Club Atlético de Pinto o Pinto E.C.B.",
+      "practicalInfo": [
+        "Ubicación: Entorno del Parque Juan Carlos I.",
+        "Alquiler de pistas e instalaciones: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "polideportivo-alberto-contador-pabellon-sandra-aguilar",
+      "title": "Polideportivo Alberto Contador",
+      "category": "Deporte",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/polideportivo-contador.jpeg",
+      "gallery": [
+        "../IMAGENES/polideportivo-contador.jpeg",
+        "../IMAGENES/polideportivo-contador2.jpg",
+        "../IMAGENES/polideportivo-contador3.jpg"
+      ],
+      "coords": [
+        40.246,
+        -3.698
+      ],
+      "shortDesc": "Instalaciones municipales que rinden homenaje a los dos grandes referentes olímpicos y mundiales del deporte pinteño.",
+      "fullDesc": "Pinto rinde tributo a sus deportistas más laureados dando su nombre a dos centros deportivos clave: el polideportivo Alberto Contador —en honor al ciclista ganador de las tres Grandes Vueltas e Hijo Predilecto de la villa desde 2011— y el pabellón Sandra Aguilar, dedicado a la gimnasta rítmica medallista olímpica. En ellos entrenan y compiten entidades como C.V. Pinto, BM Pinto y Futsal Pinto.",
+      "practicalInfo": [
+        "Uso para competiciones federadas, escuelas deportivas y actividades dirigidas.",
+        "Horarios y abonos municipales: consultar en ayto-pinto.es."
+      ]
+    },
+    {
+      "id": "lago-wakeboard-centro-hipico",
+      "title": "Lago de Wakeboard y Centro Hípico",
+      "category": "Deporte",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/parque-juan-carlos.jpg",
+      "gallery": [
+        "../IMAGENES/parque-juan-carlos.jpg",
+        "../IMAGENES/parque-juan-carlos1.jpeg",
+        "../IMAGENES/parque-juan-carlos.jpeg"
+      ],
+      "coords": [
+        40.2462,
+        -3.6905
+      ],
+      "shortDesc": "Deportes náuticos con cable-ski y equitación sin salir del Parque Municipal Juan Carlos I.",
+      "fullDesc": "Uno de los mayores atractivos singulares de Pinto es la posibilidad de practicar wakeboard sobre el lago artificial del Parque Juan Carlos I mediante un sistema de cable-ski apto tanto para principiantes como para expertos. Muy cerca se encuentra además el centro hípico municipal, que completa una oferta deportiva al aire libre poco habitual tan cerca de la capital.",
+      "practicalInfo": [
+        "Ubicación: Parque Municipal Juan Carlos I.",
+        "Reserva de sesiones y cursos: consultar en turismopinto.es."
+      ]
+    },
+    {
+      "id": "piscinas-municipales-complejo-patricia-chamorro",
+      "title": "Piscinas Municipales",
+      "category": "Deporte",
+      "section": "que-hacer",
+      "featured": false,
+      "image": "../IMAGENES/piscinas-pinto.jpeg",
+      "gallery": [
+        "../IMAGENES/piscinas-pinto.jpeg",
+        "../IMAGENES/piscinas-pinto2.jpeg",
+        "../IMAGENES/piscinas-pinto3.jpeg"
+      ],
+      "coords": [
+        40.2442,
+        -3.6955
+      ],
+      "shortDesc": "Piscinas de verano al aire libre, piscina climatizada y pistas del complejo deportivo Patricia Chamorro.",
+      "fullDesc": "Para refrescarse durante los cálidos veranos del clima mediterráneo continentalizado o practicar natación durante todo el año, Pinto dispone de piscinas municipales de verano y vaso climatizado. A esta red se suma el complejo deportivo Patricia Chamorro, ampliando las opciones para la práctica del deporte base y recreativo en el municipio.",
+      "practicalInfo": [
+        "Temporada de piscina de verano: habitualmente de junio a septiembre consultar en ayto-pinto.es.",
+        "Entradas y bonos: consultar en ayto-pinto.es."
+      ]
+    }
+  ],
+  "events": [
+    {
+      "day": "04",
+      "month": "Dic",
+      "status": "Próximamente",
+      "title": "Encendido de Luces y Arranque de la Navidad",
+      "description": "Arrancan las fiestas navideñas con el encendido de luces, la Villa de la Navidad, mercados, música, DJ, la Papanoelada Motera y las tradicionales Preuvas.",
+      "location": "Centro urbano de Pinto",
+      "date": "2026-12-04",
+      "countdown": true
+    },
+    {
+      "day": "05",
+      "month": "Ene",
+      "status": "Próximamente",
+      "title": "Cabalgata de Reyes",
+      "description": "La tradicional y esperada Cabalgata de Reyes recorrerá las calles de Pinto para la ilusión de los más pequeños.",
+      "location": "Calles de Pinto",
+      "date": "2027-01-05",
+      "recurring": true,
+      "countdown": true
+    },
+    {
+      "day": "21",
+      "month": "Nov",
+      "status": "Este fin de semana",
+      "title": "Comercios Mágicos",
+      "description": "Espectáculos, juegos y actividades para toda la familia para impulsar el comercio local en la Avenida de España.",
+      "location": "Avenida de España",
+      "date": "2026-11-21"
+    },
+    {
+      "day": "18",
+      "month": "Abr",
+      "status": "Cada año",
+      "title": "Día Internacional de los Monumentos y Sitios",
+      "description": "Jornadas de puertas abiertas en la Torre de Éboli, rutas guiadas por el casco histórico y recorridos ambientales por la Cañada Real Galiana.",
+      "location": "Torre de Éboli y casco histórico",
+      "date": "2027-04-18",
+      "recurring": true
+    },
+    {
+      "day": "30",
+      "month": "Abr",
+      "status": "Cada año",
+      "title": "Fiestas del Barrio de El Prado",
+      "description": "Celebración vecinal con actividades infantiles, música al aire libre y encuentros populares organizados en uno de los barrios con mayor tradición. Se celebran en torno al 2 de mayo.",
+      "location": "Barrio de El Prado",
+      "date": "2027-04-30",
+      "recurring": true
+    },
+    {
+      "day": "15",
+      "month": "Ago",
+      "status": "Cada año",
+      "title": "Fiestas Patronales de la Virgen de la Asunción",
+      "description": "La semana grande de Pinto reúne conciertos multitudinarios, casetas de peñas, espectáculos familiares y actos tradicionales.",
+      "location": "Recinto Ferial Parque Juan Carlos I y Plaza de la Constitución",
+      "date": "2027-08-15",
+      "recurring": true,
+      "countdown": true
+    },
+    {
+      "day": "--",
+      "month": "May-Jun",
+      "status": "Cada año",
+      "title": "Fiestas del Santísimo Cristo del Calvario",
+      "description": "Segunda gran celebración de Pinto tras las patronales de agosto: procesiones del Cristo, traslado desde la ermita a Santo Domingo de Silos, conciertos y actividades.",
+      "location": "Ermita del Cristo y casco antiguo"
+    },
+    {
+      "day": "--",
+      "month": "Nov",
+      "status": "En curso",
+      "title": "Black Friday del comercio local",
+      "description": "Campaña comercial con acciones especiales en los establecimientos adheridos de Pinto.",
+      "location": "Comercios adheridos de Pinto",
+      "date": "2026-11-20",
+      "end": "2026-11-30"
+    },
+    {
+      "day": "--",
+      "month": "Sep",
+      "status": "Cada año",
+      "title": "Feria del Chocolate",
+      "description": "Catas, talleres de chocolate para familias, degustaciones de tapas y dulces típicos como los Ombligos de Pinto, con ambientación del siglo XIX y visitas especiales a la Torre. Se celebra a finales de septiembre.",
+      "location": "Pinto"
+    }
+  ],
+  "barrios": [
+    {
+      "name": "Casco antiguo",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/casco-antiguo.jpeg",
+      "description": "Núcleo originario de la villa en torno a la Torre de Éboli, la iglesia de Santo Domingo de Silos, el convento de las Capuchinas y casas señoriales."
+    },
+    {
+      "name": "El Egido",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/egido.jpeg",
+      "description": "Corazón social y comercial del centro, articulado alrededor del parque Egido de la Fuente y el monolito del centro geográfico de la península ibérica."
+    },
+    {
+      "name": "La Calera",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/calera.jpg",
+      "description": "Barrio tradicional integrado en el entramado histórico de Pinto, muy próximo a los servicios administrativos, comercios y zonas peatonales del centro."
+    },
+    {
+      "name": "La Estación",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/estacion.jpeg",
+      "description": "Desarrollado junto a la estación de ferrocarril inaugurada en el siglo XIX, hoy ofrece conexión directa con Madrid mediante la línea C-3 de Cercanías."
+    },
+    {
+      "name": "La Rábida",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/rabida.jpeg",
+      "description": "Barrio tradicional de ambiente vecinal tranquilo que gira en torno a la plaza de La Rábida y cuenta con fácil acceso a pie al casco histórico."
+    },
+    {
+      "name": "Las Mercedes",
+      "zone": "Barrios históricos",
+      "image": "../IMAGENES/las_mercedes.jpeg",
+      "description": "Sector histórico consolidado de Pinto con edificaciones residenciales tradicionales, comercio de proximidad y buena comunicación con las vías principales."
+    },
+    {
+      "name": "Parque Pinto",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/parque-pinto.jpg",
+      "description": "Barrio surgido durante la expansión urbana de la segunda mitad del siglo XX, dotado de zonas verdes vecinales, comercios y centros educativos cercanos."
+    },
+    {
+      "name": "Las Chimeneas",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/chimeneas.jpg",
+      "description": "Área residencial vinculada al crecimiento industrial del siglo XX en las proximidades del antiguo eje ferroviario y de la histórica fábrica de chocolates."
+    },
+    {
+      "name": "Buenos Aires",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/buenos-aires.jpg",
+      "description": "Barrio residencial consolidado que cuenta con colegio público propio y el arbolado parque de Pinto Buenos Aires como espacio de encuentro vecinal."
+    },
+    {
+      "name": "Puerta de Pinto",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/puerta_pinto.jpeg",
+      "description": "Situado en uno de los accesos principales al municipio, dispone de zonas ajardinadas como el parque de Puerta Pinto y conexión rápida con la A-4."
+    },
+    {
+      "name": "El Prado",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/prado.jpg",
+      "description": "Barrio con fuerte identidad comunitaria que dispone de parque, centro cívico, dotaciones escolares y celebra anualmente sus propias fiestas populares."
+    },
+    {
+      "name": "La Cristina",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/estragales.webp",
+      "description": "Zona residencial tranquila del ensanche del siglo XX articulada en torno a su propio parque vecinal y próxima a centros educativos y deportivos."
+    },
+    {
+      "name": "La Indiana",
+      "zone": "Crecimiento 1950-1990",
+      "image": "../IMAGENES/indiana.jpg",
+      "description": "Barrio residencial de ambiente familiar que cuenta con el parque de la Indiana y buenas conexiones con los ejes viarios y líneas de autobús urbano."
+    },
+    {
+      "name": "Parque Europa",
+      "zone": "Nuevos barrios 2000-2010",
+      "image": "../IMAGENES/parque-europa.jpeg",
+      "description": "Desarrollo urbano moderno de amplias calles y zonas verdes que alberga un centro de salud propio, colegios e instalaciones deportivas cercanas."
+    },
+    {
+      "name": "San Antón-Valparaíso",
+      "zone": "Nuevos barrios 2000-2010",
+      "image": "../IMAGENES/san-anton.jpg",
+      "description": "Sector residencial contemporáneo situado en el entorno de la histórica ermita de San Antón, combinando viviendas modernas con espacios abiertos."
+    },
+    {
+      "name": "La Tenería",
+      "zone": "Nuevos barrios 2000-2010",
+      "image": "../IMAGENES/teneria.jpg",
+      "description": "El mayor desarrollo reciente de Pinto (junto a La Tenería II), sede de la biblioteca Javier Lapeña, aula de la UNED, Plaza Éboli y el parque Juan Carlos I."
+    }
+  ],
+  "curiosities": [
+    {
+      "question": "¿De dónde procede el nombre de Pinto?",
+      "answer": "Proviene del latín «punctum» (punto), debido a la antigua creencia geográfica de que la localidad ocupaba el centro exacto de la península ibérica."
+    },
+    {
+      "question": "¿Qué representa el escudo oficial de Pinto?",
+      "answer": "Muestra un fondo jaquelado de oro y gules (rojo) con un globo terráqueo en el centro donde un punto rojo señala la ubicación de Pinto en la península."
+    },
+    {
+      "question": "¿Qué origen tiene el dicho «Entre Pinto y Valdemoro»?",
+      "answer": "Alude a estar indeciso entre dos opciones. Existen varias tradiciones populares, como la del arroyo que separaba ambos pueblos o las dudas sobre la estancia de los reyes."
+    },
+    {
+      "question": "¿Qué cuenta la Leyenda del Arca en El Egido?",
+      "answer": "Según la tradición, antiguos geógrafos árabes midieron aquí el centro peninsular y enterraron un arca con sus instrumentos bajo una piedra marcada con una X, hoy recordada por un monolito."
+    },
+    {
+      "question": "¿Quién fue la prisionera más ilustre de la Torre de Éboli?",
+      "answer": "Ana de Mendoza de la Cerda, princesa de Éboli, permaneció recluida en la torre pinteña por orden del rey Felipe II desde 1579 hasta su muerte en 1592."
+    },
+    {
+      "question": "¿Cuándo obtuvo Pinto el título de villa?",
+      "answer": "En el año 1359, por concesión del rey Pedro I de Castilla, un hito clave en la historia institucional del municipio."
+    },
+    {
+      "question": "¿Por qué Pinto tuvo tanta fama chocolatera en el siglo XIX?",
+      "answer": "Porque en 1866 la Compañía Colonial instaló aquí una gran fábrica de chocolates junto al ferrocarril, de la que aún perduran su chimenea y la Casita de Chocolate."
+    },
+    {
+      "question": "¿Qué vínculo une a Pinto con el ciclismo y la gimnasia olímpica?",
+      "answer": "Es la ciudad del ciclista Alberto Contador, nombrado Hijo Predilecto en 2011, y de la gimnasta medallista olímpica Sandra Aguilar; ambos dan nombre a instalaciones locales."
+    }
+  ],
+  "gastroAndLodging": [
+    {
+      "type": "comer",
+      "tag": "Producto típico",
+      "title": "Los Ombligos de Pinto",
+      "description": "Dulce artesanal creado en homenaje al estatus de Pinto como centro geográfico de la península ibérica. Es el recuerdo gastronómico más emblemático de la villa.",
+      "practical": "Puntos de venta y pastelerías: consultar pastelerías adheridas en ayto-pinto.es.",
+      "image": "../IMAGENES/Ombligos-Pinto-.webp"
+    },
+    {
+      "type": "comer",
+      "tag": "Gastronomía tradicional",
+      "title": "Cocido madrileño en tres vuelcos",
+      "description": "Plato estrella de la cocina tradicional pinteña y madrileña, especialmente apreciado durante los meses fríos del invierno continental.",
+      "practical": "Disponible en restaurantes tradicionales del municipio.",
+      "image": "../IMAGENES/Cocido madrileño en tres vuelcos.webp"
+    },
+    {
+      "type": "comer",
+      "tag": "Tradición dulce",
+      "title": "Herencia chocolatera de Pinto",
+      "description": "La huella de la histórica fábrica de la Compañía Colonial (1866) sigue muy presente en la cultura dulce y repostera de la localidad.",
+      "practical": "Visita exterior a la Casita de Chocolate y degustación en confiterías locales.",
+      "image": "../IMAGENES/Fabrica_Chocolate.jpg"
+    },
+    {
+      "type": "comer",
+      "tag": "Ocio al aire libre",
+      "title": "Restaurante y terrazas del Parque Juan Carlos I",
+      "description": "Espacio de restauración integrado dentro del mayor parque de Pinto, ideal para hacer una pausa tras pasear en bicicleta o visitar ArqueoPinto.",
+      "practical": "Ubicación: Parque Municipal Juan Carlos I. Horarios: consultar en ayto-pinto.es.",
+      "image": "../IMAGENES/restaurante_la_suite_del_lago_pinto.jpg"
+    },
+    {
+      "type": "comer",
+      "tag": "Cafetería",
+      "title": "Pastelería Sweet Bites",
+      "description": "Pastelería-cafetería en pleno centro de Pinto, buena opción para una pausa dulce o una merienda tranquila.",
+      "practical": "Av. de Antonio López, 21. Horarios: consultar en el propio local.",
+      "image": "../IMAGENES/Pastelería Sweet Bites pinto.jfif"
+    },
+    {
+      "type": "comer",
+      "tag": "Compras y restauración",
+      "title": "Zona gastronómica y comercial Plaza Éboli",
+      "description": "Amplia oferta de restaurantes familiares, cafeterías y comercios junto al barrio de La Tenería y el Parque Juan Carlos I.",
+      "practical": "Calle Pablo Picasso, s/n. Horarios: consultar en ayto-pinto.es.",
+      "image": "../IMAGENES/Gastronomia.webp"
+    },
+    {
+      "type": "dormir",
+      "tag": "Guía oficial",
+      "title": "Hoteles y hostales en Pinto",
+      "description": "El municipio cuenta con establecimientos hoteleros y hostales bien comunicados con Madrid tanto por tren Cercanías C-3 como por la autovía A-4.",
+      "practical": "Listado oficial actualizado en ayto-pinto.es/donde-dormir.",
+      "image": "../IMAGENES/Hoteles y hostales en Pinto.jpg"
+    },
+    {
+      "type": "dormir",
+      "tag": "Autocaravanas",
+      "title": "Área de servicio para autocaravanas de Pinto",
+      "description": "Espacio habilitado para viajeros itinerantes situado en una ubicación estratégica junto al centro comercial Plaza Éboli y el Parque Juan Carlos I.",
+      "practical": "Calle Pablo Picasso, 8B, junto al Parque Juan Carlos I. Estancia máxima de 7 días. Tarifas: consultar en ayto-pinto.es.",
+      "image": "../IMAGENES/Área de servicio para autocaravanas de Pinto.webp"
+    },
+    {
+      "type": "dormir",
+      "tag": "Hotel",
+      "title": "Hotel Princesa de Éboli",
+      "description": "Hotel de 4 estrellas en Pinto con restaurante, cuyo nombre rinde homenaje a la princesa de Éboli, presa en la torre de la villa.",
+      "practical": "Tarifas y disponibilidad: consultar en su web o en plataformas de reserva.",
+      "image": "../IMAGENES/Hotel Princesa de Éboli.webp"
+    },
+    {
+      "type": "dormir",
+      "tag": "Hotel",
+      "title": "Hotel Indiana",
+      "description": "Hotel de 3 estrellas en el centro, a unos 4 minutos a pie del Parque del Egido y a unos 12 de la estación de Pinto.",
+      "practical": "C/ Castilla, 8. Check-in desde las 14:00 y check-out hasta las 12:00.",
+      "image": "../IMAGENES/indiana.jpg"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "¿En qué año recibió Pinto el título de villa por concesión del rey Pedro I?",
+      "options": [
+        "1359",
+        "1492",
+        "1579",
+        "1866"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "¿Qué famoso personaje histórico estuvo preso en la Torre de Pinto entre 1579 y 1592?",
+      "options": [
+        "Juana I de Castilla",
+        "La princesa de Éboli",
+        "El duque de Lerma",
+        "Antonio Pérez"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "¿De qué palabra latina procede el nombre de Pinto?",
+      "options": [
+        "Pinus",
+        "Pons",
+        "Punctum",
+        "Portus"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "¿Cuántas hectáreas ocupa aproximadamente el Parque Municipal Juan Carlos I?",
+      "options": [
+        "15 hectáreas",
+        "30 hectáreas",
+        "55 hectáreas",
+        "110 hectáreas"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "¿Cuántas especies de aves se han llegado a censar en el humedal de Los Estragales?",
+      "options": [
+        "Hasta 45 especies",
+        "Hasta 80 especies",
+        "Hasta 130 especies",
+        "Hasta 250 especies"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "¿Qué dulce típico de Pinto rinde homenaje a su condición de centro geográfico peninsular?",
+      "options": [
+        "Los Ombligos de Pinto",
+        "Las Rosquillas del Santo",
+        "Los Miguelitos",
+        "Las Yemas de Éboli"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "¿Qué línea de Cercanías Madrid conecta directamente con la estación de Pinto?",
+      "options": [
+        "Línea C-2",
+        "Línea C-3",
+        "Línea C-5",
+        "Línea C-8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "¿Qué fábrica histórica se inauguró en Pinto en el año 1866?",
+      "options": [
+        "Fábrica de porcelana",
+        "Fábrica de chocolates Compañía Colonial",
+        "Fábrica de harinas",
+        "Fábrica de vidrio"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "¿Cómo se llama el parque arqueológico dedicado a la Prehistoria situado en Pinto?",
+      "options": [
+        "ArqueoPinto",
+        "PrehistoMadrid",
+        "IberiaViva",
+        "PaleoSur"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "¿Qué ciclista ganador de las tres Grandes Vueltas fue nombrado Hijo Predilecto de Pinto en 2011?",
+      "options": [
+        "Miguel Induráin",
+        "Carlos Sastre",
+        "Alberto Contador",
+        "Alejandro Valverde"
+      ],
+      "correctIndex": 2
+    }
+  ]
+}
