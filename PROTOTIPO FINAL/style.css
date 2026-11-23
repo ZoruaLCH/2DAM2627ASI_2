@@ -73,39 +73,36 @@ img { max-width: 100%; display: block; }
 /* El menú va por ENCIMA de la capa oscura */
 @media (max-width: 1100px) {
   .menu-toggle { display: flex; }
-  .main-nav { 
-    position: fixed; 
-    top: 0; 
-    right: -100%; 
-    width: 320px; 
-    height: 100vh; 
-    height: 100dvh; 
-    background: var(--bg); 
-    color: var(--text); 
-    padding: 4rem 2rem 2rem; 
-    transition: right .3s ease; 
-    box-shadow: -4px 0 20px rgba(0,0,0,.1); 
-    z-index: 1002; /* El menú siempre por encima */
-    display: flex; 
-    flex-direction: column; 
+  .main-nav {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(320px, 86vw);
+    height: 100vh; height: 100dvh;
+    background: var(--bg); color: var(--text);
+    padding: 4.5rem 1.5rem 2rem;
+    overflow-y: auto; overscroll-behavior: contain;
+    box-shadow: -4px 0 20px rgba(0,0,0,.25);
+    z-index: 1002;
+    display: flex; flex-direction: column;
+    /* Cerrado: fuera de pantalla, sin ensanchar la página y sin foco con el tabulador */
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .3s ease, visibility 0s linear .3s;
   }
-  .main-nav.open { right: 0; }
-  .nav-list { flex-direction: column; align-items: flex-start; gap: 1.2rem; width: 100%; }
-  .nav-link { font-size: 1.1rem; width: 100%; border-bottom: 1px solid var(--border); padding-bottom: .8rem; }
-  
-  .close-nav-btn { 
-    display: block; 
-    background: transparent; 
-    border: 0; 
-    color: var(--text); 
-    font-size: 2rem; 
-    cursor: pointer; 
-    position: absolute; 
-    top: 1rem; 
-    right: 1rem; 
-    z-index: 1010; 
+  .main-nav.open { transform: none; visibility: visible; transition: transform .3s ease, visibility 0s; }
+  .nav-list { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .nav-list li { width: 100%; }
+  .nav-link { display: flex; align-items: center; gap: .6rem; width: 100%; font-size: 1.1rem; padding: .95rem 0; border-bottom: 1px solid var(--border); }
+  .nav-link::after { bottom: -1px; }
+  .close-nav-btn {
+    display: grid; place-items: center;
+    position: absolute; top: .75rem; right: .75rem;
+    width: 44px; height: 44px;
+    background: transparent; border: 1px solid var(--border); color: var(--text);
+    font-size: 1.8rem; line-height: 1; cursor: pointer; z-index: 1010;
   }
+  .close-nav-btn:hover { background: var(--pinto-gold); border-color: var(--pinto-gold); color: var(--ink); }
 }
+
 @media (min-width: 1101px) {
   .close-nav-btn { display: none !important; }
 }
@@ -416,4 +413,37 @@ img { max-width: 100%; display: block; }
   padding: .25rem .55rem;
   background: var(--pinto-gold);
   color: var(--ink);
+}
+
+/* ====== CORRECCIONES: HERO, BLOQUEO DE SCROLL, MAPAS ====== */
+.hero-media { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.hero-media .hero-overlay { z-index: 1; }
+body.menu-open, body.modal-open { overflow: hidden; }
+
+.map-container { position: relative; background: var(--bg-alt); isolation: isolate; }
+.map-mini { height: clamp(300px, 75vw, 380px); }
+.leaflet-container { font-family: inherit; }
+.map-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; text-align: center; color: var(--text-muted); }
+.map-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: max-content; max-width: 90%; background: rgba(0,0,0,.78); color: #fff; padding: .45rem .9rem; font-size: .85rem; border-radius: 2px; z-index: 1000; opacity: 0; transition: opacity .25s; pointer-events: none; text-align: center; }
+.map-hint.show { opacity: 1; }
+[data-theme="dark"] .leaflet-container { background: #1b1b1b; }
+[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.92) contrast(.9); }
+.map-popup-btn { min-height: 36px; }
+
+.modal-card { max-height: 90vh; max-height: 92dvh; }
+.countdown-timer { flex-wrap: wrap; }
+
+@media (max-width: 600px) {
+  .map-large { height: 70vh; min-height: 340px; max-height: 480px; }
+  .page-banner { padding: 7rem 0 2.5rem; }
+  .theme-card { min-height: 240px; }
+  .icon-btn, .menu-toggle { width: 44px; height: 44px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.2rem !important; }
+  .countdown-timer { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+  .time-box { min-width: 0; padding: .5rem .3rem; }
+  .h-card-body { padding: 1.2rem; }
+  .quiz-box { padding: 1.2rem; }
+  .modal-body { padding: 1.2rem; }
+  .modal-actions-inline { width: 100%; }
+  .modal-actions-inline .btn-icon-text { flex: 1; }
 }
