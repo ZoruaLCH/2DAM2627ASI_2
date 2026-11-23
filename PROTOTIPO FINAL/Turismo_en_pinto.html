@@ -62,9 +62,10 @@
     <!-- SECCIÓN 1: INICIO -->
     <section id="view-inicio" class="spa-view active">
       <div class="hero">
-        <div class="hero-bg" id="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
+        <div class="hero-media" aria-hidden="true">
+          <div class="hero-bg" id="hero-bg"></div>
+          <div class="hero-overlay"></div>
+        </div>        <div class="container hero-content">
           <span class="hero-kicker">Comunidad de Madrid · Centro geográfico peninsular</span>
           <h1 class="hero-title">Descubre Pinto</h1>
           <p class="hero-subtitle">Historia medieval, grandes pulmones verdes, arqueología y tradición gastronómica a solo 20 km al sur de Madrid.</p>
@@ -177,7 +178,7 @@
               <h2>Mapa interactivo</h2>
               <p>Explora patrimonio, parques y servicios.</p>
             </div>
-            <div id="home-map" class="map-container map-mini"></div>
+           <div id="home-map" class="map-container map-mini" role="region" aria-label="Mapa interactivo de Pinto"></div>
           </div>
         </div>
       </div>
@@ -286,8 +287,7 @@
         </div>
       </div>
       <div class="container section">
-        <div id="full-map" class="map-container map-large" style="margin-bottom: 2rem;"></div>
-        <h2>Alojamientos</h2>
+<div id="full-map" class="map-container map-large" style="margin-bottom: 2rem;" role="region" aria-label="Mapa de lugares de Pinto"></div>        <h2>Alojamientos</h2>
         <div class="horizontal-cards-list" id="alojamientos-list"></div>
       </div>
     </section>
@@ -364,8 +364,8 @@
     <img id="lightbox-img" src="" alt="Imagen ampliada">
   </div>
     <!-- ================= MODAL DE DETALLE (FALTABA ESTO) ================= -->
-  <div class="modal-backdrop" id="detail-modal" hidden role="dialog" aria-modal="true">
-    <div class="modal-card">
+<div class="modal-backdrop" id="detail-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
       <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar ficha">&times;</button>
       
       <div class="modal-gallery" id="modal-gallery"></div>
