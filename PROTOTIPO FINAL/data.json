@@ -39,13 +39,13 @@
         "../IMAGENES/Fabrica_Chocolate3.jpg"
       ],
       "coords": [
-        40.2414,
-        -3.7024
+        40.246068203761716,
+        -3.707546123969497
       ],
       "shortDesc": "Conjunto industrial de 1866 que conserva su chimenea, un almacén y la emblemática Casita de Chocolate.",
       "fullDesc": "En 1866 la Compañía Colonial inauguró en Pinto una moderna fábrica de chocolates aprovechando el impulso del ferrocarril Madrid-Aranjuez. Este complejo transformó la economía y la fisonomía de la localidad durante décadas. En la actualidad se conservan tres testigos singulares de aquel pasado industrial: la esbelta chimenea de ladrillo, un antiguo almacén reconvertido en centro de educación de personas adultas y la pintoresca Casita de Chocolate, hoy sede de dependencias municipales.",
       "practicalInfo": [
-        "Ubicación: Entorno de la calle Pablo Picasso y Paseo Dolores Soria.",
+        "Ubicación: C. de Águilas, 7, 28320 Pinto, Madrid.",
         "Exterior visitable libremente durante todo el año.",
         "Horario de dependencias municipales: consultar en ayto-pinto.es."
       ]
@@ -63,13 +63,12 @@
         "../IMAGENES/Santo_Domingo3.png"
       ],
       "coords": [
-        40.2431,
-        -3.6981
+        40.24323086382805, -3.6982557657270907
       ],
       "shortDesc": "Principal templo parroquial del casco histórico, testigo de siglos de devoción y arte sacro en la villa.",
       "fullDesc": "Situada en el núcleo fundacional de Pinto, la iglesia parroquial de Santo Domingo de Silos constituye el referente religioso más antiguo de la localidad. Su arquitectura refleja distintas etapas constructivas vinculadas al crecimiento de la villa desde la Edad Media. Un paseo por sus alrededores permite enlazar fácilmente con otros templos históricos del municipio, como las iglesias de San José y San Francisco Javier.",
       "practicalInfo": [
-        "Ubicación: Plaza de Santo Domingo, casco antiguo.",
+        "Ubicación: P.º de Dolores Soria, 28320 Pinto, Madrid",
         "Acceso sujeto a horarios de culto parroquial.",
         "Horarios detallados: consultar en ayto-pinto.es."
       ]
@@ -87,13 +86,11 @@
         "../IMAGENES/convento-capuchinas3.jpg"
       ],
       "coords": [
-        40.2441,
-        -3.7023
-      ],
+40.24403703882475, -3.702164494776235      ],
       "shortDesc": "Conjunto conventual inventariado como Bien Cultural por la Comunidad de Madrid en el centro histórico.",
       "fullDesc": "El convento e iglesia de las Madres Capuchinas forma parte destacada del patrimonio arquitectónico religioso de Pinto, contando con reconocimiento oficial como Bien Cultural inventariado por la Comunidad de Madrid. Su sobria fachada y el recogimiento de su iglesia aportan un remanso de tranquilidad en las calles tradicionales del casco antiguo pinteño.",
       "practicalInfo": [
-        "Ubicación: Casco antiguo de Pinto.",
+        "Ubicación: Pl. Capuchinas, 3, 28320 Pinto, Madrid.",
         "Visita interior vinculada a celebraciones litúrgicas.",
         "Horarios: consultar en ayto-pinto.es."
       ]
@@ -159,8 +156,7 @@
         "../IMAGENES/parque-juan-carlos.jpeg"
       ],
       "coords": [
-        40.2485,
-        -3.689
+40.23654858704982, -3.695310262687344
       ],
       "shortDesc": "Gran pulmón verde de unas 55 hectáreas con lago de wakeboard, auditorio, pajarera, carril bici y recinto ferial.",
       "fullDesc": "Abierto en 1997 e inaugurado oficialmente en 1998 por los reyes Juan Carlos I y Sofía, este parque de aproximadamente 55 hectáreas es el mayor espacio de ocio al aire libre de Pinto. Entre sus numerosos atractivos figuran un lago con actividad de wakeboard, auditorio, recinto ferial, circuito de educación vial, centro hípico, pajarera con pavos reales, zona canina, restaurante, juegos infantiles y extensos paseos ciclables.",
@@ -471,8 +467,7 @@
         "../IMAGENES/plaza-eboli3.jpg"
       ],
       "coords": [
-        40.2512,
-        -3.6968
+40.24098680859173, -3.690814231998903
       ],
       "shortDesc": "Gran espacio comercial y de entretenimiento con salas de cine, bolera, tiendas y restauración junto a La Tenería.",
       "fullDesc": "Ubicado junto al Parque Juan Carlos I y el barrio de La Tenería, el centro comercial Plaza Éboli es un punto de referencia para el ocio cubierto y las compras en el sur de Madrid. Cuenta con salas de cine, bolera, gimnasio, hipermercado, numerosas tiendas de moda y servicios, así como una variada zona de restauración.",
