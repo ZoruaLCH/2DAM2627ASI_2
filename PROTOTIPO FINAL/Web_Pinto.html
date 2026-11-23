@@ -1,830 +1,402 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DISEÑO DE INTERFACES - Actividad 1: Guía de Viaje Pinto</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal turístico no oficial (proyecto educativo) sobre Pinto (Madrid). Descubre su patrimonio, naturaleza, gastronomía, fiestas y barrios.">
+  <title>Descubre Pinto | Turismo, Historia y Naturaleza en Madrid</title>
+  <meta name="theme-color" content="#C8102E">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Descubre Pinto | Turismo, Historia y Naturaleza en Madrid">
+  <meta property="og:description" content="Patrimonio, naturaleza, gastronomía, fiestas y barrios de Pinto (Madrid).">
+  <link rel="icon" href="../IMAGENES/bandera.png">
 
-  <style>
-    :root {
-      --bg-outer: #0f172a;
-      --bg-slide: #ffffff;
-      --bg-subtle: #f8fafc;
-      --primary: #1e3a8a;
-      --accent: #2563eb;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border-color: #cbd5e1;
-      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --slide-padding: clamp(1.5rem, 3vw, 3rem);
-      --transition-speed: 0.35s;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font-main);
-      background-color: var(--bg-outer);
-      color: var(--text-main);
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-
-    #presentation-wrapper {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    #deck {
-      position: relative;
-      width: min(100%, calc((100vh - 32px) * (16 / 9)));
-      aspect-ratio: 16 / 9;
-      background-color: var(--bg-slide);
-      border-radius: 16px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-      overflow: hidden;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      padding: var(--slide-padding);
-      padding-bottom: calc(var(--slide-padding) + 32px);
-      display: flex;
-      flex-direction: column;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(15px);
-      transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
-      overflow-y: auto;
-    }
-
-    .slide.active { opacity: 1; visibility: visible; transform: translateY(0); z-index: 2; }
-    .slide.prev { transform: translateY(-15px); }
-
-    .slide-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 0.75rem;
-      margin-bottom: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .slide-kicker { font-size: clamp(0.75rem, 1vw, 0.9rem); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-    .slide-page-badge { font-size: clamp(0.75rem, 0.95vw, 0.85rem); color: var(--text-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
-    
-    /* Estructura principal de contenido */
-    .slide-body { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; }
-    
-    /* Para diapositivas de texto + imagen (Izquierda texto, Derecha imagen) */
-    .content-split { 
-      display: grid; 
-      grid-template-columns: 1fr 1.2fr; /* Damos un poco más de espacio a la imagen */
-      gap: 2rem; 
-      align-items: center; 
-      height: 100%; 
-    }
-
-    /* Para diapositivas solo de texto (Diferencias) */
-    .content-full {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
-      max-width: 900px;
-      margin: 0 auto; /* Centrar el texto en la diapositiva */
-    }
-    
-    h1 { font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--primary); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
-    h2 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); color: var(--primary); line-height: 1.25; font-weight: 700; margin-bottom: 0.75rem; }
-    p, li { font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--text-main); }
-    ul, ol { padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
-
-    code {
-      background-color: #e2e8f0;
-      color: var(--primary);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.9em;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-    
-    .narrative-box {
-      background-color: var(--bg-subtle);
-      border-left: 5px solid var(--accent);
-      padding: 1.25rem 1.5rem;
-      border-radius: 0 12px 12px 0;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-
-    .narrative-box p + p { margin-top: 1rem; }
-    .narrative-box ul + p, .narrative-box p + ul { margin-top: 1rem; }
-
-    .meta-block {
-      background-color: #eff6ff;
-      border: 1px solid #bfdbfe;
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      font-size: clamp(0.85rem, 1.05vw, 0.95rem);
-      color: #1e40af;
-      margin-top: 1rem;
-    }
-
-    /* Portada */
-    .cover-layout { justify-content: center; align-items: center; text-align: center; gap: 1.5rem; }
-    .cover-logo { width: 400px; height: 220px; }
-    .cover-subtitle { font-size: clamp(1.1rem, 1.8vw, 1.5rem); font-weight: 600; color: var(--accent); }
-    .cover-author { font-size: clamp(1rem, 1.4vw, 1.2rem); font-weight: 500; color: var(--text-muted); margin-top: 0.5rem; }
-
-    /* Contenedores de Imágenes Profesionales */
-    .image-display {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-height: 55vh; /* Evita que la imagen se salga de la pantalla */
-      border-radius: 12px;
-      background-color: #e2e8f0; /* Fondo de carga */
-      border: 1px solid var(--border-color);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-display.small { max-height: 40vh; width: 60%; margin: 0 auto; }
-
-    .image-display.gallery { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .image-display.gallery:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); }
-
-    /* La imagen se adapta manteniendo su proporción */
-    .image-display img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* Muestra la captura completa sin recortarla */
-      padding: 8px; /* Un pequeño margen para que respire dentro del marco */
-    }
-
-    .image-display.gallery img:not(:first-of-type) { display: none; }
-
-    .gallery-badge {
-      position: absolute;
-      bottom: 16px;
-      right: 16px;
-      z-index: 3;
-      background: rgba(15, 23, 42, 0.9);
-      color: #ffffff;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 999px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      opacity: 0;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      transform: translateY(10px);
-    }
-    .image-display.gallery:hover .gallery-badge { opacity: 1; transform: translateY(0); }
-
-    /* NUEVO: Contenedor para el texto del Prompt */
-    .prompt-display {
-      width: 100%;
-      height: 100%;
-      max-height: 55vh;
-      background-color: #1e293b; /* Fondo oscuro tipo terminal */
-      border-radius: 12px;
-      border: 1px solid #334155;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-      overflow-y: auto;
-      padding: 1.5rem;
-      color: #e2e8f0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: clamp(0.75rem, 1vw, 0.9rem);
-      line-height: 1.5;
-      white-space: pre-wrap; /* Mantiene los saltos de línea del texto */
-    }
-
-    /* Estilos de scrollbar para el prompt */
-    .prompt-display::-webkit-scrollbar { width: 8px; }
-    .prompt-display::-webkit-scrollbar-track { background: #0f172a; border-radius: 4px; }
-    .prompt-display::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-    .prompt-display::-webkit-scrollbar-thumb:hover { background: #64748b; }
-
-
-    /* Lightbox (Visor de imágenes) */
-    #gallery-lightbox {
-      position: absolute;
-      inset: 0;
-      z-index: 60;
-      background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px 24px;
-      color: #f8fafc;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-    #gallery-lightbox.open { opacity: 1; visibility: visible; }
-    .lb-topbar { display: flex; justify-content: space-between; align-items: center; }
-    .lb-close { background: rgba(255, 255, 255, 0.15); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; }
-    .lb-close:hover { background: rgba(255, 255, 255, 0.3); }
-    
-    .lb-stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; margin: 20px 0; }
-    .lb-stage img { max-width: 90%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-    
-    .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .lb-nav:hover { background: rgba(255,255,255,0.3); }
-    .lb-nav.prev { left: 20px; } .lb-nav.next { right: 20px; }
-    
-    .lb-footer { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .lb-thumbs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .lb-thumb-btn { width: 64px; height: 44px; border: 2px solid transparent; border-radius: 6px; background: rgba(255,255,255,0.1); cursor: pointer; overflow: hidden; padding: 0; transition: border-color 0.2s; }
-    .lb-thumb-btn:hover { border-color: rgba(255,255,255,0.5); }
-    .lb-thumb-btn.active { border-color: var(--accent); }
-    .lb-thumb-btn img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* Controles inferiores */
-    .controls-bar {
-      position: absolute; bottom: 16px; right: 20px; z-index: 20; display: flex; align-items: center; gap: 8px;
-      background: rgba(15, 23, 42, 0.9); padding: 6px 16px; border-radius: 999px; color: #fff; font-size: 0.85rem;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-    }
-    .controls-bar button { background: transparent; border: none; color: #fff; cursor: pointer; padding: 6px 10px; font-weight: 600; border-radius: 6px; transition: background 0.2s; }
-    .controls-bar button:hover { background: rgba(255,255,255,0.1); }
-    
-    .progress-track { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(203, 213, 225, 0.3); z-index: 25; }
-    .progress-fill { height: 100%; width: 0%; background: var(--accent); transition: width var(--transition-speed) ease; }
-
-    /* Índice lateral */
-    #sidebar-index {
-      position: absolute; top: 0; left: 0; bottom: 0; width: min(350px, 85vw); background: #0f172a; color: #f8fafc;
-      z-index: 40; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;
-      box-shadow: 10px 0 25px rgba(0,0,0,0.5);
-    }
-    #sidebar-index.open { transform: translateX(0); }
-    .sidebar-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.1rem; }
-    .sidebar-header button { background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
-    #index-list { list-style: none; padding: 1rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-    #index-list li button { width: 100%; text-align: left; background: transparent; border: none; color: #cbd5e1; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; }
-    #index-list li button:hover { background: rgba(255,255,255,0.05); color: #fff; }
-    #index-list li button.current { background: var(--accent); color: #fff; font-weight: 600; }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <a href="#app-main" class="skip-link">Saltar al contenido</a>
 
-  <div id="presentation-wrapper">
-    <main id="deck" aria-live="polite">
+  <!-- ================= HEADER FIJO ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo" data-route="inicio" aria-label="Inicio Descubre Pinto">
+        <img src="../IMAGENES/bandera.png" alt="Descubre Pinto" class="logo-img">
+        <span class="logo-text">Descubre <strong>Pinto</strong></span>
+      </a>
 
-      <!-- Slide 1: Portada -->
-      <section class="slide active" data-title="Portada">
-        <div class="slide-header"><span class="slide-kicker">DISEÑO DE INTERFACES</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body cover-layout">
-          <div class="image-display gallery cover-logo" style="box-shadow: none; background: transparent; border: none;">
-            <img src="../IMAGENES_IA/PORTADA.png" alt="Logotipo principal de Descubre Pinto">
-          </div>
-          <h1>DESCUBRE PINTO</h1>
-          <p class="cover-subtitle">Guía de Viaje Local · Actividad 1</p>
-          <p class="cover-author">Aarón Estalayo Bermúdez</p>
-        </div>
-      </section>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <button type="button" class="close-nav-btn" id="close-nav-btn" aria-label="Cerrar menú">&times;</button>
+        <ul class="nav-list">
+          <li><a href="#inicio" class="nav-link active" data-route="inicio">Inicio</a></li>
+          <li><a href="#que-ver" class="nav-link" data-route="que-ver">Qué ver</a></li>
+          <li><a href="#que-hacer" class="nav-link" data-route="que-hacer">Qué hacer</a></li>
+          <li><a href="#comer-comprar" class="nav-link" data-route="comer-comprar">Comer y comprar</a></li>
+          <li><a href="#fiestas" class="nav-link" data-route="fiestas">Fiestas y agenda</a></li>
+          <li><a href="#barrios" class="nav-link" data-route="barrios">Mis barrios</a></li>
+          <li><a href="#info-practica" class="nav-link" data-route="info-practica">Cómo llegar</a></li>
+          <li><a href="#favoritos" class="nav-link" data-route="favoritos">Favoritos <span class="badge-fav" id="fav-count">0</span></a></li>
+        </ul>
+      </nav>
 
-      <!-- Slide 2: Claude (Ideación) -->
-      <section class="slide" data-title="Claude: Ideación">
-        <div class="slide-header"><span class="slide-kicker">CLAUDE</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>Lluvia de ideas y Contexto</h2>
-            <div class="narrative-box">
-              <p>El proyecto comenzó utilizando <strong>Claude</strong> como consultor estratégico. Le pedí ideas para una guía de viaje con cuatro niveles de zoom (Instituto, Barrio, Pueblo, País).</p>
-              <p><strong>Inspiración:</strong> Me recomendó webs de turismo (Spain.info, Lonely Planet, Visit London) para inspirar la maquetación.</p>
-              <p><strong>Contextualización:</strong> Le indiqué que el proyecto se centraría en el pueblo real de <strong>Pinto (Madrid)</strong>, aportando enlaces a la Wikipedia y al Ayuntamiento.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_IA/TUR_CLOUDE_1.png" alt="Informe de recomendaciones técnicas"> 
-            <img src="../IMAGENES_IA/TUR_CLOUDE_2.png" alt="Análisis técnico detallado"> 
-            <img src="../IMAGENES_IA/TUR_CLOUDE_3.png" alt="Propuestas de optimización"> 
-            <img src="../IMAGENES_IA/TUR_CLOUDE_4.png" alt="Propuestas de optimización">          
-          </div>
-        </div>
-      </section>
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button type="button" class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-      <!-- Slide 3: Claude (Prompt) -->
-      <section class="slide" data-title="Claude: Prompt Maestro">
-        <div class="slide-header"><span class="slide-kicker">CLAUDE</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>Redacción del Prompt Maestro</h2>
-            <div class="narrative-box">
-              <p>Claude redactó un prompt detallado para un "desarrollador front-end senior", especificando las reglas del proyecto:</p>
-              <ul class="mt-sm">
-                <li>Uso de HTML, CSS y JS puro (sin frameworks).</li>
-                <li>Carga de datos desde un <code>data.json</code>.</li>
-                <li>Uso de Leaflet para mapas interactivos.</li>
-                <li>Maquetación estilo <em>spain.info</em>.</li>
-                <li>Reglas de honestidad: nada de inventar horarios ni precios.</li>
-              </ul>
-              <p class="meta-block"><strong>Bloque de fuentes:</strong> Se añadió un apartado con todos los enlaces de referencia (Wikipedia, Ayuntamiento, Turismo) para que la IA tuviera contexto real.</p>
-            </div>
+<!-- Capa oscura para el menú móvil -->
+<div class="nav-overlay" id="nav-overlay"></div>
+  <!-- ================= MAIN ================= -->
+  <main id="app-main">
+    <!-- SECCIÓN 1: INICIO -->
+    <section id="view-inicio" class="spa-view active">
+      <div class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <div class="hero-bg" id="hero-bg"></div>
+          <div class="hero-overlay"></div>
+        </div>        <div class="container hero-content">
+          <span class="hero-kicker">Comunidad de Madrid · Centro geográfico peninsular</span>
+          <h1 class="hero-title">Descubre Pinto</h1>
+          <p class="hero-subtitle">Historia medieval, grandes pulmones verdes, arqueología y tradición gastronómica a solo 20 km al sur de Madrid.</p>
+          <div class="hero-search-wrapper">
+            <form class="hero-search" id="global-search-form" role="search">
+              <label for="global-search-input" class="visually-hidden">Buscar lugares</label>
+              <input type="search" id="global-search-input" placeholder="Busca Torre de Éboli, Parque Juan Carlos I..." autocomplete="off">
+              <button type="submit" class="btn btn-primary">Explorar</button>
+            </form>
+            <div class="search-results-dropdown" id="search-results-dropdown" hidden></div>
           </div>
-          <div class="prompt-display">
-## 0. FUENTES DE INFORMACIÓN (consúltalas antes de escribir el contenido)
-Usa estas fuentes como base de todos los textos y datos de la web. Si tienes acceso a internet, ábrelas y extrae de ellas la información. Si no puedes abrirlas, usa los datos de la sección 4 de este prompt, que ya vienen resumidos de ellas.
-
-Fuentes principales sobre Pinto
-- Wikipedia, Pinto (Madrid): https://es.wikipedia.org/wiki/Pinto_(Madrid)
-  Datos generales, historia, patrimonio, parques, barrios, educación, transporte, fiestas, gastronomía y deporte.
-- Ayuntamiento de Pinto (web oficial): https://www.ayto-pinto.es/
-  Información municipal, noticias, servicios y agenda.
-- Turismo de Pinto (portal turístico del Ayuntamiento): https://www.turismopinto.es
-  Actividades, eventos y boletín mensual de turismo.
-- Portal de reservas del Ayuntamiento (rutas y actividades): https://reservas.ayto-pinto.es/
-
-Fuentes secundarias de apoyo (enlazadas desde Wikipedia)
-- Rutas de interés (cicloturismo y senderismo): http://www.ayto-pinto.es/rutas-de-interes
-- Dónde dormir: http://www.ayto-pinto.es/donde-dormir
-- Término municipal: http://www.ayto-pinto.es/termino-municipal
-- Casas señoriales de Pinto: https://seminariohistoriapinto.es/patrimonio-cultural/casas-senoriales/
-- Historia de Pinto: https://www.unaventanadesdemadrid.com/comunidad-de-madrid/pinto.html
-- Imágenes con licencia libre: https://commons.wikimedia.org/wiki/Category:Pinto,%20Madrid
-
-Referencia de maquetación (solo diseño, no contenido)
-- Turismo de España: https://www.spain.info
-
-Reglas para usar las fuentes
-1. Prioriza siempre la información del Ayuntamiento de Pinto y de turismopinto.es; usa Wikipedia para completar. Si hay datos contradictorios, indica cuál has elegido y por qué.
-2. No copies los textos literalmente: reescríbelos con un tono cercano y turístico, en español.
-3. Los datos que cambian (horarios, precios, fechas de fiestas, teléfonos, agenda) no los inventes: ponlos como "Ejemplo" o con el marcador [COMPLETAR] e indica en la página que se consulten en la web oficial.
-4. Incluye en el footer y en la página de Créditos una lista con todas las fuentes usadas, con enlace y la fecha de consulta.
-5. Las imágenes de Wikimedia Commons deben llevar su autor y licencia en los créditos; el resto serán placeholders para sustituir por fotos propias o con licencia.        </div>
-      </section>
-
-      <!-- Slide 4: Gemini -->
-      <section class="slide" data-title="Gemini: Desarrollo Base">
-        <div class="slide-header"><span class="slide-kicker">GEMINI</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>Desarrollo de la Arquitectura</h2>
-            <div class="narrative-box">
-              <p>Con el prompt listo, pasé a <strong>Gemini</strong> para programar la base. Se generó una arquitectura profesional separando responsabilidades en 4 documentos:</p>
-              <ul class="mt-sm">
-                <li><strong><code>index.html</code>:</strong> El esqueleto semántico.</li>
-                <li><strong><code>styles.css</code>:</strong> Variables de tema, responsive, transiciones y modo oscuro.</li>
-                <li><strong><code>app.js</code>:</strong> Carga de datos, estado (favoritos), mapas, búsquedas, quiz y renderizado dinámico.</li>
-                <li><strong><code>data.json</code>:</strong> La base de datos de lugares, eventos y barrios.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_IA/GEMINI_1.png" alt="Código generado por Gemini">
-            <img src="../IMAGENES_IA/GEMINI_2.png" alt="Estructura de archivos">
-            <img src="../IMAGENES_IA/GEMINI_3.png" alt="css">
-            <img src="../IMAGENES_IA/GEMINI_4.png" alt="js">
-            <img src="../IMAGENES_IA/GEMINI_5.png" alt="json">
-            <img src="../IMAGENES_IA/GEMINI_6.png" alt="cambios en el json">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 5: PROTOTIPO 1 - Imagen + Explicación -->
-      <section class="slide" data-title="Prototipo 1: Vista General">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 1</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>El Primer Prototipo Funcional</h2>
-            <div class="narrative-box">
-              <p>Gemini generó el primer prototipo funcional de la guía. Este primer resultado sentó las bases visuales y estructurales de "Descubre Pinto".</p>
-              <p><strong>Rediseño:</strong> Se cambiaron solo las hojas de estilo para adaptar la maquetación al estilo editorial de <em>spain.info</em> (cabecera blanca fija, hero a pantalla completa, esquinas rectas, paleta rojo/amarillo). El HTML y JS no se tocaron.</p>
-              <p><strong>Problema detectado:</strong> La web salía vacía porque el archivo se llamaba <code>app.json</code> en vez de <code>data.json</code>, y porque <code>fetch()</code> requiere un servidor local (Live Server), no funciona con doble clic.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO1.png" alt="Vista del prototipo renderizado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2.png" alt="Panel de opciones secundarias">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO5.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO6.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO7.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO8.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO9.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO10.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO11.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO12.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO13.png" alt="Selectores de temas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO14.png" alt="Selectores de temas">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 6: PROTOTIPO 1 - Diferencias -->
-      <section class="slide" data-title="Prototipo 1: Cambios y Ajustes">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 1</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-full">
-          <h2>Diferencias respecto a la base generada</h2>
-          <div class="narrative-box">
-            <p>Tras probar la base generada por Gemini, se aplicaron los siguientes cambios para llegar al Prototipo 1:</p>
-            <ul class="mt-sm">
-              <li><strong>Rediseño editorial:</strong> Se abandonó el diseño por defecto y se adoptó la estética de <em>spain.info</em> (rojo y amarillo, cabecera fija, tipografía limpia).</li>
-              <li><strong>Contenido real en data.json:</strong> Se generó un archivo con 11 lugares, 16 barrios, 5 curiosidades, 4 eventos, 6 fichas de comer/dormir y 4 preguntas de quiz.</li>
-              <li><strong>Corrección de carga:</strong> Se renombró <code>app.json</code> a <code>data.json</code> y se estableció el uso obligatorio de Live Server.</li>
-              <li><strong>Depuración inicial:</strong> Se corrigieron errores de notificaciones y se ajustó la barra lateral.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 7: DeepSeek -->
-      <section class="slide" data-title="DeepSeek: Refinamiento">
-        <div class="slide-header"><span class="slide-kicker">DEEPSEEK</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>El Salto a DeepSeek</h2>
-            <div class="narrative-box">
-              <p>Al alcanzar el límite de Gemini, me pasé a <strong>DeepSeek</strong> para pulir el código, donde surgieron múltiples iteraciones y corrección de errores.</p>
-              <p>En esta fase se desarrollaron los prototipos 2 y 3, aplicando mejoras estructurales, corrección de bugs visuales y funcionales, y una auditoría profunda del código.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_IA/DEEPSEEK.png" alt="Propuestas de mejora en DeepSeek">
-            <img src="../IMAGENES_IA/DEEPSEEK_2.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_3.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_4.png" alt="Generación de código actualizado">
-            <img src="./IMAGENES_IA/DEEPSEEK_5.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_5.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_6.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_7.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_8.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_9.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_10.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_11.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_12.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_13.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_14.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_15.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_16.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_17.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_18.png" alt="Generación de código actualizado">
-            <img src="../IMAGENES_IA/DEEPSEEK_19.png" alt="Generación de código actualizado">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 8: PROTOTIPO 2 - Imagen + Explicación -->
-      <section class="slide" data-title="Prototipo 2: Vista General">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 2</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>Segundo Prototipo (DeepSeek)</h2>
-            <div class="narrative-box">
-              <p>Con el sistema de notificaciones operativo y los ajustes de la barra lateral aplicados, se obtuvo el segundo prototipo funcional.</p>
-              <p>En esta fase se aplicaron mejoras críticas como la sincronización de URL con rutas, la búsqueda global y la protección contra inyección HTML.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2.png" alt="Menús laterales estables">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_1.png" alt="Comparativa con el panel anterior">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_3.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_4.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_5.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_6.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_7.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_8.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_9.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_10.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_11.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_12.png" alt="Pruebas de guardado">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO2_13.png" alt="Pruebas de guardado">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 9: PROTOTIPO 2 - Diferencias -->
-      <section class="slide" data-title="Prototipo 2: Cambios respecto al Prototipo 1">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 2</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-full">
-          <h2>Diferencias y Mejoras (Prototipo 2)</h2>
-          <div class="narrative-box">
-            <p>Comparado con el Prototipo 1, DeepSeek aplicó las siguientes mejoras estructurales:</p>
-            <ul class="mt-sm">
-              <li><strong>Sincronización de URL:</strong> Rutas amigables (ej. <code>#torre-de-eboli</code>) para abrir fichas directamente.</li>
-              <li><strong>Buscador global:</strong> Búsqueda en lugares, eventos, barrios y gastronomía, con normalización de acentos (ignorando tildes).</li>
-              <li><strong>Accesibilidad:</strong> Uso de <code>aria-label</code>, cierre de menús con <em>Escape</em> y protección contra inyección HTML.</li>
-              <li><strong>Corrección de JSON:</strong> El archivo original tenía errores de sintaxis (faltaban arrays como barrios o gastroAndLodging) que bloqueaban la carga.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 10: PROTOTIPO 3 - Imagen + Explicación -->
-      <section class="slide" data-title="Prototipo 3: Vista General">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 3</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>Tercer Prototipo (DeepSeek)</h2>
-            <div class="narrative-box">
-              <p>La integración del nuevo acceso rápido al gestor de tareas y las correcciones de estilo dieron lugar al tercer prototipo.</p>
-              <p>Se resolvieron fallos visuales y funcionales, como el contador inteligente que entiende los meses en español, y se arreglaron los estilos de las tarjetas, modales y mapas.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3.png" alt="Botón flotante de tareas">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_1.png" alt="Panel de pendientes">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_2.png" alt="Subtareas con progreso">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_3.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_4.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_5.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_6.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_7.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_8.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_9.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_10.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_11.png" alt="Sintonización visual">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO3_12.png" alt="Sintonización visual">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 11: PROTOTIPO 3 - Diferencias (AMPLIADO) -->
-      <section class="slide" data-title="Prototipo 3: Cambios respecto al Prototipo 2">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO 3</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-full">
-          <h2>Diferencias y Correcciones (Prototipo 3)</h2>
-          <div class="narrative-box">
-            <p>Comparado con el Prototipo 2, se aplicaron las siguientes correcciones y mejoras técnicas:</p>
-            <ul class="mt-sm">
-              <li><strong>Contador inteligente de eventos:</strong> Se reescribió la función <code>initCountdown()</code> para que analice el archivo <code>data.json</code> en busca del próximo evento real. Se añadió un diccionario de meses en español (Ene, Feb, Mar, Abr...) y lógica para calcular los días exactos, saltando automáticamente al año siguiente si la fecha ya ha pasado.</li>
-              <li><strong>Arreglo de estilos CSS rotos:</strong> Se solucionó el desbordamiento de las tarjetas horizontales de hoteles y restaurantes ajustando el <code>grid-template-columns</code>. Se corrigieron los iconos de sol/luna del tema oscuro (ahora solo se muestra uno dependiendo del tema).</li>
-              <li><strong>Carrusel profesional:</strong> Se ocultó la barra de scroll nativa (fea) y se implementaron flechas de navegación flotantes a los laterales con efectos hover. Además, se ajustó el JavaScript para que el desplazamiento sea suave y preciso.</li>
-              <li><strong>Interacción en mapas Leaflet:</strong> Los botones "Ver ficha" dentro de los popups de los mapas no funcionaban debido a la propagación de eventos. Se solucionó usando <code>L.DomEvent.stopPropagation()</code> y delegación de eventos.</li>
-              <li><strong>Rediseño de Modales:</strong> Se arregló el posicionamiento de la "X" de cerrar (ahora flota sobre la imagen sin crear huecos) y se estilizaron los botones de "Guardar" y "Compartir" para que sigan la línea visual de la web.</li>
-              <li><strong>Gestor de tareas:</strong> Se integró un botón flotante y un panel lateral para la gestión de tareas pendientes (subtareas, progreso, etc.).</li>
-            </ul>
-            <p class="meta-block"><strong>Límite de DeepSeek:</strong> El menú móvil seguía bloqueado (conflicto de <code>z-index</code>), el <code>style.css</code> estaba duplicado y el scroll se quedaba a mitad de página.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 12: Claude Final -->
-      <section class="slide" data-title="Claude: Auditoría y Rescate">
-        <div class="slide-header"><span class="slide-kicker">FASE FINAL</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>La Vuelta a Claude</h2>
-            <div class="narrative-box">
-              <p>Debido a la incapacidad de DeepSeek para cerrar los bugs finales, decidí volver a <strong>Claude</strong>. Al tener una ventana de contexto mucho más grande, pudo solucionar los problemas estructurales.</p>
-              <p><strong>Corrección del menú móvil:</strong> El menú estaba dentro del <code>&lt;header&gt;</code> (que tenía <code>position: fixed; z-index: 1000</code>). Esto creaba un contexto de apilamiento, por lo que la capa oscura (<code>.nav-overlay</code>) quedaba por encima. Se solucionó bajando el overlay a <code>z-index: 999</code> y usando <code>100dvh</code>.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_IA/TUR_CLOUDE_1.png" alt="Informe de recomendaciones técnicas">
-            <img src="../IMAGENES_IA/TUR_CLOUDE_2.png" alt="Análisis técnico detallado">
-            <img src="../IMAGENES_IA/TUR_CLOUDE_3.png" alt="Propuestas de optimización">
-            <img src="../IMAGENES_IA/TUR_CLOUDE_4.png" alt="Propuestas de optimización">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 13: PROTOTIPO FINAL - Imagen + Explicación -->
-      <section class="slide" data-title="Prototipo Final: Vista General">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO FINAL</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-split">
-          <div>
-            <h2>El Prototipo Definitivo</h2>
-            <div class="narrative-box">
-              <p>Claude logró unificar el código, limpiar los errores residuales y entregar el <strong>Prototipo Final</strong> totalmente funcional, estabilizado y con el diseño de Pinto intacto.</p>
-              <p><strong>Datos actualizados (2026):</strong> Se actualizaron estadísticas (habitantes a 56.651 según padrón 2025) y eventos reales del Ayuntamiento (Navidad, Black Friday, Feria del Chocolate).</p>
-              <p><strong>Mejoras finales:</strong> Se añadieron avisos de revisión en el footer, metadatos Open Graph y un favicon con la bandera de Pinto.</p>
-            </div>
-          </div>
-          <div class="image-display gallery">
-            <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_1.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_2.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_3.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_4.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_5.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_6.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_7.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_8.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_9.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_10.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_11.png" alt="Panel desplegable">
-           <img src="../IMAGENES_PROTOTIPOS/PROTOTIPO4_12.png" alt="Panel desplegable">
-          </div>
-        </div>
-      </section>
-
-      <!-- Slide 14: PROTOTIPO FINAL - Diferencias -->
-      <section class="slide" data-title="Prototipo Final: Cambios respecto al Prototipo 3">
-        <div class="slide-header"><span class="slide-kicker">PROTOTIPO FINAL</span><span class="slide-page-badge"></span></div>
-        <div class="slide-body content-full">
-          <h2>Diferencias y Cierre del Proyecto</h2>
-          <div class="narrative-box">
-            <p>Respecto al Prototipo 3, el Prototipo Final presenta las siguientes mejoras definitivas:</p>
-            <ul class="mt-sm">
-              <li><strong>Estabilidad total:</strong> Se resolvieron los conflictos del menú móvil y se unificó el CSS duplicado.</li>
-              <li><strong>Verificación de enlaces:</strong> Se comprobó que no quedaran IDs duplicados, que <code>app.js</code> y <code></body></code> aparecieran una sola vez, y que la lógica de eventos funcionara simulando fechas reales.</li>
-              <li><strong>Contenido actualizado:</strong> Fechas de eventos confirmadas (Black Friday, Feria del Chocolate), fichas de la Torre de Éboli actualizadas y datos de población revisados.</li>
-              <li><strong>Accesibilidad y UX:</strong> Se añadió foco visible, reducción de animaciones, y se aseguró que la navegación SPA hiciera scroll al principio de la página.</li>
-            </ul>
-            <p class="meta-block"><strong>Tareas pendientes:</strong> Verificar coordenadas en OpenStreetMap, rellenar los <code>[COMPLETAR]</code> con datos oficiales y conseguir las fotos definitivas para la carpeta <code>img/</code>.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Lightbox -->
-      <div id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Galería de imágenes" hidden>
-        <div class="lb-topbar">
-          <span class="lb-counter" id="lb-counter">1 / 1</span>
-          <button type="button" class="lb-close" id="lb-close" title="Cerrar (Esc)">✕</button>
-        </div>
-        <div class="lb-stage" id="lb-stage">
-          <button type="button" class="lb-nav prev" id="lb-prev" title="Anterior">←</button>
-          <img id="lb-img" src="" alt="" />
-          <button type="button" class="lb-nav next" id="lb-next" title="Siguiente">→</button>
-        </div>
-        <div class="lb-footer">
-          <div class="lb-thumbs" id="lb-thumbs"></div>
         </div>
       </div>
 
-    </main>
+      <div class="section container reveal">
+        <div class="section-header">
+          <h2>Inspírate por temática</h2>
+          <p>Elige cómo quieres vivir tu próxima escapada a nuestra villa.</p>
+        </div>
+        <div class="theme-pills-grid">
+          <button class="theme-card t-patrimonio" data-nav-filter="que-ver:Patrimonio">
+            <h3>Historia y Patrimonio</h3>
+            <p>De la Torre de Éboli a las casas señoriales</p>
+          </button>
+          <button class="theme-card t-naturaleza" data-nav-filter="que-ver:Naturaleza">
+            <h3>Naturaleza y Parques</h3>
+            <p>55 hectáreas de ocio y humedales con 130 aves</p>
+          </button>
+          <button class="theme-card t-deporte" data-nav-filter="que-hacer:Deporte">
+            <h3>Deporte y Rutas</h3>
+            <p>Cuna de campeones y senderos cicloturistas</p>
+          </button>
+          <button class="theme-card t-gastro" data-nav-filter="comer-comprar:all">
+            <h3>Gastronomía</h3>
+            <p>Cocido madrileño, chocolate y Ombligos de Pinto</p>
+          </button>
+          <button class="theme-card t-fiestas" data-nav-filter="fiestas:all">
+            <h3>Fiestas y Cultura</h3>
+            <p>Tradiciones vivas durante todo el año</p>
+          </button>
+        </div>
+      </div>
 
-    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-    <nav class="controls-bar" aria-label="Controles">
-      <button id="btn-index" title="Índice (M)">☰ Índice</button>
-      <button id="btn-prev" title="Anterior">←</button>
-      <span id="slide-counter">1 / 14</span>
-      <button id="btn-next" title="Siguiente">→</button>
-      <button id="btn-fullscreen" title="Pantalla completa (F)">⛶</button>
-    </nav>
-    <aside id="sidebar-index" aria-label="Índice">
-      <div class="sidebar-header"><span>Índice</span><button id="btn-close-index">✕</button></div>
-      <ul id="index-list"></ul>
-    </aside>
+      <div class="section bg-alt reveal">
+        <div class="container">
+          <div class="section-header-flex">
+            <div>
+              <h2>Imprescindibles de Pinto</h2>
+              <p>Los lugares que no pueden faltar en tu primera visita.</p>
+            </div>
+          </div>
+          
+          <!-- CARRUSEL PROFESIONAL -->
+          <div class="carousel-wrapper">
+            <button type="button" class="circle-btn prev" id="carousel-prev" aria-label="Anterior">&#8592;</button>
+            <div class="horizontal-carousel" id="imprescindibles-carousel"></div>
+            <button type="button" class="circle-btn next" id="carousel-next" aria-label="Siguiente">&#8594;</button>
+          </div>
+          
+        </div>
+      </div>
+      <!-- ESTADÍSTICAS -->
+      <div class="section container reveal">
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number" data-target="56651">0</span>
+            <span class="stat-label">Habitantes (Padrón 2025)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="1359">0</span>
+            <span class="stat-label">Año del título de Villa</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="55" data-suffix=" ha">0</span>
+            <span class="stat-label">Parque Juan Carlos I</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" data-target="130" data-suffix="+">0</span>
+            <span class="stat-label">Aves en Los Estragales</span>
+          </div>
+        </div>
+      </div>
+      <div class="section bg-alt reveal">
+        <div class="container">
+          <div class="section-header">
+            <h2>Curiosidades de <em>Punctum</em></h2>
+            <p>Toca o pasa el ratón sobre las tarjetas para descubrir los secretos de Pinto.</p>
+          </div>
+          <div class="flip-grid" id="curiosidades-grid"></div>
+          <div class="quiz-box" id="quiz-box">
+            <span class="badge-gold">Reto local</span>
+            <h3>¿Cuánto sabes de Pinto?</h3>
+            <div id="quiz-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section container reveal">
+        <div class="split-home-grid">
+          <div>
+            <div class="section-header">
+              <h2>Próximas citas</h2>
+              <p>Agenda cultural y festiva.</p>
+            </div>
+            <div class="events-compact-list" id="home-events-list"></div>
+            <a href="#fiestas" class="btn btn-outline mt-1" data-route="fiestas">Ver calendario completo</a>
+          </div>
+          <div>
+            <div class="section-header">
+              <h2>Mapa interactivo</h2>
+              <p>Explora patrimonio, parques y servicios.</p>
+            </div>
+           <div id="home-map" class="map-container map-mini" role="region" aria-label="Mapa interactivo de Pinto"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: QUÉ VER -->
+    <section id="view-que-ver" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Qué ver en Pinto</h1>
+          <p>Monumentos medievales, arquitectura industrial chocolatera, parques históricos y espacios naturales.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="filter-bar" role="group">
+          <button class="chip active" data-filter="all">Todos</button>
+          <button class="chip" data-filter="Patrimonio">Patrimonio</button>
+          <button class="chip" data-filter="Parques">Parques</button>
+          <button class="chip" data-filter="Naturaleza">Naturaleza</button>
+          <button class="chip" data-filter="Museos y cultura">Museos y cultura</button>
+        </div>
+        <p class="grid-counter" id="que-ver-grid-count"></p>
+        <div class="places-grid" id="que-ver-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: QUÉ HACER -->
+    <section id="view-que-hacer" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Qué hacer en Pinto</h1>
+          <p>Rutas cicloturistas, arqueología experimental en familia e instalaciones deportivas de primer nivel.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="filter-bar" role="group">
+          <button class="chip active" data-filter="all">Todas las actividades</button>
+          <button class="chip" data-filter="Rutas">Rutas a pie y bici</button>
+          <button class="chip" data-filter="Familia">Ocio en familia</button>
+          <button class="chip" data-filter="Deporte">Deporte y clubes</button>
+        </div>
+        <p class="grid-counter" id="que-hacer-grid-count"></p>
+        <div class="places-grid" id="que-hacer-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: COMER Y COMPRAR -->
+    <section id="view-comer-comprar" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Comer y comprar</h1>
+          <p>Del tradicional cocido madrileño a la herencia chocolatera y los dulces Ombligos de Pinto.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <h2 class="mt-3">Dónde comer y zonas comerciales</h2>
+        <div class="horizontal-cards-list" id="comer-list"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: FIESTAS -->
+    <section id="view-fiestas" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Fiestas y agenda</h1>
+          <p>Tradiciones patronales, encuentros vecinales y programación cultural a lo largo del año.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="countdown-banner">
+          <div>
+            <span class="badge-gold">Próxima gran cita</span>
+            <h2 id="countdown-event-name">Próximas Fiestas de Pinto</h2>
+            <p id="countdown-event-desc">Consulta la agenda actualizada para 2026/2027.</p>
+          </div>
+          <div class="countdown-timer">
+            <div class="time-box"><span id="cd-days">--</span><small>Días</small></div>
+            <div class="time-box"><span id="cd-hours">--</span><small>Horas</small></div>
+            <div class="time-box"><span id="cd-mins">--</span><small>Min</small></div>
+            <div class="time-box"><span id="cd-secs">--</span><small>Seg</small></div>
+          </div>
+        </div>
+        <div class="events-grid" id="fiestas-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: MIS BARRIOS -->
+    <section id="view-barrios" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Mis barrios</h1>
+          <p>Un recorrido por la identidad y evolución urbana de los barrios que dan vida a Pinto.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="places-grid" id="barrios-grid"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: CÓMO LLEGAR -->
+    <section id="view-info-practica" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Cómo llegar y dónde dormir</h1>
+          <p>Conexiones rápidas con Madrid, mapa de recursos, alojamientos y teléfonos de utilidad.</p>
+        </div>
+      </div>
+      <div class="container section">
+<div id="full-map" class="map-container map-large" style="margin-bottom: 2rem;" role="region" aria-label="Mapa de lugares de Pinto"></div>        <h2>Alojamientos</h2>
+        <div class="horizontal-cards-list" id="alojamientos-list"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: FAVORITOS -->
+    <section id="view-favoritos" class="spa-view">
+      <div class="page-banner">
+        <div class="container">
+          <h1>Tus Favoritos</h1>
+          <p>Los lugares que has guardado para tu próxima visita.</p>
+        </div>
+      </div>
+      <div class="container section">
+        <div class="places-grid" id="favoritos-grid"></div>
+        <div class="empty-state" id="favoritos-empty" hidden>
+          <p>Aún no tienes favoritos. ¡Explora la web y pulsa el corazón!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Descubre Pinto</h4>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: #9A968D;">Portal turístico no oficial creado como proyecto educativo. Descubre la historia, naturaleza y gastronomía de esta villa madrileña.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/AyuntamientodePinto" target="_blank" rel="noopener noreferrer" aria-label="Facebook del Ayuntamiento de Pinto">FB</a>
+          <a href="https://x.com/AytoPinto" target="_blank" rel="noopener noreferrer" aria-label="Twitter del Ayuntamiento de Pinto">X</a>
+          <a href="https://www.instagram.com/ayuntamientopinto" target="_blank" rel="noopener noreferrer" aria-label="Instagram del Ayuntamiento de Pinto">IG</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explora la web</h4>
+        <ul class="footer-links">
+          <li><a href="#que-ver" data-route="que-ver">Qué ver</a></li>
+          <li><a href="#que-hacer" data-route="que-hacer">Qué hacer</a></li>
+          <li><a href="#comer-comprar" data-route="comer-comprar">Comer y comprar</a></li>
+          <li><a href="#fiestas" data-route="fiestas">Fiestas y agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Información útil</h4>
+        <ul class="footer-links">
+          <li><a href="#info-practica" data-route="info-practica">Cómo llegar</a></li>
+          <li><a href="#barrios" data-route="barrios">Mis barrios</a></li>
+          <li><a href="#favoritos" data-route="favoritos">Tus favoritos</a></li>
+          <li><a href="https://www.ayto-pinto.es/" target="_blank" rel="noopener">Ayuntamiento</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul class="footer-links">
+          <li>📍 Plaza de la Constitución, 1</li>
+          <li>📞 +34 91 248 80 00</li>
+          <li>✉️ turismo@ayto-pinto.es</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Descubre Pinto. Proyecto educativo sin ánimo de lucro.</p>
+        <p style="font-size:.8rem;opacity:.7;margin-top:.4rem">Información revisada en noviembre de 2026. Horarios, tarifas y aperturas pueden cambiar: confirma siempre en las fuentes oficiales.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen">&times;</button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada">
+  </div>
+    <!-- ================= MODAL DE DETALLE (FALTABA ESTO) ================= -->
+<div class="modal-backdrop" id="detail-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar ficha">&times;</button>
+      
+      <div class="modal-gallery" id="modal-gallery"></div>
+      
+      <div class="modal-body">
+        <div class="modal-top-meta">
+          <span class="card-tag" id="modal-category">Categoría</span>
+          <div class="modal-actions-inline">
+            <button type="button" class="btn-icon-text" id="modal-fav-btn">♡ Guardar</button>
+            <button type="button" class="btn-icon-text" id="modal-share-btn">Compartir</button>
+          </div>
+        </div>
+        
+        <h2 id="modal-title">Título del lugar</h2>
+        <p class="text-muted" id="modal-desc" style="margin-top: 1rem;">Descripción completa...</p>
+        
+        <div class="modal-practical-box">
+          <h4>Información práctica</h4>
+          <ul id="modal-practical-list"></ul>
+        </div>
+        
+        <div id="modal-map" class="map-container" style="height: 250px; margin-top: 1.5rem;"></div>
+        
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <a href="#" id="modal-directions-btn" class="btn btn-primary" target="_blank" rel="noopener">📍 Cómo llegar (OpenStreetMap)</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    (() => {
-      const deck = document.getElementById('deck');
-      const slides = Array.from(deck.querySelectorAll('.slide'));
-      const counterEl = document.getElementById('slide-counter');
-      const progressEl = document.getElementById('progress-fill');
-      const indexListEl = document.getElementById('index-list');
-      const sidebarEl = document.getElementById('sidebar-index');
-
-      const lbEl = document.getElementById('gallery-lightbox');
-      const lbImg = document.getElementById('lb-img');
-      const lbCounter = document.getElementById('lb-counter');
-      const lbThumbs = document.getElementById('lb-thumbs');
-      const lbPrev = document.getElementById('lb-prev');
-      const lbNext = document.getElementById('lb-next');
-      const lbClose = document.getElementById('lb-close');
-      const lbStage = document.getElementById('lb-stage');
-
-      let current = 0;
-      const total = slides.length;
-      let lbImages = [];
-      let lbIndex = 0;
-      let lbTriggerEl = null;
-
-      function isLightboxOpen() { return lbEl.classList.contains('open'); }
-
-      function renderLightbox() {
-        const item = lbImages[lbIndex];
-        if (!item) return;
-        lbImg.src = item.src;
-        lbImg.alt = item.alt;
-        lbCounter.textContent = `${lbIndex + 1} / ${lbImages.length}`;
-        const multiple = lbImages.length > 1;
-        lbPrev.classList.toggle('hidden', !multiple);
-        lbNext.classList.toggle('hidden', !multiple);
-        Array.from(lbThumbs.children).forEach((btn, i) => { btn.classList.toggle('active', i === lbIndex); });
-      }
-
-      function openLightbox(images, startIndex, triggerEl) {
-        if (!images.length) return;
-        lbImages = images;
-        lbIndex = startIndex;
-        lbTriggerEl = triggerEl || document.activeElement;
-        lbThumbs.innerHTML = '';
-        if (images.length > 1) {
-          images.forEach((imgObj, i) => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'lb-thumb-btn';
-            const thumb = document.createElement('img');
-            thumb.src = imgObj.src;
-            btn.appendChild(thumb);
-            btn.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = i; renderLightbox(); });
-            lbThumbs.appendChild(btn);
-          });
-        }
-        renderLightbox();
-        lbEl.hidden = false;
-        requestAnimationFrame(() => { lbEl.classList.add('open'); lbClose.focus(); });
-      }
-
-      function closeLightbox() {
-        if (!isLightboxOpen()) return;
-        lbEl.classList.remove('open');
-        lbEl.hidden = true;
-        if (lbTriggerEl && typeof lbTriggerEl.focus === 'function') lbTriggerEl.focus();
-      }
-
-      lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
-      lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; renderLightbox(); });
-      lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbImages.length; renderLightbox(); });
-      lbEl.addEventListener('click', (e) => { if (e.target === lbEl || e.target === lbStage) closeLightbox(); });
-
-      deck.querySelectorAll('.image-display.gallery').forEach((container) => {
-        const imgs = Array.from(container.querySelectorAll('img'));
-        if (imgs.length === 0) return;
-        const items = imgs.map((img) => ({ src: img.getAttribute('src'), alt: (img.getAttribute('alt') || '').trim() }));
-        container.classList.add('has-images');
-        container.setAttribute('role', 'button');
-        container.setAttribute('tabindex', '0');
-        if (items.length > 1) {
-          container.classList.add('has-multiple');
-          const badge = document.createElement('span');
-          badge.className = 'gallery-badge';
-          badge.textContent = `Ver ${items.length} imágenes`;
-          container.appendChild(badge);
-        }
-        const triggerOpen = () => openLightbox(items, 0, container);
-        container.addEventListener('click', triggerOpen);
-        container.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerOpen(); } });
-      });
-
-      slides.forEach((slide, idx) => {
-        const pageBadge = slide.querySelector('.slide-page-badge');
-        if (pageBadge) pageBadge.textContent = `${idx + 1} / ${total}`;
-        const li = document.createElement('li');
-        const btn = document.createElement('button');
-        btn.textContent = `${idx + 1}. ${slide.dataset.title || 'Diapositiva'}`;
-        btn.addEventListener('click', () => { current = idx; updateUI(); sidebarEl.classList.remove('open'); });
-        li.appendChild(btn);
-        indexListEl.appendChild(li);
-      });
-
-      const indexButtons = Array.from(indexListEl.querySelectorAll('button'));
-
-      function updateUI() {
-        slides.forEach((slide, idx) => {
-          slide.classList.remove('active', 'prev');
-          if (idx === current) { slide.classList.add('active'); slide.scrollTop = 0; }
-          else if (idx < current) slide.classList.add('prev');
-        });
-        indexButtons.forEach((btn, idx) => { btn.classList.toggle('current', idx === current); });
-        counterEl.textContent = `${current + 1} / ${total}`;
-        progressEl.style.width = `${total > 1 ? ((current + 1) / total) * 100 : 100}%`;
-      }
-
-      document.getElementById('btn-next').addEventListener('click', () => { if (current < total - 1) { current++; updateUI(); } });
-      document.getElementById('btn-prev').addEventListener('click', () => { if (current > 0) { current--; updateUI(); } });
-      document.getElementById('btn-fullscreen').addEventListener('click', () => {
-        if (!document.documentElement.contains(document.fullscreenElement)) document.documentElement.requestFullscreen().catch(() => {});
-        else document.exitFullscreen().catch(() => {});
-      });
-      document.getElementById('btn-index').addEventListener('click', () => sidebarEl.classList.toggle('open'));
-      document.getElementById('btn-close-index').addEventListener('click', () => sidebarEl.classList.remove('open'));
-
-      document.addEventListener('keydown', (e) => {
-        if (isLightboxOpen()) {
-          if (e.key === 'ArrowRight') { e.preventDefault(); lbIndex = (lbIndex + 1) % lbImages.length; renderLightbox(); }
-          else if (e.key === 'ArrowLeft') { e.preventDefault(); lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; renderLightbox(); }
-          else if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
-          return;
-        }
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); if (current < total - 1) { current++; updateUI(); } }
-        else if (e.key === 'ArrowLeft') { e.preventDefault(); if (current > 0) { current--; updateUI(); } }
-        else if (e.key.toLowerCase() === 'f') {
-          if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
-          else document.exitFullscreen().catch(() => {});
-        }
-        else if (e.key.toLowerCase() === 'm') sidebarEl.classList.toggle('open');
-        else if (e.key === 'Escape') sidebarEl.classList.remove('open');
-      });
-
-      updateUI();
-    })();
-  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./app.js"></script>
 </body>
 </html>
